@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SIOSS – Swedish International Organization of Sport Science</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Cairo:wght@400;600;700&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- ===== NAVBAR ===== -->
+  <header class="navbar" id="navbar">
+    <div class="container nav-inner">
+      <a href="#home" class="logo">
+        <img src="images/logo-white.png" alt="SIOSS Logo" class="logo-img" />
+      </a>
+      <nav class="nav-links" id="navLinks">
+        <a href="#home" data-i18n="nav_home">Home</a>
+        <a href="#about" data-i18n="nav_about">About</a>
+        <a href="#team" data-i18n="nav_instructors">Instructors</a>
+        <a href="students.html" data-i18n="nav_students">Our Students</a>
+        <a href="#gallery" data-i18n="nav_gallery">Gallery</a>
+        <a href="#contact" data-i18n="nav_contact">Contact</a>
+      </nav>
+      <div class="lang-switch">
+        <button class="lang-btn active" data-lang="en">EN</button>
+        <span class="lang-sep">|</span>
+        <button class="lang-btn" data-lang="ar">عربي</button>
+      </div>
+      <a href="#contact" class="btn btn-sm btn-primary" data-i18n="nav_cta">Get in Touch</a>
+      <button class="burger" id="burger" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- ===== HERO ===== -->
+  <section class="hero" id="home">
+    <video class="hero-video" autoplay muted loop playsinline preload="auto">
+      <source src="videos/hero.mp4" type="video/mp4" />
+    </video>
+    <div class="hero-bg"></div>
+    <div class="container hero-inner">
+      <div class="hero-content">
+        <p class="hero-eyebrow anim-fade-up" style="--d:.1s" data-i18n="hero_eyebrow">Swedish International Organization of Sport Science</p>
+        <h1 class="anim-fade-up" style="--d:.3s" data-i18n-html="hero_h1">Where <span class="accent">Science</span><br />Meets Sport</h1>
+        <p class="hero-sub anim-fade-up" style="--d:.5s" data-i18n="hero_sub">
+          Advancing fitness through evidence-based training, modern sports technology,
+          and world-class coaching — available to you, wherever you are.
+        </p>
+        <div class="hero-actions anim-fade-up" style="--d:.7s">
+          <a href="#about" class="btn btn-primary" data-i18n="hero_btn1">Discover SIOSS</a>
+          <a href="#contact" class="btn btn-outline" data-i18n="hero_btn2">Contact Us</a>
+        </div>
+      </div>
+    </div>
+    <div class="hero-scroll-hint">
+      <span></span>
+    </div>
+  </section>
+
+  <!-- ===== STATS ===== -->
+  <section class="stats">
+    <div class="container stats-grid">
+      <div class="stat-item">
+        <span class="stat-number">5k+</span>
+        <span class="stat-label" data-i18n="stat_classes">Classes Completed</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-number">97.5%</span>
+        <span class="stat-label" data-i18n="stat_satisfaction">Satisfaction Rate</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-number">9k+</span>
+        <span class="stat-label" data-i18n="stat_community">Student Community</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== ABOUT ===== -->
+  <section class="about section" id="about">
+    <div class="container about-grid">
+      <div class="about-visual">
+        <div class="about-img-main">
+          <img src="images/about_main.png" alt="About SIOSS" />
+        </div>
+        <div class="about-img-float">
+          <img src="images/about_float.png" alt="SIOSS Training" />
+        </div>
+      </div>
+      <div class="about-text">
+        <p class="section-label" data-i18n="about_label">About SIOSS</p>
+        <h2 data-i18n-html="about_h2">Established in Sweden.<br />Built for the World.</h2>
+        <p data-i18n-html="about_p1">
+          Founded in <strong>Sweden in 2015</strong>, SIOSS is a specialized educational institution
+          dedicated to the training and development of sports coaches across various disciplines.
+          We apply the latest teaching methodologies and interactive technologies to deliver
+          an exceptional learning experience.
+        </p>
+        <p data-i18n="about_p2">
+          Our mission is to transfer modern sports technology and knowledge to the Arab region
+          and beyond, providing a high-quality educational environment that meets international
+          standards in sports science and coaching.
+        </p>
+        <a href="#team" class="btn btn-primary" data-i18n="about_btn">Meet Our Team</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CERTIFICATES ===== -->
+  <section class="certs section" id="certificates">
+    <div class="container">
+      <p class="section-label center" data-i18n="certs_label">Recognised & Accredited</p>
+      <h2 class="center" data-i18n="certs_h2">Our Certificates</h2>
+      <p class="center" style="max-width:560px;margin:0 auto 48px;" data-i18n="certs_desc">Official recognition from leading universities and sports federations — validating SIOSS as a trusted sports science institution.</p>
+      <div class="photo-scroll-wrapper">
+        <button class="scroll-arrow left" id="certsLeft" aria-label="Scroll left"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15,18 9,12 15,6"/></svg></button>
+        <button class="scroll-arrow right" id="certsRight" aria-label="Scroll right"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9,18 15,12 9,6"/></svg></button>
+        <div class="certs-scroll-track" id="certsTrack">
+          <div class="cert-card" onclick="openCert('images/cert_svff.png','Svenska Fotbollsförbundet')">
+            <div class="cert-thumb"><img src="images/cert_svff.png" alt="Svenska Fotbollsförbundet" loading="lazy" /></div>
+            <div class="cert-info">
+              <span class="cert-tag">Football Federation</span>
+              <p class="cert-title">Svenska Fotbollsförbundet</p>
+            </div>
+          </div>
+          <div class="cert-card" onclick="openCert('images/cert_basrah.png','University of Basrah')">
+            <div class="cert-thumb"><img src="images/cert_basrah.png" alt="University of Basrah" loading="lazy" /></div>
+            <div class="cert-info">
+              <span class="cert-tag">University</span>
+              <p class="cert-title">University of Basrah</p>
+            </div>
+          </div>
+          <div class="cert-card" onclick="openCert('images/cert_baghdad.png','University of Baghdad')">
+            <div class="cert-thumb"><img src="images/cert_baghdad.png" alt="University of Baghdad" loading="lazy" /></div>
+            <div class="cert-info">
+              <span class="cert-tag">University</span>
+              <p class="cert-title">University of Baghdad</p>
+            </div>
+          </div>
+          <div class="cert-card" onclick="openCert('images/cert_samarra.png','University of Samarra')">
+            <div class="cert-thumb"><img src="images/cert_samarra.png" alt="University of Samarra" loading="lazy" /></div>
+            <div class="cert-info">
+              <span class="cert-tag">University</span>
+              <p class="cert-title">University of Samarra</p>
+            </div>
+          </div>
+          <div class="cert-card" onclick="openCert('images/cert_wasit.png','University of Wasit')">
+            <div class="cert-thumb"><img src="images/cert_wasit.png" alt="University of Wasit" loading="lazy" /></div>
+            <div class="cert-info">
+              <span class="cert-tag">University</span>
+              <p class="cert-title">University of Wasit</p>
+            </div>
+          </div>
+          <div class="cert-card" onclick="openCert('images/cert_baghdad_women.png','University of Baghdad – Women')">
+            <div class="cert-thumb"><img src="images/cert_baghdad_women.png" alt="University of Baghdad – Women" loading="lazy" /></div>
+            <div class="cert-info">
+              <span class="cert-tag">University</span>
+              <p class="cert-title">University of Baghdad – Women</p>
+            </div>
+          </div>
+          <div class="cert-card" onclick="openCert('images/cert_ashur.png','Ashur University')">
+            <div class="cert-thumb"><img src="images/cert_ashur.png" alt="Ashur University" loading="lazy" /></div>
+            <div class="cert-info">
+              <span class="cert-tag">University</span>
+              <p class="cert-title">Ashur University</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Cert lightbox -->
+  <div class="cert-lightbox" id="certLightbox" onclick="closeCert()">
+    <button class="cert-lb-close" onclick="closeCert()">&times;</button>
+    <div class="cert-lb-inner" onclick="event.stopPropagation()">
+      <img id="certLbImg" src="" alt="" />
+      <p id="certLbTitle"></p>
+    </div>
+  </div>
+
+  <!-- ===== WHY SIOSS ===== -->
+  <section class="why section">
+    <div class="container">
+      <p class="section-label center" data-i18n="why_label">Why Choose Us</p>
+      <h2 class="center" data-i18n="why_h2">The SIOSS Difference</h2>
+      <div class="why-grid">
+        <div class="why-card">
+          <div class="why-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9H4.5a2.5 2.5 0 0 0 0 5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 1 0 5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg></div>
+          <h3 data-i18n="why1_title">Expert Trainers</h3>
+          <p data-i18n="why1_desc">Learn from leading sport science experts with verified credentials and international experience.</p>
+        </div>
+        <div class="why-card">
+          <div class="why-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></div>
+          <h3 data-i18n="why2_title">Evidence-Based Learning</h3>
+          <p data-i18n="why2_desc">Every programme is grounded in the latest research, ensuring you gain knowledge that actually works.</p>
+        </div>
+        <div class="why-card">
+          <div class="why-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2 2"/><path d="M5 3 2 6"/><path d="m22 6-3-3"/><path d="M6.38 18.7 4 21"/><path d="M17.64 18.67 20 21"/></svg></div>
+          <h3 data-i18n="why3_title">Flexible Schedule</h3>
+          <p data-i18n="why3_desc">Study at your own pace — balancing education with your professional and personal commitments.</p>
+        </div>
+        <div class="why-card">
+          <div class="why-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M16 8h-6a2 2 0 1 0 0 4h4a2 2 0 1 1 0 4H8"/><path d="M12 18V6"/></svg></div>
+          <h3 data-i18n="why4_title">Affordable Pricing</h3>
+          <p data-i18n="why4_desc">High-quality sports science education made accessible to coaches and athletes worldwide.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== INSTRUCTORS ===== -->
+  <section class="team section" id="team">
+    <div class="container">
+      <p class="section-label center" data-i18n="team_label">Our Experts</p>
+      <h2 class="center" data-i18n="team_h2">Meet the Instructors</h2>
+      <div class="team-grid">
+        <div class="team-card">
+          <div class="team-avatar"><img src="https://www.sioss.org/wp-content/uploads/2026/04/team_1_1.jpg" alt="Dr. Abduladeem Ahmed Khalil" /></div>
+          <h3>Dr. Abduladeem Ahmed Khalil</h3>
+          <span class="team-role" data-i18n="team1_role">HRV Trainer & Sport Scientist</span>
+          <p data-i18n="team1_desc">Specialist in heart rate variability training and performance optimisation.</p>
+        </div>
+        <div class="team-card">
+          <div class="team-avatar"><img src="https://www.sioss.org/wp-content/uploads/2026/04/team_1_2.png" alt="Dr. Mahmoud Al Khateeb" /></div>
+          <h3>Dr. Mahmoud Al Khateeb</h3>
+          <span class="team-role" data-i18n="team2_role">Nutrition & Sports Dietetics</span>
+          <p data-i18n="team2_desc">Expert in sports nutrition, dietary planning, and athlete performance fuelling.</p>
+        </div>
+        <div class="team-card">
+          <div class="team-avatar"><img src="https://www.sioss.org/wp-content/uploads/2026/04/team_1_3.png" alt="Mr. Haider Sabah" /></div>
+          <h3>Mr. Haider Sabah</h3>
+          <span class="team-role" data-i18n="team3_role">Personal Training Specialist</span>
+          <p data-i18n="team3_desc">Certified PT trainer with extensive experience in strength and conditioning.</p>
+        </div>
+        <div class="team-card">
+          <div class="team-avatar"><img src="https://www.sioss.org/wp-content/uploads/2026/04/team_1_4.png" alt="Fredrik Bjors & Frida Johansson" /></div>
+          <h3>Fredrik Bjors & Frida Johansson</h3>
+          <span class="team-role" data-i18n="team4_role">PT Trainer & Football Fitness Coach</span>
+          <p data-i18n="team4_desc">Experienced trainers focused on functional movement and football-specific conditioning.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== TESTIMONIALS ===== -->
+  <section class="testimonials section">
+    <div class="container">
+      <p class="section-label center" data-i18n="test_label">Testimonials</p>
+      <h2 class="center" data-i18n="test_h2">What Our Students Say</h2>
+      <div class="testimonial-videos">
+        <div class="tv-wrap">
+          <video src="videos/testimonial1.mp4" playsinline preload="metadata"></video>
+          <button class="tv-play" aria-label="Play"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="6,3 20,12 6,21"/></svg></button>
+        </div>
+        <div class="tv-wrap">
+          <video src="videos/testimonial2.mp4" playsinline preload="metadata"></video>
+          <button class="tv-play" aria-label="Play"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="6,3 20,12 6,21"/></svg></button>
+        </div>
+        <div class="tv-wrap">
+          <video src="videos/testimonial3.mp4" playsinline preload="metadata"></video>
+          <button class="tv-play" aria-label="Play"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="6,3 20,12 6,21"/></svg></button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== GALLERY / VIDEOS ===== -->
+  <section class="gallery section" id="gallery">
+    <div class="container">
+      <p class="section-label center" data-i18n="gallery_label">Watch</p>
+      <h2 class="center" data-i18n="gallery_h2">Highlights</h2>
+      <div class="video-scroll-wrapper">
+      <button class="scroll-arrow left" id="scrollLeft" aria-label="Scroll left">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15,18 9,12 15,6"/></svg>
+      </button>
+      <button class="scroll-arrow right" id="scrollRight" aria-label="Scroll right">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9,18 15,12 9,6"/></svg>
+      </button>
+      <div class="video-grid" id="videoGrid">
+
+        <div class="reel-wrap">
+          <video src="videos/video12.mp4" playsinline loop preload="metadata"></video>
+          <button class="play-btn" aria-label="Play"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="6,3 20,12 6,21"/></svg></button>
+        </div>
+        <div class="reel-wrap">
+          <video src="videos/video12.1.mp4" playsinline loop preload="metadata"></video>
+          <button class="play-btn" aria-label="Play"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="6,3 20,12 6,21"/></svg></button>
+        </div>
+        <div class="reel-wrap">
+          <video src="videos/video1.mp4" playsinline loop preload="metadata"></video>
+          <button class="play-btn" aria-label="Play"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="6,3 20,12 6,21"/></svg></button>
+        </div>
+        <div class="reel-wrap">
+          <video src="videos/video2.mp4" playsinline loop preload="metadata"></video>
+          <button class="play-btn" aria-label="Play"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="6,3 20,12 6,21"/></svg></button>
+        </div>
+        <div class="reel-wrap">
+          <video src="videos/video3.mp4" playsinline loop preload="metadata"></video>
+          <button class="play-btn" aria-label="Play"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="6,3 20,12 6,21"/></svg></button>
+        </div>
+        <div class="reel-wrap">
+          <video src="videos/video4.mp4" playsinline loop preload="metadata"></video>
+          <button class="play-btn" aria-label="Play"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="6,3 20,12 6,21"/></svg></button>
+        </div>
+        <div class="reel-wrap">
+          <video src="videos/video5.mp4" playsinline loop preload="metadata"></video>
+          <button class="play-btn" aria-label="Play"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="6,3 20,12 6,21"/></svg></button>
+        </div>
+        <div class="reel-wrap">
+          <video src="videos/video6.mp4" playsinline loop preload="metadata"></video>
+          <button class="play-btn" aria-label="Play"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="6,3 20,12 6,21"/></svg></button>
+        </div>
+        <div class="reel-wrap">
+          <video src="videos/video7.mp4" playsinline loop preload="metadata"></video>
+          <button class="play-btn" aria-label="Play"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="6,3 20,12 6,21"/></svg></button>
+        </div>
+        <div class="reel-wrap">
+          <video src="videos/video8.mp4" playsinline loop preload="metadata"></video>
+          <button class="play-btn" aria-label="Play"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="6,3 20,12 6,21"/></svg></button>
+        </div>
+        <div class="reel-wrap">
+          <video src="videos/video9.mp4" playsinline loop preload="metadata"></video>
+          <button class="play-btn" aria-label="Play"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="6,3 20,12 6,21"/></svg></button>
+        </div>
+        <div class="reel-wrap">
+          <video src="videos/video10.mp4" playsinline loop preload="metadata"></video>
+          <button class="play-btn" aria-label="Play"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="6,3 20,12 6,21"/></svg></button>
+        </div>
+        <div class="reel-wrap">
+          <video src="videos/video11.mp4" playsinline loop preload="metadata"></video>
+          <button class="play-btn" aria-label="Play"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="6,3 20,12 6,21"/></svg></button>
+        </div>
+
+      </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== HRV VIDEO ===== -->
+  <section class="hrv-section section">
+    <div class="container">
+      <p class="section-label center" data-i18n="hrv_label">Featured</p>
+      <h2 class="center" data-i18n="hrv_h2">Understanding HRV</h2>
+      <div class="hrv-host">
+        <div class="hrv-host-avatar">
+          <img src="https://www.sioss.org/wp-content/uploads/2026/04/team_1_1.jpg" alt="Dr. Abduladeem Ahmed Khalil" />
+        </div>
+        <div class="hrv-host-info">
+          <strong>Dr. Abduladeem Ahmed Khalil</strong>
+          <span data-i18n="team1_role">HRV Trainer & Sport Scientist</span>
+        </div>
+      </div>
+      <p class="hrv-desc" data-i18n="hrv_desc">Heart Rate Variability (HRV) is one of the most powerful tools in modern sport science — used to monitor recovery, optimize training load, and maximize athletic performance.</p>
+      <a class="hrv-video-wrap" href="https://youtu.be/Xfcc_ZL5X3k" target="_blank" rel="noopener" aria-label="Watch HRV video on YouTube">
+        <img src="https://img.youtube.com/vi/Xfcc_ZL5X3k/maxresdefault.jpg" alt="Understanding HRV – SIOSS" />
+        <div class="hrv-play-btn">
+          <svg viewBox="0 0 68 48" width="68" height="48"><path d="M66.52 7.74c-.78-2.93-2.49-5.41-5.42-6.19C55.79.13 34 0 34 0S12.21.13 6.9 1.55c-2.93.78-4.63 3.26-5.42 6.19C.06 13.05 0 24 0 24s.06 10.95 1.48 16.26c.78 2.93 2.49 5.41 5.42 6.19C12.21 47.87 34 48 34 48s21.79-.13 27.1-1.55c2.93-.78 4.64-3.26 5.42-6.19C67.94 34.95 68 24 68 24s-.06-10.95-1.48-16.26z" fill="#ff0000"/><path d="M45 24 27 14v20" fill="#fff"/></svg>
+          <span data-i18n="hrv_watch">Watch on YouTube</span>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <!-- ===== BAHRAIN GALLERY ===== -->
+  <section class="photo-scroll-section section" id="bahrain-gallery">
+    <div class="container">
+      <p class="section-label center" data-i18n="bahrain_label">Bahrain</p>
+      <h2 class="center" data-i18n="bahrain_h2">Strength Training &amp; Mobility Course</h2>
+      <div class="photo-scroll-wrapper">
+        <button class="scroll-arrow left" id="bahrainLeft" aria-label="Scroll left"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15,18 9,12 15,6"/></svg></button>
+        <button class="scroll-arrow right" id="bahrainRight" aria-label="Scroll right"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9,18 15,12 9,6"/></svg></button>
+        <div class="photo-scroll-track" id="bahrainTrack">
+          <div class="photo-slide"><img src="images/bahrain1.png" alt="SIOSS Bahrain – Mobility" loading="lazy" /></div>
+          <div class="photo-slide"><img src="images/bahrain2.png" alt="SIOSS Bahrain – Strength Training" loading="lazy" /></div>
+          <div class="photo-slide"><img src="images/bahrain3.png" alt="SIOSS Bahrain – Course Session" loading="lazy" /></div>
+          <div class="photo-slide"><img src="images/bahrain4.png" alt="SIOSS Bahrain – Group Training" loading="lazy" /></div>
+          <div class="photo-slide"><img src="images/bahrain7.png" alt="SIOSS Bahrain – Certificates" loading="lazy" /></div>
+          <div class="photo-slide photo-slide-wide"><img src="images/bahrain_group.jpg" alt="SIOSS Bahrain – Group Photo" loading="lazy" style="object-fit:contain;background:var(--dark-2);" /></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== IRAQ GALLERY ===== -->
+  <section class="photo-scroll-section section" id="iraq-gallery">
+    <div class="container">
+      <p class="section-label center" data-i18n="iraq_label">Middle East</p>
+      <h2 class="center" data-i18n="iraq_h2">Courses &amp; Events in the Middle East</h2>
+      <div class="photo-scroll-wrapper">
+        <button class="scroll-arrow left" id="iraqLeft" aria-label="Scroll left"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15,18 9,12 15,6"/></svg></button>
+        <button class="scroll-arrow right" id="iraqRight" aria-label="Scroll right"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9,18 15,12 9,6"/></svg></button>
+        <div class="photo-scroll-track" id="iraqTrack">
+          <div class="photo-slide"><img src="images/iraq1.png"  alt="SIOSS Iraq" loading="lazy" /></div>
+          <div class="photo-slide"><img src="images/iraq2.png"  alt="SIOSS Iraq" loading="lazy" /></div>
+          <div class="photo-slide"><img src="images/iraq3.png"  alt="SIOSS Iraq" loading="lazy" /></div>
+          <div class="photo-slide"><img src="images/iraq4.png"  alt="SIOSS Iraq" loading="lazy" /></div>
+          <div class="photo-slide"><img src="images/iraq5.png"  alt="SIOSS Iraq" loading="lazy" /></div>
+          <div class="photo-slide"><img src="images/iraq6.png"  alt="SIOSS Iraq" loading="lazy" /></div>
+          <div class="photo-slide"><img src="images/iraq7.png"  alt="SIOSS Iraq" loading="lazy" /></div>
+          <div class="photo-slide"><img src="images/iraq8.png"  alt="SIOSS Iraq" loading="lazy" /></div>
+          <div class="photo-slide"><img src="images/iraq9.png"  alt="SIOSS Iraq" loading="lazy" /></div>
+          <div class="photo-slide"><img src="images/iraq10.png" alt="SIOSS Iraq" loading="lazy" /></div>
+          <div class="photo-slide"><img src="images/iraq11.png" alt="SIOSS Iraq" loading="lazy" /></div>
+          <div class="photo-slide"><img src="images/iraq12.png" alt="SIOSS Middle East" loading="lazy" /></div>
+          <div class="photo-slide"><img src="images/iraq13.png" alt="SIOSS Middle East" loading="lazy" /></div>
+          <div class="photo-slide"><img src="images/iraq14.png" alt="SIOSS Middle East" loading="lazy" /></div>
+          <div class="photo-slide"><img src="images/iraq15.png" alt="SIOSS Middle East" loading="lazy" /></div>
+          <div class="photo-slide"><img src="images/iraq16.png" alt="SIOSS Middle East" loading="lazy" /></div>
+          <div class="photo-slide"><img src="images/iraq17.png" alt="SIOSS Middle East" loading="lazy" /></div>
+          <div class="photo-slide"><img src="images/iraq18.png" alt="SIOSS Middle East" loading="lazy" /></div>
+          <div class="photo-slide"><img src="images/iraq19.png" alt="SIOSS Middle East" loading="lazy" /></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== IMAGE GALLERY ===== -->
+  <section class="photo-scroll-section section" id="img-gallery">
+    <div class="container">
+      <p class="section-label center" data-i18n="field_label">Photos</p>
+      <h2 class="center" data-i18n="field_h2">On the Field</h2>
+      <div class="photo-scroll-wrapper">
+        <button class="scroll-arrow left" id="fieldLeft" aria-label="Scroll left"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15,18 9,12 15,6"/></svg></button>
+        <button class="scroll-arrow right" id="fieldRight" aria-label="Scroll right"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9,18 15,12 9,6"/></svg></button>
+        <div class="photo-scroll-track" id="fieldTrack">
+          <div class="photo-slide"><img src="images/gallery1.png" alt="SIOSS Football Academy" loading="lazy" /></div>
+          <div class="photo-slide"><img src="images/gallery2.png" alt="SIOSS – Harness Your Power" loading="lazy" /></div>
+          <div class="photo-slide"><img src="images/gallery3.png" alt="SIOSS Football Match" loading="lazy" /></div>
+          <div class="photo-slide"><img src="images/gallery4.png" alt="SIOSS Team Photo" loading="lazy" /></div>
+          <div class="photo-slide"><img src="images/gallery5.png" alt="SIOSS – Dream Closer" loading="lazy" /></div>
+          <div class="photo-slide"><img src="images/gallery6.png" alt="SIOSS Team Photo" loading="lazy" /></div>
+          <div class="photo-slide"><img src="images/gallery7.png" alt="SIOSS Football Player" loading="lazy" /></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CONTACT ===== -->
+  <section class="contact section" id="contact">
+    <div class="container contact-grid">
+      <div class="contact-info">
+        <p class="section-label" data-i18n="contact_label">Get in Touch</p>
+        <h2 data-i18n="contact_h2">Have Any Questions?</h2>
+        <p data-i18n="contact_desc">We welcome all enquiries — from prospective students, coaches, and organisations looking to collaborate with SIOSS.</p>
+        <ul class="contact-list">
+          <li>
+            <span class="contact-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.27h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.91a16 16 0 0 0 6 6l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7a2 2 0 0 1 1.72 2.02z"/></svg></span>
+            <span>+46 70 718 11 37</span>
+          </li>
+          <li>
+            <span class="contact-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg></span>
+            <span>info@sioss.org</span>
+          </li>
+          <li>
+            <span class="contact-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg></span>
+            <span data-i18n="contact_location">Linköping, Sweden</span>
+          </li>
+        </ul>
+        <div class="social-links">
+          <a href="https://www.facebook.com/sioss.iraq" target="_blank" rel="noopener" class="social-btn" aria-label="Facebook">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+          </a>
+          <a href="https://www.instagram.com/sioss.sweden/" target="_blank" rel="noopener" class="social-btn" aria-label="Instagram">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+          </a>
+        </div>
+      </div>
+      <form class="contact-form" id="contactForm">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="name" data-i18n="form_name">Full Name</label>
+            <input type="text" id="name" name="name" placeholder="Your name" data-i18n-ph="form_name_ph" required />
+          </div>
+          <div class="form-group">
+            <label for="email" data-i18n="form_email">Email</label>
+            <input type="email" id="email" name="email" placeholder="your@email.com" data-i18n-ph="form_email_ph" required />
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="subject" data-i18n="form_subject">Subject</label>
+          <input type="text" id="subject" name="subject" placeholder="How can we help?" data-i18n-ph="form_subject_ph" />
+        </div>
+        <div class="form-group">
+          <label for="message" data-i18n="form_message">Message</label>
+          <textarea id="message" name="message" rows="5" placeholder="Write your message here…" data-i18n-ph="form_message_ph" required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary btn-full" data-i18n="form_submit">Send Message</button>
+        <p class="form-note" id="formNote"></p>
+      </form>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <a href="#home" class="logo">
+          <img src="images/logo-white.png" alt="SIOSS Logo" class="logo-img" />
+        </a>
+        <p data-i18n="footer_tagline">Swedish International Organization of Sport Science — advancing fitness through science and innovation since 2015.</p>
+      </div>
+      <div class="footer-col">
+        <h4 data-i18n="footer_nav">Navigation</h4>
+        <ul>
+          <li><a href="#home" data-i18n="nav_home">Home</a></li>
+          <li><a href="#about" data-i18n="nav_about">About</a></li>
+          <li><a href="#team" data-i18n="nav_instructors">Instructors</a></li>
+          <li><a href="students.html" data-i18n="nav_students">Our Students</a></li>
+          <li><a href="#gallery" data-i18n="nav_gallery">Gallery</a></li>
+          <li><a href="#contact" data-i18n="nav_contact">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4 data-i18n="footer_contact">Contact</h4>
+        <ul>
+          <li>+46 70 718 11 37</li>
+          <li>info@sioss.org</li>
+          <li data-i18n="contact_location">Linköping, Sweden</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p data-i18n="footer_copy">© 2026 SIOSS — Swedish International Organization of Sport Science. All Rights Reserved.</p>
+    </div>
+  </footer>
+
+  <!-- Lightbox -->
+  <div class="lightbox" id="lightbox">
+    <button class="lightbox-close" id="lightboxClose">&times;</button>
+    <img id="lightboxImg" src="" alt="" />
+  </div>
+
+  <script src="i18n.js"></script>
+  <script src="script.js"></script>
+  <script>
+    function openCert(src, title) {
+      document.getElementById('certLbImg').src = src;
+      document.getElementById('certLbTitle').textContent = title;
+      document.getElementById('certLightbox').classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeCert() {
+      document.getElementById('certLightbox').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeCert(); });
+  </script>
+</body>
+</html>

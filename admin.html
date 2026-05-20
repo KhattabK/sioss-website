@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Panel – SIOSS Students</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Cairo:wght@400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    body { min-height: 100vh; }
+
+    /* ── Login ── */
+    .login-wrap {
+      min-height: 100vh;
+      display: flex; align-items: center; justify-content: center;
+      background: radial-gradient(ellipse at 50% 0%, rgba(26,111,196,.15) 0%, transparent 70%), var(--dark);
+    }
+    .login-card {
+      background: var(--dark-2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 48px 40px;
+      width: 100%; max-width: 420px;
+      box-shadow: var(--shadow);
+    }
+    .login-card .logo-img { height: 46px; margin-bottom: 30px; display: block; }
+    .login-card h2 { font-size: 1.5rem; margin-bottom: 6px; }
+    .login-card > p { font-size: .9rem; margin-bottom: 28px; }
+    .login-error { color: #f87171; font-size: .85rem; margin-bottom: 14px; display: none; }
+
+    .fld label {
+      display: block; font-size: .75rem; font-weight: 700;
+      letter-spacing: .07em; text-transform: uppercase;
+      color: var(--text-muted); margin-bottom: 7px;
+    }
+    .fld input, .fld select {
+      width: 100%; background: var(--mid);
+      border: 1px solid var(--border); color: var(--text);
+      border-radius: 8px; padding: 11px 14px;
+      font-family: inherit; font-size: .9rem;
+      transition: border-color .2s; margin-bottom: 16px;
+    }
+    .fld input:focus, .fld select:focus { outline: none; border-color: var(--primary); }
+    .fld input::placeholder { color: var(--text-muted); }
+    .fld select option { background: var(--mid); }
+    .btn-full { width: 100%; text-align: center; border: none; }
+    .back-link {
+      display: inline-flex; align-items: center; gap: 6px;
+      color: var(--text-muted); text-decoration: none;
+      font-size: .85rem; transition: color .2s; margin-top: 22px;
+    }
+    .back-link:hover { color: var(--text); }
+
+    /* ── Admin panel ── */
+    .admin-wrap { display: none; }
+    .admin-topbar {
+      background: var(--dark-2); border-bottom: 1px solid var(--border);
+      padding: 14px 0; position: sticky; top: 0; z-index: 100;
+    }
+    .admin-topbar-inner { display: flex; align-items: center; gap: 16px; }
+    .admin-topbar-inner .logo-img { height: 34px; }
+    .topbar-title { font-size: .95rem; font-weight: 700; color: var(--text-muted); margin: 0; }
+    .topbar-title span { color: var(--text); }
+    .topbar-actions { margin-left: auto; display: flex; gap: 12px; align-items: center; }
+    .topbar-link {
+      display: inline-flex; align-items: center; gap: 5px;
+      color: var(--text-muted); text-decoration: none;
+      font-size: .82rem; transition: color .2s;
+    }
+    .topbar-link:hover { color: var(--text); }
+
+    /* ── Layout ── */
+    .admin-content {
+      display: grid;
+      grid-template-columns: 360px 1fr;
+      gap: 28px; padding: 36px 0; align-items: start;
+    }
+    @media (max-width: 900px) { .admin-content { grid-template-columns: 1fr; } }
+
+    /* ── Add form card ── */
+    .add-card {
+      background: var(--dark-2); border: 1px solid var(--border);
+      border-radius: var(--radius-lg); padding: 28px;
+      position: sticky; top: 76px;
+    }
+    .add-card h3 {
+      font-size: 1rem; margin-bottom: 22px;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .add-card h3 svg { color: var(--primary); flex-shrink: 0; }
+    .form-success { color: #34d399; font-size: .83rem; margin-top: 10px; display: none; }
+
+    /* ── List card ── */
+    .list-card {
+      background: var(--dark-2); border: 1px solid var(--border);
+      border-radius: var(--radius-lg); overflow: hidden;
+    }
+    .list-header {
+      padding: 20px 24px 18px; border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; gap: 14px; flex-wrap: wrap;
+    }
+    .list-header h3 { font-size: 1rem; margin: 0; flex: 1; }
+    .list-search {
+      background: var(--mid); border: 1px solid var(--border);
+      color: var(--text); border-radius: 8px; padding: 8px 14px;
+      font-family: inherit; font-size: .83rem; width: 200px;
+      transition: border-color .2s;
+    }
+    .list-search:focus { outline: none; border-color: var(--primary); }
+    .list-search::placeholder { color: var(--text-muted); }
+
+    /* ── Table ── */
+    .student-table { width: 100%; border-collapse: collapse; }
+    .student-table th {
+      text-align: left; padding: 11px 18px;
+      font-size: .68rem; font-weight: 700; letter-spacing: .09em;
+      text-transform: uppercase; color: var(--text-muted);
+      background: var(--mid); border-bottom: 1px solid var(--border);
+    }
+    .student-table td {
+      padding: 13px 18px; border-bottom: 1px solid var(--border);
+      font-size: .86rem; vertical-align: middle; color: var(--text);
+    }
+    .student-table tr:last-child td { border-bottom: none; }
+    .student-table tr:hover td { background: rgba(255,255,255,.02); }
+
+    .tbl-num { color: var(--text-muted); font-size: .78rem; font-weight: 700; }
+    .tbl-avatar {
+      width: 34px; height: 34px; border-radius: 50%;
+      background: var(--mid); border: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      font-size: .8rem; font-weight: 700; color: var(--primary);
+      flex-shrink: 0; overflow: hidden;
+    }
+    .tbl-avatar img { width: 100%; height: 100%; object-fit: cover; }
+    .tbl-name-cell { display: flex; align-items: center; gap: 10px; }
+
+    .badge {
+      display: inline-block; font-size: .67rem; font-weight: 700;
+      letter-spacing: .05em; text-transform: uppercase;
+      border-radius: 20px; padding: 3px 10px; border: 1px solid;
+    }
+    .badge-pt    { color: #60a5fa; background: rgba(96,165,250,.08); border-color: rgba(96,165,250,.2); }
+    .badge-foot  { color: #4ade80; background: rgba(74,222,128,.08); border-color: rgba(74,222,128,.2); }
+    .badge-hrv   { color: #34d399; background: rgba(52,211,153,.08); border-color: rgba(52,211,153,.2); }
+    .badge-nutr  { color: #f472b6; background: rgba(244,114,182,.08); border-color: rgba(244,114,182,.2); }
+    .badge-ft    { color: #a78bfa; background: rgba(167,139,250,.08); border-color: rgba(167,139,250,.2); }
+    .badge-other { color: #8b949e; background: rgba(139,148,158,.08); border-color: rgba(139,148,158,.2); }
+    .badge-none  { color: #8b949e; background: rgba(139,148,158,.04); border-color: rgba(139,148,158,.1); }
+
+    .btn-delete {
+      background: transparent; border: 1px solid rgba(248,113,113,.3);
+      color: #f87171; border-radius: 6px; padding: 5px 11px;
+      font-size: .75rem; font-weight: 600; cursor: pointer;
+      transition: background .2s, border-color .2s; white-space: nowrap;
+    }
+    .btn-delete:hover { background: rgba(248,113,113,.1); border-color: #f87171; }
+    .empty-table { text-align: center; padding: 48px; color: var(--text-muted); font-size: .9rem; }
+
+    /* ── Toast ── */
+    .toast {
+      position: fixed; bottom: 28px; right: 28px;
+      background: var(--dark-2); border: 1px solid var(--border);
+      border-left: 3px solid var(--primary);
+      border-radius: 10px; padding: 13px 18px;
+      font-size: .86rem; color: var(--text); box-shadow: var(--shadow);
+      transform: translateY(70px); opacity: 0;
+      transition: transform .3s, opacity .3s; z-index: 999; max-width: 280px;
+    }
+    .toast.show { transform: translateY(0); opacity: 1; }
+    .toast.toast-error { border-left-color: #f87171; }
+  </style>
+</head>
+<body>
+
+  <!-- ===== LOGIN ===== -->
+  <div class="login-wrap" id="loginWrap">
+    <div class="login-card">
+      <img src="images/logo-white.png" alt="SIOSS Logo" class="logo-img" />
+      <h2>Admin Login</h2>
+      <p>Sign in to manage the student registry.</p>
+      <div class="login-error" id="loginError">Incorrect username or password.</div>
+      <form id="loginForm" autocomplete="off">
+        <div class="fld">
+          <label for="loginUser">Username</label>
+          <input type="text" id="loginUser" placeholder="Enter username" autocomplete="username" />
+        </div>
+        <div class="fld">
+          <label for="loginPass">Password</label>
+          <input type="password" id="loginPass" placeholder="Enter password" autocomplete="current-password" />
+        </div>
+        <button type="submit" class="btn btn-primary btn-full" style="margin-top:4px">Sign In</button>
+      </form>
+      <div style="text-align:center">
+        <a href="students.html" class="back-link">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="19,12 5,12"/><polyline points="12,19 5,12 12,5"/></svg>
+          Back to Students
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== ADMIN PANEL ===== -->
+  <div class="admin-wrap" id="adminWrap">
+
+    <div class="admin-topbar">
+      <div class="container admin-topbar-inner">
+        <img src="images/logo-white.png" alt="SIOSS Logo" class="logo-img" />
+        <p class="topbar-title"><span>Admin</span> · Student Registry</p>
+        <div class="topbar-actions">
+          <div class="lang-switch">
+            <button class="lang-btn active" data-lang="en">EN</button>
+            <span class="lang-sep">|</span>
+            <button class="lang-btn" data-lang="ar">عربي</button>
+          </div>
+          <a href="students.html" class="topbar-link">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="19,12 5,12"/><polyline points="12,19 5,12 12,5"/></svg>
+            Public Page
+          </a>
+          <button class="btn btn-outline btn-sm" id="logoutBtn">Log Out</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="container admin-content">
+
+      <!-- ── Add form ── -->
+      <div class="add-card">
+        <h3>
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="19" y1="8" x2="19" y2="14"/><line x1="22" y1="11" x2="16" y2="11"/></svg>
+          Add New Student
+        </h3>
+        <form id="addForm" autocomplete="off">
+          <div class="fld">
+            <label for="sName">Full Name *</label>
+            <input type="text" id="sName" placeholder="e.g. Ahmed Al-Rashid" required />
+          </div>
+          <div class="fld">
+            <label for="sCourse">Course Title</label>
+            <input type="text" id="sCourse" placeholder="e.g. Personal Trainer" />
+          </div>
+          <div class="fld">
+            <label for="sDate">Date (MM/DD/YYYY)</label>
+            <input type="text" id="sDate" placeholder="e.g. 05/15/2026" pattern="\d{2}/\d{2}/\d{4}" />
+          </div>
+          <div class="fld">
+            <label for="sInstructor">Instructor</label>
+            <input type="text" id="sInstructor" placeholder="e.g. Abdullahdem Khalil" />
+          </div>
+          <button type="submit" class="btn btn-primary btn-full">Add Student</button>
+          <p class="form-success" id="addSuccess">Student added.</p>
+        </form>
+      </div>
+
+      <!-- ── Student list ── -->
+      <div class="list-card">
+        <div class="list-header">
+          <h3 id="listTitle">All Students</h3>
+          <input type="text" class="list-search" id="adminSearch" placeholder="Search by name…" />
+        </div>
+        <div style="overflow-x:auto">
+          <table class="student-table">
+            <thead>
+              <tr>
+                <th>No</th>
+                <th>Student Name</th>
+                <th>Course Title</th>
+                <th>Date</th>
+                <th>Instructor</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody id="adminTbody"></tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <script>
+    /* ── Credentials ── */
+    const ADMIN_USER = 'admin';
+    const ADMIN_PASS = 'sioss2026';
+
+    /* ── Auth ── */
+    function isLoggedIn() { return sessionStorage.getItem('sioss_admin') === 'true'; }
+    function showAdmin()  { document.getElementById('loginWrap').style.display = 'none'; document.getElementById('adminWrap').style.display = 'block'; renderTable(getStudents()); }
+    if (isLoggedIn()) showAdmin();
+
+    document.getElementById('loginForm').addEventListener('submit', e => {
+      e.preventDefault();
+      if (document.getElementById('loginUser').value.trim() === ADMIN_USER &&
+          document.getElementById('loginPass').value === ADMIN_PASS) {
+        sessionStorage.setItem('sioss_admin', 'true');
+        document.getElementById('loginError').style.display = 'none';
+        showAdmin();
+      } else {
+        document.getElementById('loginError').style.display = 'block';
+        document.getElementById('loginPass').value = '';
+      }
+    });
+
+    document.getElementById('logoutBtn').addEventListener('click', () => {
+      sessionStorage.removeItem('sioss_admin'); location.reload();
+    });
+
+    /* ── Data ── */
+    const SEED = [
+      { id:  1, name: 'HUSSEIN AYYED IBADI ALMOHAMMED',          course: '',                        date: '',           instructor: '' },
+      { id:  2, name: 'Mohammed bin Khalifa bin Fadel Al-Hajri',  course: '',                        date: '',           instructor: '' },
+      { id:  3, name: 'Iqbal Abdul Ghaffar',                      course: '',                        date: '',           instructor: '' },
+      { id:  4, name: 'Amal Ali Naji',                            course: '',                        date: '',           instructor: '' },
+      { id:  5, name: 'Zahraa Anwer Mahdi',                       course: '',                        date: '',           instructor: '' },
+      { id:  6, name: 'Al-Muntadhar Najm Abd',                    course: '',                        date: '',           instructor: '' },
+      { id:  7, name: 'Fatima Star Jawad',                        course: '',                        date: '',           instructor: '' },
+      { id:  8, name: 'Mohammed Qasem Eubady',                    course: '',                        date: '',           instructor: '' },
+      { id:  9, name: 'Haidar Sabah',                             course: 'Personal Trainer',        date: '03/02/2024', instructor: '' },
+      { id: 10, name: 'Ahmaed Rashed',                            course: 'Fitness Football Course',  date: '09/26/2019', instructor: '' },
+      { id: 11, name: 'HIND ABDULKAREM ABDULRAZAQ',               course: 'Personal Trainer',        date: '05/15/2026', instructor: '' },
+      { id: 12, name: 'NOORALDEEN NABEEL JUMA IDREES',            course: 'Personal Trainer',        date: '05/15/2026', instructor: '' },
+      { id: 13, name: 'Haya Nabeel Sabeeh',                       course: 'Personal Trainer',        date: '05/15/2026', instructor: '' },
+      { id: 14, name: 'Hamza Thamer Ibrahim',                     course: '',                        date: '',           instructor: '' },
+      { id: 15, name: 'Tabarek Sabah Al-Mayyah',                  course: 'Personal Trainer Course', date: '03/03/2024', instructor: '' },
+      { id: 16, name: 'ASHIKUR RAHMAN',                           course: 'FT Course',               date: '06/11/2024', instructor: 'Abdullahdem Khalil' },
+    ];
+
+    const DATA_VERSION = '2';
+
+    function getStudents() {
+      if (localStorage.getItem('sioss_students_v') !== DATA_VERSION) {
+        localStorage.setItem('sioss_students', JSON.stringify(SEED));
+        localStorage.setItem('sioss_students_v', DATA_VERSION);
+        return SEED;
+      }
+      const s = localStorage.getItem('sioss_students');
+      return s ? JSON.parse(s) : SEED;
+    }
+    function saveStudents(arr) { localStorage.setItem('sioss_students', JSON.stringify(arr)); }
+    function nextId(arr) { return arr.length ? Math.max(...arr.map(s => s.id)) + 1 : 1; }
+    function pad(n) { return String(n).padStart(2, '0'); }
+
+    function badgeClass(course) {
+      if (!course) return 'badge-none';
+      const c = course.toLowerCase();
+      if (c.includes('personal') || c.includes('pt'))      return 'badge-pt';
+      if (c.includes('football') || c.includes('fitness')) return 'badge-foot';
+      if (c.includes('hrv'))                                return 'badge-hrv';
+      if (c.includes('nutri'))                              return 'badge-nutr';
+      if (c.includes('ft'))                                 return 'badge-ft';
+      return 'badge-other';
+    }
+    function initials(name) { return name.split(' ').map(w => w[0]).slice(0,2).join('').toUpperCase(); }
+
+    /* ── Render table ── */
+    function renderTable(list) {
+      document.getElementById('listTitle').textContent = `All Students (${list.length})`;
+      const tbody = document.getElementById('adminTbody');
+      if (!list.length) {
+        tbody.innerHTML = `<tr><td colspan="6" class="empty-table">No students found.</td></tr>`;
+        return;
+      }
+      tbody.innerHTML = list.map(s => `
+        <tr>
+          <td class="tbl-num">${pad(s.id)}</td>
+          <td>
+            <div class="tbl-name-cell">
+              <div class="tbl-avatar">${initials(s.name)}</div>
+              ${s.name}
+            </div>
+          </td>
+          <td><span class="badge ${badgeClass(s.course)}">${s.course || '—'}</span></td>
+          <td style="color:var(--text-muted)">${s.date || '—'}</td>
+          <td style="color:var(--text-muted)">${s.instructor || '—'}</td>
+          <td><button class="btn-delete" onclick="deleteStudent(${s.id})">Delete</button></td>
+        </tr>`).join('');
+    }
+
+    function deleteStudent(id) {
+      if (!confirm('Remove this student?')) return;
+      const arr = getStudents().filter(s => s.id !== id);
+      saveStudents(arr);
+      const q = document.getElementById('adminSearch').value.toLowerCase();
+      renderTable(q ? arr.filter(s => s.name.toLowerCase().includes(q)) : arr);
+      showToast('Student removed.', true);
+    }
+
+    document.getElementById('addForm').addEventListener('submit', e => {
+      e.preventDefault();
+      const arr = getStudents();
+      arr.push({
+        id:         nextId(arr),
+        name:       document.getElementById('sName').value.trim(),
+        course:     document.getElementById('sCourse').value.trim(),
+        date:       document.getElementById('sDate').value.trim(),
+        instructor: document.getElementById('sInstructor').value.trim(),
+      });
+      saveStudents(arr);
+      renderTable(arr);
+      document.getElementById('addForm').reset();
+      showToast('Student added.');
+    });
+
+    document.getElementById('adminSearch').addEventListener('input', function() {
+      const q = this.value.toLowerCase().trim();
+      const arr = getStudents();
+      renderTable(q ? arr.filter(s => s.name.toLowerCase().includes(q)) : arr);
+    });
+
+    let toastTimer;
+    function showToast(msg, err = false) {
+      const t = document.getElementById('toast');
+      t.textContent = msg;
+      t.className = 'toast' + (err ? ' toast-error' : '') + ' show';
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => t.classList.remove('show'), 3000);
+    }
+  </script>
+  <script src="i18n.js"></script>
+</body>
+</html>
