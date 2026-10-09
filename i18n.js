@@ -11,7 +11,7 @@ const TRANSLATIONS = {
 
     hero_eyebrow: 'Swedish International Organization of Sport Science',
     hero_h1:      'Where <span class="accent">Science</span><br />Meets Sport',
-    hero_sub:     'Advancing fitness through evidence-based training, modern sports technology, and world-class coaching — available to you, wherever you are.',
+    hero_sub:     'Advancing fitness through evidence-based training, modern sports technology, and expert coaching — available to you, wherever you are.',
     hero_btn1:    'Discover SIOSS',
     hero_btn2:    'Contact Us',
 
@@ -21,6 +21,7 @@ const TRANSLATIONS = {
     stat_satisfaction: 'Satisfaction Rate',
     stat_community:    'Student Community',
 
+    hero_founded: 'Founded in 2015',
     about_label: 'About SIOSS',
     about_h2:    'Established in Sweden.<br />Built for the World.',
     about_p1:    'Founded in <strong>Sweden in 2015</strong>, SIOSS is a specialized educational institution dedicated to the training and development of sports coaches across various disciplines. We apply the latest teaching methodologies and interactive technologies to deliver an exceptional learning experience.',
@@ -50,8 +51,6 @@ const TRANSLATIONS = {
     team2_desc:  'Expert in sports nutrition, dietary planning, and athlete performance fuelling.',
     team3_role:  'Personal Training Specialist',
     team3_desc:  'Certified PT trainer with extensive experience in strength and conditioning.',
-    team4_role:  'PT Trainer & Football Fitness Coach',
-    team4_desc:  'Experienced trainers focused on functional movement and football-specific conditioning.',
 
     test_label:  'Testimonials',
     test_h2:     'What Our Students Say',
@@ -114,6 +113,7 @@ const TRANSLATIONS = {
     stat_satisfaction: 'معدل الرضا',
     stat_community:    'مجتمع الطلاب',
 
+    hero_founded: 'تأسست عام 2015',
     about_label: 'عن SIOSS',
     about_h2:    'تأسست في السويد.<br />بنيت للعالم.',
     about_p1:    'تأسست <strong>في السويد عام 2015</strong>، وتُعدّ SIOSS مؤسسة تعليمية متخصصة في تدريب وتطوير المدربين الرياضيين في مختلف التخصصات. نطبق أحدث المناهج التدريسية والتقنيات التفاعلية لتقديم تجربة تعليمية استثنائية.',
@@ -143,8 +143,6 @@ const TRANSLATIONS = {
     team2_desc:  'خبير في التغذية الرياضية وتخطيط النظام الغذائي وتغذية الرياضيين.',
     team3_role:  'أخصائي تدريب شخصي',
     team3_desc:  'مدرب شخصي معتمد بخبرة واسعة في القوة والتكييف البدني.',
-    team4_role:  'مدرب شخصي ومدرب لياقة كرة القدم',
-    team4_desc:  'مدربون ذوو خبرة يركزون على الحركة الوظيفية وتكييف اللياقة لكرة القدم.',
 
     test_label:  'آراء الطلاب',
     test_h2:     'ما يقوله طلابنا',

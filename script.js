@@ -1,10 +1,8 @@
 // ── Navbar: shrink on scroll ──
 const navbar = document.getElementById('navbar');
 window.addEventListener('scroll', () => {
-  navbar.style.background = window.scrollY > 40
-    ? 'rgba(13,17,23,.98)'
-    : 'rgba(13,17,23,.85)';
-});
+  navbar.classList.toggle('scrolled', window.scrollY > 40);
+}, { passive: true });
 
 // ── Mobile burger ──
 const burger = document.getElementById('burger');
@@ -140,8 +138,9 @@ const lightbox      = document.getElementById('lightbox');
 const lightboxImg   = document.getElementById('lightboxImg');
 const lightboxClose = document.getElementById('lightboxClose');
 
-document.querySelectorAll('.img-gallery-item img').forEach(img => {
+document.querySelectorAll('.photo-slide img').forEach(img => {
   img.addEventListener('click', () => {
+    if (img.closest('.photo-scroll-track').dataset.dragged === '1') return;
     lightboxImg.src = img.src;
     lightboxImg.alt = img.alt;
     lightbox.classList.add('open');
@@ -183,65 +182,18 @@ function initPhotoScroll(trackId, leftId, rightId) {
   left.addEventListener('click',  () => track.scrollBy({ left: -AMT, behavior: 'smooth' }));
   right.addEventListener('click', () => track.scrollBy({ left:  AMT, behavior: 'smooth' }));
   let isDown = false, startX, scrollLeft;
-  track.addEventListener('mousedown', e => { isDown = true; startX = e.pageX - track.offsetLeft; scrollLeft = track.scrollLeft; });
+  track.addEventListener('mousedown', e => { isDown = true; track.dataset.dragged = ''; startX = e.pageX - track.offsetLeft; scrollLeft = track.scrollLeft; });
   track.addEventListener('mouseleave', () => isDown = false);
   track.addEventListener('mouseup',    () => isDown = false);
   track.addEventListener('mousemove',  e => {
     if (!isDown) return;
     e.preventDefault();
-    track.scrollLeft = scrollLeft - (e.pageX - track.offsetLeft - startX) * 1.5;
+    const dx = e.pageX - track.offsetLeft - startX;
+    if (Math.abs(dx) > 5) track.dataset.dragged = '1';
+    track.scrollLeft = scrollLeft - dx * 1.5;
   });
 }
 initPhotoScroll('certsTrack',   'certsLeft',   'certsRight');
 initPhotoScroll('bahrainTrack', 'bahrainLeft', 'bahrainRight');
 initPhotoScroll('iraqTrack',    'iraqLeft',    'iraqRight');
 initPhotoScroll('fieldTrack',   'fieldLeft',   'fieldRight');
-
-// ── Counter animation ──
-function animateCounters() {
-  document.querySelectorAll('.stat-number').forEach(el => {
-    const text = el.textContent;
-    const num  = parseFloat(text.replace(/[^0-9.]/g, ''));
-    const suffix = text.replace(/[0-9.]/g, '');
-    let start = 0;
-    const duration = 1600;
-    const step = 16;
-    const increment = num / (duration / step);
-    const timer = setInterval(() => {
-      start += increment;
-      if (start >= num) { start = num; clearInterval(timer); }
-      el.textContent = (num % 1 === 0 ? Math.floor(start) : start.toFixed(1)) + suffix;
-    }, step);
-  });
-}
-
-// Trigger counters when stats section enters viewport
-const statsSection = document.querySelector('.stats');
-let counted = false;
-const observer = new IntersectionObserver(entries => {
-  if (entries[0].isIntersecting && !counted) {
-    counted = true;
-    animateCounters();
-  }
-}, { threshold: 0.4 });
-if (statsSection) observer.observe(statsSection);
-
-// ── Fade-in on scroll ──
-const fadeEls = document.querySelectorAll(
-  '.why-card, .team-card, .testimonial-card, .gallery-item, .stat-item'
-);
-const fadeObserver = new IntersectionObserver(entries => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.style.opacity = '1';
-      entry.target.style.transform = 'translateY(0)';
-    }
-  });
-}, { threshold: 0.12 });
-
-fadeEls.forEach(el => {
-  el.style.opacity = '0';
-  el.style.transform = 'translateY(20px)';
-  el.style.transition = 'opacity .5s ease, transform .5s ease';
-  fadeObserver.observe(el);
-});
