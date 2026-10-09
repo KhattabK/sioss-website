@@ -250,7 +250,7 @@
         <h4>Contact</h4>
         <ul>
           <li>+46 70 718 11 37</li>
-          <li>info@sioss.org</li>
+          <li>info@sioss.se</li>
           <li>Linköping, Sweden</li>
         </ul>
       </div>
@@ -261,6 +261,8 @@
     </div>
   </footer>
 
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="supabase-config.js"></script>
   <script>
     /* ── Navbar ── */
     window.addEventListener('scroll', () => {
@@ -270,36 +272,11 @@
       document.getElementById('navLinks').classList.toggle('open');
     });
 
-    /* ── Real student data ── */
-    const SEED = [
-      { id:  1, name: 'HUSSEIN AYYED IBADI ALMOHAMMED',          course: '',                       date: '',           instructor: '' },
-      { id:  2, name: 'Mohammed bin Khalifa bin Fadel Al-Hajri',  course: '',                       date: '',           instructor: '' },
-      { id:  3, name: 'Iqbal Abdul Ghaffar',                      course: '',                       date: '',           instructor: '' },
-      { id:  4, name: 'Amal Ali Naji',                            course: '',                       date: '',           instructor: '' },
-      { id:  5, name: 'Zahraa Anwer Mahdi',                       course: '',                       date: '',           instructor: '' },
-      { id:  6, name: 'Al-Muntadhar Najm Abd',                    course: '',                       date: '',           instructor: '' },
-      { id:  7, name: 'Fatima Star Jawad',                        course: '',                       date: '',           instructor: '' },
-      { id:  8, name: 'Mohammed Qasem Eubady',                    course: '',                       date: '',           instructor: '' },
-      { id:  9, name: 'Haidar Sabah',                             course: 'Personal Trainer',       date: '03/02/2024', instructor: '' },
-      { id: 10, name: 'Ahmaed Rashed',                            course: 'Fitness Football Course', date: '09/26/2019', instructor: '' },
-      { id: 11, name: 'HIND ABDULKAREM ABDULRAZAQ',               course: 'Personal Trainer',       date: '05/15/2026', instructor: '' },
-      { id: 12, name: 'NOORALDEEN NABEEL JUMA IDREES',            course: 'Personal Trainer',       date: '05/15/2026', instructor: '' },
-      { id: 13, name: 'Haya Nabeel Sabeeh',                       course: 'Personal Trainer',       date: '05/15/2026', instructor: '' },
-      { id: 14, name: 'Hamza Thamer Ibrahim',                     course: '',                       date: '',           instructor: '' },
-      { id: 15, name: 'Tabarek Sabah Al-Mayyah',                  course: 'Personal Trainer Course', date: '03/03/2024', instructor: '' },
-      { id: 16, name: 'ASHIKUR RAHMAN',                           course: 'FT Course',              date: '06/11/2024', instructor: 'Abdullahdem Khalil' },
-    ];
-
-    const DATA_VERSION = '2';
-
-    function loadStudents() {
-      if (localStorage.getItem('sioss_students_v') !== DATA_VERSION) {
-        localStorage.setItem('sioss_students', JSON.stringify(SEED));
-        localStorage.setItem('sioss_students_v', DATA_VERSION);
-        return SEED;
-      }
-      const stored = localStorage.getItem('sioss_students');
-      return stored ? JSON.parse(stored) : SEED;
+    /* ── Student data (Supabase) ── */
+    async function loadStudents() {
+      const { data, error } = await sb.from('students').select('id, name, course, date, instructor').order('id');
+      if (error) throw error;
+      return data;
     }
 
     function yearFromDate(d) {
@@ -369,13 +346,13 @@
       grid.innerHTML = list.map((s, i) => {
         const yr = yearFromDate(s.date);
         const metaParts = [];
-        if (s.date)       metaParts.push(`<span><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>${s.date}</span>`);
-        if (s.instructor) metaParts.push(`<span><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>${s.instructor}</span>`);
+        if (s.date)       metaParts.push(`<span><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>${escapeHtml(s.date)}</span>`);
+        if (s.instructor) metaParts.push(`<span><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>${escapeHtml(s.instructor)}</span>`);
         return `<div class="student-card">
           <span class="student-num">${pad(s.id)}</span>
-          <div class="student-avatar">${initials(s.name)}</div>
-          <div class="student-name">${s.name}</div>
-          <div class="student-badge ${badgeClass(s.course)}">${s.course || 'SIOSS Graduate'}</div>
+          <div class="student-avatar">${escapeHtml(initials(s.name))}</div>
+          <div class="student-name">${escapeHtml(s.name)}</div>
+          <div class="student-badge ${badgeClass(s.course)}">${escapeHtml(s.course) || 'SIOSS Graduate'}</div>
           ${metaParts.length ? `<div class="student-meta">${metaParts.join('')}</div>` : ''}
         </div>`;
       }).join('');
@@ -395,10 +372,19 @@
     }
 
     /* ── Boot ── */
-    const ALL = loadStudents();
-    updateStats(ALL);
-    populateFilters(ALL);
-    renderCards(ALL);
+    let ALL = [];
+    document.getElementById('resultCount').textContent = 'Loading…';
+
+    loadStudents().then(students => {
+      ALL = students;
+      updateStats(ALL);
+      populateFilters(ALL);
+      renderCards(ALL);
+    }).catch(err => {
+      console.error(err);
+      document.getElementById('resultCount').textContent = '';
+      document.getElementById('studentGrid').innerHTML = `<div class="empty-state"><p>Could not load students. Please try again later.</p></div>`;
+    });
 
     ['searchInput','courseFilter','yearFilter'].forEach(id => {
       document.getElementById(id).addEventListener('input', () => renderCards(applyFilters(ALL)));

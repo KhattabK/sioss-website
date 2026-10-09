@@ -181,17 +181,17 @@
       <img src="images/logo-white.png" alt="SIOSS Logo" class="logo-img" />
       <h2>Admin Login</h2>
       <p>Sign in to manage the student registry.</p>
-      <div class="login-error" id="loginError">Incorrect username or password.</div>
-      <form id="loginForm" autocomplete="off">
+      <div class="login-error" id="loginError">Incorrect email or password.</div>
+      <form id="loginForm">
         <div class="fld">
-          <label for="loginUser">Username</label>
-          <input type="text" id="loginUser" placeholder="Enter username" autocomplete="username" />
+          <label for="loginUser">Email</label>
+          <input type="email" id="loginUser" placeholder="Enter email" autocomplete="username" required />
         </div>
         <div class="fld">
           <label for="loginPass">Password</label>
           <input type="password" id="loginPass" placeholder="Enter password" autocomplete="current-password" />
         </div>
-        <button type="submit" class="btn btn-primary btn-full" style="margin-top:4px">Sign In</button>
+        <button type="submit" class="btn btn-primary btn-full" id="loginBtn" style="margin-top:4px">Sign In</button>
       </form>
       <div style="text-align:center">
         <a href="students.html" class="back-link">
@@ -249,7 +249,7 @@
             <label for="sInstructor">Instructor</label>
             <input type="text" id="sInstructor" placeholder="e.g. Abdullahdem Khalil" />
           </div>
-          <button type="submit" class="btn btn-primary btn-full">Add Student</button>
+          <button type="submit" class="btn btn-primary btn-full" id="addBtn">Add Student</button>
           <p class="form-success" id="addSuccess">Student added.</p>
         </form>
       </div>
@@ -282,66 +282,51 @@
 
   <div class="toast" id="toast"></div>
 
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="supabase-config.js"></script>
   <script>
-    /* ── Credentials ── */
-    const ADMIN_USER = 'admin';
-    const ADMIN_PASS = 'sioss2026';
-
     /* ── Auth ── */
-    function isLoggedIn() { return sessionStorage.getItem('sioss_admin') === 'true'; }
-    function showAdmin()  { document.getElementById('loginWrap').style.display = 'none'; document.getElementById('adminWrap').style.display = 'block'; renderTable(getStudents()); }
-    if (isLoggedIn()) showAdmin();
+    let students = [];
 
-    document.getElementById('loginForm').addEventListener('submit', e => {
+    function showAdmin() { document.getElementById('loginWrap').style.display = 'none'; document.getElementById('adminWrap').style.display = 'block'; loadStudents(); }
+
+    sb.auth.getSession().then(({ data }) => { if (data.session) showAdmin(); });
+
+    document.getElementById('loginForm').addEventListener('submit', async e => {
       e.preventDefault();
-      if (document.getElementById('loginUser').value.trim() === ADMIN_USER &&
-          document.getElementById('loginPass').value === ADMIN_PASS) {
-        sessionStorage.setItem('sioss_admin', 'true');
-        document.getElementById('loginError').style.display = 'none';
-        showAdmin();
-      } else {
+      const btn = document.getElementById('loginBtn');
+      btn.disabled = true;
+      const { error } = await sb.auth.signInWithPassword({
+        email:    document.getElementById('loginUser').value.trim(),
+        password: document.getElementById('loginPass').value,
+      });
+      btn.disabled = false;
+      if (error) {
         document.getElementById('loginError').style.display = 'block';
         document.getElementById('loginPass').value = '';
+        return;
       }
+      document.getElementById('loginError').style.display = 'none';
+      showAdmin();
     });
 
-    document.getElementById('logoutBtn').addEventListener('click', () => {
-      sessionStorage.removeItem('sioss_admin'); location.reload();
+    document.getElementById('logoutBtn').addEventListener('click', async () => {
+      await sb.auth.signOut(); location.reload();
     });
 
     /* ── Data ── */
-    const SEED = [
-      { id:  1, name: 'HUSSEIN AYYED IBADI ALMOHAMMED',          course: '',                        date: '',           instructor: '' },
-      { id:  2, name: 'Mohammed bin Khalifa bin Fadel Al-Hajri',  course: '',                        date: '',           instructor: '' },
-      { id:  3, name: 'Iqbal Abdul Ghaffar',                      course: '',                        date: '',           instructor: '' },
-      { id:  4, name: 'Amal Ali Naji',                            course: '',                        date: '',           instructor: '' },
-      { id:  5, name: 'Zahraa Anwer Mahdi',                       course: '',                        date: '',           instructor: '' },
-      { id:  6, name: 'Al-Muntadhar Najm Abd',                    course: '',                        date: '',           instructor: '' },
-      { id:  7, name: 'Fatima Star Jawad',                        course: '',                        date: '',           instructor: '' },
-      { id:  8, name: 'Mohammed Qasem Eubady',                    course: '',                        date: '',           instructor: '' },
-      { id:  9, name: 'Haidar Sabah',                             course: 'Personal Trainer',        date: '03/02/2024', instructor: '' },
-      { id: 10, name: 'Ahmaed Rashed',                            course: 'Fitness Football Course',  date: '09/26/2019', instructor: '' },
-      { id: 11, name: 'HIND ABDULKAREM ABDULRAZAQ',               course: 'Personal Trainer',        date: '05/15/2026', instructor: '' },
-      { id: 12, name: 'NOORALDEEN NABEEL JUMA IDREES',            course: 'Personal Trainer',        date: '05/15/2026', instructor: '' },
-      { id: 13, name: 'Haya Nabeel Sabeeh',                       course: 'Personal Trainer',        date: '05/15/2026', instructor: '' },
-      { id: 14, name: 'Hamza Thamer Ibrahim',                     course: '',                        date: '',           instructor: '' },
-      { id: 15, name: 'Tabarek Sabah Al-Mayyah',                  course: 'Personal Trainer Course', date: '03/03/2024', instructor: '' },
-      { id: 16, name: 'ASHIKUR RAHMAN',                           course: 'FT Course',               date: '06/11/2024', instructor: 'Abdullahdem Khalil' },
-    ];
-
-    const DATA_VERSION = '2';
-
-    function getStudents() {
-      if (localStorage.getItem('sioss_students_v') !== DATA_VERSION) {
-        localStorage.setItem('sioss_students', JSON.stringify(SEED));
-        localStorage.setItem('sioss_students_v', DATA_VERSION);
-        return SEED;
-      }
-      const s = localStorage.getItem('sioss_students');
-      return s ? JSON.parse(s) : SEED;
+    async function loadStudents() {
+      const { data, error } = await sb.from('students').select('id, name, course, date, instructor').order('id');
+      if (error) { showToast('Could not load students: ' + error.message, true); return; }
+      students = data;
+      renderFiltered();
     }
-    function saveStudents(arr) { localStorage.setItem('sioss_students', JSON.stringify(arr)); }
-    function nextId(arr) { return arr.length ? Math.max(...arr.map(s => s.id)) + 1 : 1; }
+
+    function renderFiltered() {
+      const q = document.getElementById('adminSearch').value.toLowerCase().trim();
+      renderTable(q ? students.filter(s => s.name.toLowerCase().includes(q)) : students);
+    }
+
     function pad(n) { return String(n).padStart(2, '0'); }
 
     function badgeClass(course) {
@@ -369,47 +354,46 @@
           <td class="tbl-num">${pad(s.id)}</td>
           <td>
             <div class="tbl-name-cell">
-              <div class="tbl-avatar">${initials(s.name)}</div>
-              ${s.name}
+              <div class="tbl-avatar">${escapeHtml(initials(s.name))}</div>
+              ${escapeHtml(s.name)}
             </div>
           </td>
-          <td><span class="badge ${badgeClass(s.course)}">${s.course || '—'}</span></td>
-          <td style="color:var(--text-muted)">${s.date || '—'}</td>
-          <td style="color:var(--text-muted)">${s.instructor || '—'}</td>
+          <td><span class="badge ${badgeClass(s.course)}">${escapeHtml(s.course) || '—'}</span></td>
+          <td style="color:var(--text-muted)">${escapeHtml(s.date) || '—'}</td>
+          <td style="color:var(--text-muted)">${escapeHtml(s.instructor) || '—'}</td>
           <td><button class="btn-delete" onclick="deleteStudent(${s.id})">Delete</button></td>
         </tr>`).join('');
     }
 
-    function deleteStudent(id) {
+    async function deleteStudent(id) {
       if (!confirm('Remove this student?')) return;
-      const arr = getStudents().filter(s => s.id !== id);
-      saveStudents(arr);
-      const q = document.getElementById('adminSearch').value.toLowerCase();
-      renderTable(q ? arr.filter(s => s.name.toLowerCase().includes(q)) : arr);
+      // .select() returns the deleted rows, so a delete blocked by RLS (not an admin) is detectable
+      const { data, error } = await sb.from('students').delete().eq('id', id).select('id');
+      if (error || !data.length) { showToast(error ? error.message : 'Not allowed — this account is not an admin.', true); return; }
+      students = students.filter(s => s.id !== id);
+      renderFiltered();
       showToast('Student removed.', true);
     }
 
-    document.getElementById('addForm').addEventListener('submit', e => {
+    document.getElementById('addForm').addEventListener('submit', async e => {
       e.preventDefault();
-      const arr = getStudents();
-      arr.push({
-        id:         nextId(arr),
+      const btn = document.getElementById('addBtn');
+      btn.disabled = true;
+      const { data, error } = await sb.from('students').insert({
         name:       document.getElementById('sName').value.trim(),
         course:     document.getElementById('sCourse').value.trim(),
         date:       document.getElementById('sDate').value.trim(),
         instructor: document.getElementById('sInstructor').value.trim(),
-      });
-      saveStudents(arr);
-      renderTable(arr);
+      }).select('id, name, course, date, instructor').single();
+      btn.disabled = false;
+      if (error) { showToast('Could not add student: ' + error.message, true); return; }
+      students.push(data);
+      renderFiltered();
       document.getElementById('addForm').reset();
       showToast('Student added.');
     });
 
-    document.getElementById('adminSearch').addEventListener('input', function() {
-      const q = this.value.toLowerCase().trim();
-      const arr = getStudents();
-      renderTable(q ? arr.filter(s => s.name.toLowerCase().includes(q)) : arr);
-    });
+    document.getElementById('adminSearch').addEventListener('input', renderFiltered);
 
     let toastTimer;
     function showToast(msg, err = false) {

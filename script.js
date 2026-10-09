@@ -80,7 +80,7 @@ document.getElementById('contactForm').addEventListener('submit', function (e) {
     message: this.querySelector('[name="message"]').value,
   };
 
-  fetch('https://formspree.io/f/mdajnjla', {
+  fetch('https://formspree.io/f/xdeorddg', {
     method:  'POST',
     headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
     body:    JSON.stringify(data)
