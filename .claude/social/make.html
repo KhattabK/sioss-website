@@ -1,0 +1,119 @@
+<!doctype html>
+<!-- Local tool (not deployed): renders the SJSS cover and social posters to PNG in /marketing.
+     Open through .claude/serve.ps1, then call window.makeAll() or just load the page. -->
+<html lang="ar">
+<head>
+<meta charset="UTF-8" />
+<title>SJSS social images</title>
+<style>body{background:#111;color:#ccc;font-family:system-ui;padding:20px} img{max-width:320px;margin:8px;border:1px solid #333}</style>
+</head>
+<body>
+<p id="status">working…</p>
+<div id="out"></div>
+<script>
+const C = { dark: '#0a0e15', navy: '#0e2038', primary: '#1a6fc4', accent: '#4cc3f7', yellow: '#f5b83d', white: '#ffffff', muted: '#9aa5b8', soft: '#c4cddb', border: '#242d3d' };
+const AR = "Cairo, 'Segoe UI', Tahoma, sans-serif";
+const EN = "Archivo, 'Segoe UI', Arial, sans-serif";
+
+// Embed the web fonts as data URIs so an SVG rendered as an image can use them
+async function fontCss() {
+  const css = await (await fetch('https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=Cairo:wght@400;600;700;800&display=swap')).text();
+  const blocks = css.split('/*').slice(1).map(b => '/*' + b).filter(b => /^\/\* (arabic|latin) \*\//.test(b));
+  const cache = {};
+  let out = '';
+  for (const b of blocks) {
+    const url = b.match(/url\((https:[^)]+)\)/)[1];
+    if (!cache[url]) {
+      const buf = await (await fetch(url)).arrayBuffer();
+      let bin = ''; new Uint8Array(buf).forEach(x => bin += String.fromCharCode(x));
+      cache[url] = 'data:font/woff2;base64,' + btoa(bin);
+    }
+    out += b.replace(url, cache[url]);
+  }
+  return out;
+}
+
+const rtl = (x, y, size, weight, fill, text) =>
+  `<text x="${x}" y="${y}" font-family="${AR}" font-size="${size}" font-weight="${weight}" fill="${fill}" direction="rtl" unicode-bidi="plaintext" text-anchor="start">${text}</text>`;
+const ltr = (x, y, size, weight, fill, text, anchor = 'start', extra = '') =>
+  `<text x="${x}" y="${y}" font-family="${EN}" font-size="${size}" font-weight="${weight}" fill="${fill}" text-anchor="${anchor}" ${extra}>${text}</text>`;
+
+function bullets(items, y, step, size) {
+  return items.map((t, i) =>
+    `<rect x="984" y="${y + i * step - size * 0.42}" width="16" height="16" fill="${C.yellow}"/>` + rtl(960, y + i * step, size, 600, C.white, t)
+  ).join('');
+}
+
+// One poster, two layouts: L holds the y positions
+function poster(W, H, L) {
+  const rules = ['بحث أصيل لم يسبق نشره أو تقديمه لمجلة أخرى', 'مكتوب باللغة الإنجليزية ووفق قالب المجلة', 'لا يتجاوز 10 صفحات', 'جميع البحوث تخضع للتحكيم العلمي'];
+  const send  = ['ملف البحث كاملاً بصيغة PDF', 'الملخص (Abstract) والكلمات المفتاحية', 'أسماء الباحثين وجهات عملهم'];
+  const lanes = [200, 250, 300, 350, 400, 450, 500].map((r, i) =>
+    `<circle cx="-70" cy="${L.lanes}" r="${r}" ${i === 3 ? `stroke="${C.yellow}" stroke-width="4"` : `opacity="${0.7 - i * 0.08}"`}/>`).join('');
+  return `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" viewBox="0 0 ${W} ${H}">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="${C.dark}"/><stop offset="1" stop-color="${C.navy}"/></linearGradient>
+    <linearGradient id="pulse" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="${C.accent}" stop-opacity="0"/><stop offset=".3" stop-color="${C.accent}"/><stop offset=".75" stop-color="${C.accent}"/><stop offset="1" stop-color="${C.accent}" stop-opacity="0"/></linearGradient>
+  </defs>
+  <rect width="${W}" height="${H}" fill="url(#bg)"/>
+  <g fill="none" stroke="${C.primary}" stroke-width="2">${lanes}</g>
+  <path d="M0 ${L.pulse} H150 l14 -28 l16 50 l22 -124 l25 162 l20 -86 l13 26 H360 l13 -18 l12 18 H430" fill="none" stroke="url(#pulse)" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/>
+  <rect width="${W}" height="10" fill="${C.primary}"/>
+
+  ${ltr(80, L.mast, 68, 800, C.white, 'SJSS', 'start', 'letter-spacing="-2"')}
+  ${ltr(80, L.mast + 40, 19, 600, C.muted, 'ISSN 2519-6634', 'start', 'letter-spacing="1.5"')}
+  ${rtl(1000, L.mast - 14, 32, 700, C.white, 'مجلة SIOSS لعلوم الرياضة')}
+  ${rtl(1000, L.mast + 34, 23, 600, C.accent, 'مجلة علمية محكّمة · وصول مفتوح')}
+  <rect x="80" y="${L.mast + 72}" width="920" height="1" fill="${C.border}"/>
+
+  ${rtl(1000, L.head, 124, 800, C.white, 'دعوة للنشر')}
+  ${rtl(1000, L.head + 82, 40, 600, C.soft, 'نستقبل بحوثكم في علوم الرياضة')}
+  <rect x="910" y="${L.head + 118}" width="90" height="8" fill="${C.yellow}"/>
+
+  ${rtl(1000, L.s1, 40, 800, C.accent, 'شروط النشر')}
+  ${bullets(rules, L.s1 + L.gap, L.step, L.size)}
+
+  ${rtl(1000, L.s2, 40, 800, C.accent, 'ماذا ترسل؟')}
+  ${bullets(send, L.s2 + L.gap, L.step, L.size)}
+
+  <rect x="0" y="${L.foot}" width="${W}" height="${L.footH}" fill="${C.dark}" opacity=".88"/>
+  <rect x="0" y="${L.foot}" width="${W}" height="1" fill="${C.border}"/>
+  <rect x="80" y="${L.foot + 38}" width="290" height="150" rx="6" fill="${C.yellow}"/>
+  <text x="225" y="${L.foot + 88}" font-family="${AR}" font-size="27" font-weight="700" fill="${C.dark}" text-anchor="middle">رسوم النشر</text>
+  ${ltr(225, L.foot + 160, 70, 800, C.dark, '$100', 'middle', 'letter-spacing="-2"')}
+  ${rtl(1000, L.foot + 72, 27, 600, C.muted, 'أرسل بحثك إلى')}
+  ${ltr(1000, L.foot + 132, 54, 700, C.white, 'info@sioss.se', 'end', 'letter-spacing="-1"')}
+  ${ltr(1000, L.foot + 180, 27, 600, C.accent, 'sioss.se/journal', 'end')}
+</svg>`;
+}
+
+const FEED  = { lanes: 760,  pulse: 420, mast: 118, head: 345, s1: 560,  s2: 882,  gap: 66, step: 58, size: 31, foot: 1124, footH: 226 };
+const STORY = { lanes: 1180, pulse: 660, mast: 300, head: 570, s1: 830,  s2: 1205, gap: 76, step: 70, size: 35, foot: 1500, footH: 230 };
+
+async function render(svg, css, W, H, name) {
+  const withFonts = svg.replace(/(<svg[^>]*>)/, `$1<style>${css}</style>`);
+  const url = URL.createObjectURL(new Blob([withFonts], { type: 'image/svg+xml' }));
+  const img = new Image(); img.src = url; await img.decode();
+  const canvas = Object.assign(document.createElement('canvas'), { width: W, height: H });
+  const ctx = canvas.getContext('2d');
+  for (let i = 0; i < 2; i++) { ctx.drawImage(img, 0, 0, W, H); await new Promise(r => setTimeout(r, 400)); }
+  const blob = await new Promise(r => canvas.toBlob(r, 'image/png'));
+  await fetch('/__save/' + name, { method: 'POST', body: blob });
+  const preview = new Image(); preview.src = URL.createObjectURL(blob); document.getElementById('out').append(preview);
+  return name + ' ' + Math.round(blob.size / 1024) + ' KB';
+}
+
+window.makeAll = async function () {
+  const css = await fontCss();
+  const cover = (await (await fetch('/journal/cover.svg')).text()).replace('<svg ', '<svg width="840" height="1188" ');
+  const done = [
+    await render(cover, css, 1680, 2376, 'sjss-cover.png'),
+    await render(poster(1080, 1350, FEED), css, 1080, 1350, 'sjss-call-for-papers-instagram.png'),
+    await render(poster(1080, 1920, STORY), css, 1080, 1920, 'sjss-call-for-papers-story.png'),
+  ];
+  document.getElementById('status').textContent = 'saved: ' + done.join(' | ');
+  return done;
+};
+</script>
+</body>
+</html>

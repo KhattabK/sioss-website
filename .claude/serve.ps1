@@ -10,6 +10,14 @@ while ($listener.IsListening) {
   $ctx = $listener.GetContext()
   try {
     $rel = [Uri]::UnescapeDataString($ctx.Request.Url.AbsolutePath).TrimStart('/')
+    # Local-only helper: POST /__save/<name>.png writes a rendered image into marketing/
+    if ($ctx.Request.HttpMethod -eq 'POST' -and $rel -match '^__save/([\w-]+\.png)$') {
+      $outDir = Join-Path $root 'marketing'
+      if (-not (Test-Path $outDir)) { New-Item -ItemType Directory $outDir | Out-Null }
+      $ms = New-Object IO.MemoryStream; $ctx.Request.InputStream.CopyTo($ms)
+      [IO.File]::WriteAllBytes((Join-Path $outDir $Matches[1]), $ms.ToArray())
+      $ctx.Response.StatusCode = 204; continue
+    }
     $path = [IO.Path]::GetFullPath((Join-Path $root $rel))
     if (-not $path.StartsWith($root)) { $ctx.Response.StatusCode = 403; continue }
     if (Test-Path $path -PathType Container) { $path = Join-Path $path 'index.html' }
