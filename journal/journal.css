@@ -94,6 +94,14 @@ table.details td { padding: 6px 0; color: var(--white); }
 .editor-note strong { color: var(--note); }
 .editor-note + h2 { margin-top: 44px; }
 
+/* Arabic (RTL) pages */
+[dir="rtl"] body, body[dir="rtl"] { font-family: 'Cairo', 'IBM Plex Sans', system-ui, sans-serif; }
+[dir="rtl"] h1, [dir="rtl"] h2, [dir="rtl"] h3 { font-family: 'Cairo', var(--font-display); letter-spacing: 0; }
+[dir="rtl"] main ul, [dir="rtl"] main ol { margin: 0 22px 14px 0; }
+[dir="rtl"] .eyebrow, [dir="rtl"] .facts dt { letter-spacing: 0; }
+[dir="rtl"] main strong { color: var(--white); }
+.jnav a[lang="ar"] { font-family: 'Cairo', 'IBM Plex Sans', system-ui, sans-serif; }
+
 .footer { padding: 36px 0; color: var(--muted); font-size: .88rem; }
 .footer-inner { display: flex; justify-content: space-between; gap: 24px; flex-wrap: wrap; }
 .footer a { color: var(--muted); }
