@@ -28,6 +28,11 @@ const lazyVideoObserver = new IntersectionObserver((entries, obs) => {
 }, { rootMargin: '600px 0px' });
 document.querySelectorAll('video[data-src]').forEach(v => lazyVideoObserver.observe(v));
 
+// Play buttons must work even if the observer has not fired yet
+function ensureVideoSrc(video) {
+  if (!video.getAttribute('src') && video.dataset.src) video.src = video.dataset.src;
+}
+
 // ── Video play / pause ──
 document.querySelectorAll('.reel-wrap').forEach(wrap => {
   const video = wrap.querySelector('video');
@@ -48,6 +53,7 @@ document.querySelectorAll('.reel-wrap').forEach(wrap => {
   btn.addEventListener('click', () => {
     if (video.paused) {
       pauseAll();
+      ensureVideoSrc(video);
       video.currentTime = 0;
       video.play();
       wrap.classList.add('playing');
@@ -176,6 +182,7 @@ document.querySelectorAll('.tv-wrap').forEach(wrap => {
     document.querySelectorAll('.tv-wrap').forEach(w => {
       if (w !== wrap) { w.querySelector('video').pause(); w.classList.remove('playing'); w.querySelector('.tv-play').style.display = ''; }
     });
+    ensureVideoSrc(video);
     video.play();
     wrap.classList.add('playing');
   });
