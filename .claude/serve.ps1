@@ -10,8 +10,8 @@ while ($listener.IsListening) {
   $ctx = $listener.GetContext()
   try {
     $rel = [Uri]::UnescapeDataString($ctx.Request.Url.AbsolutePath).TrimStart('/')
-    # Local-only helper: POST /__save/<name>.png writes a rendered image into marketing/
-    if ($ctx.Request.HttpMethod -eq 'POST' -and $rel -match '^__save/([\w-]+\.png)$') {
+    # Local-only helper: POST /__save/<name>.(png|jpg|webp) writes a rendered image into marketing/
+    if ($ctx.Request.HttpMethod -eq 'POST' -and $rel -match '^__save/([\w-]+\.(?:png|jpg|webp))$') {
       $outDir = Join-Path $root 'marketing'
       if (-not (Test-Path $outDir)) { New-Item -ItemType Directory $outDir | Out-Null }
       $ms = New-Object IO.MemoryStream; $ctx.Request.InputStream.CopyTo($ms)

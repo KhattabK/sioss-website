@@ -421,8 +421,8 @@ p:last-child { margin-bottom: 0; }
 .team { background: var(--dark-2); }
 .team-grid {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 40px 24px;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 40px 28px;
 }
 .team-avatar {
   position: relative;
