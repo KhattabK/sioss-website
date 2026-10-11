@@ -1,9 +1,18 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-page="students">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Our Students – SIOSS</title>
+  <meta name="description" content="The public registry of SIOSS graduates — search coaches and athletes who have earned a SIOSS diploma by name, course or year." />
+  <link rel="canonical" href="https://www.sioss.se/students.html" />
+  <link rel="alternate" hreflang="en" href="https://www.sioss.se/students.html" />
+  <link rel="alternate" hreflang="ar" href="https://www.sioss.se/students.html?lang=ar" />
+  <meta name="theme-color" content="#0a0e15" />
+  <link rel="icon" href="favicon.ico" sizes="32x32" />
+  <link rel="apple-touch-icon" href="images/apple-touch-icon.png" />
+  <meta property="og:title" content="Our Students – SIOSS" />
+  <meta property="og:image" content="https://www.sioss.se/images/og-image.jpg" />
   <link rel="stylesheet" href="style.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -111,22 +120,23 @@
   <header class="navbar" id="navbar">
     <div class="container nav-inner">
       <a href="index.html" class="logo">
-        <img src="images/logo-white-tight.png" alt="SIOSS Logo" class="logo-img" />
+        <img src="images/logo-white-tight.png" alt="SIOSS Logo" class="logo-img" width="430" height="160" />
       </a>
       <nav class="nav-links" id="navLinks">
-        <a href="index.html#home">Home</a>
-        <a href="index.html#about">About</a>
-        <a href="index.html#team">Instructors</a>
-        <a href="students.html" class="active">Our Students</a>
-        <a href="index.html#gallery">Gallery</a>
-        <a href="index.html#contact">Contact</a>
+        <a href="index.html#home" data-i18n="nav_home">Home</a>
+        <a href="index.html#about" data-i18n="nav_about">About</a>
+        <a href="index.html#team" data-i18n="nav_instructors">Instructors</a>
+        <a href="students.html" class="active" data-i18n="nav_students">Our Students</a>
+        <a href="index.html#gallery" data-i18n="nav_gallery">Gallery</a>
+        <a href="journal/" data-i18n="nav_journal">Journal</a>
+        <a href="index.html#contact" data-i18n="nav_contact">Contact</a>
       </nav>
       <div class="lang-switch">
         <button class="lang-btn active" data-lang="en">EN</button>
         <span class="lang-sep">|</span>
         <button class="lang-btn" data-lang="ar">عربي</button>
       </div>
-      <a href="index.html#contact" class="btn btn-sm btn-primary">Get in Touch</a>
+      <a href="index.html#contact" class="btn btn-sm btn-primary" data-i18n="nav_cta">Get in Touch</a>
       <button class="burger" id="burger" aria-label="Toggle menu">
         <span></span><span></span><span></span>
       </button>
@@ -136,20 +146,20 @@
   <!-- ===== HERO ===== -->
   <section class="students-hero">
     <div class="container">
-      <h1>Our Students</h1>
-      <p>Meet the coaches and athletes who have earned their SIOSS diploma — a recognised mark of excellence in sports science education.</p>
+      <h1 data-i18n="students_h1">Our Students</h1>
+      <p data-i18n="students_intro">Meet the coaches and athletes who have earned their SIOSS diploma — a recognised mark of excellence in sports science education.</p>
       <div class="students-stats">
         <div class="s-stat">
           <span class="s-num" id="totalCount">—</span>
-          <span class="s-lbl">Graduates</span>
+          <span class="s-lbl" data-i18n="students_stat_grads">Graduates</span>
         </div>
         <div class="s-stat">
           <span class="s-num" id="courseCount">—</span>
-          <span class="s-lbl">Courses</span>
+          <span class="s-lbl" data-i18n="students_stat_courses">Courses</span>
         </div>
         <div class="s-stat">
           <span class="s-num" id="yearSpan">—</span>
-          <span class="s-lbl">Years</span>
+          <span class="s-lbl" data-i18n="students_stat_years">Years</span>
         </div>
       </div>
     </div>
@@ -158,12 +168,12 @@
   <!-- ===== FILTER BAR ===== -->
   <div class="filter-bar">
     <div class="container filter-inner">
-      <input type="search" id="searchInput" placeholder="Search by name…" aria-label="Search by name" />
+      <input type="search" id="searchInput" placeholder="Search by name…" data-i18n-ph="students_search_ph" aria-label="Search by name" data-i18n-aria="students_search_ph" />
       <select id="courseFilter" aria-label="Filter by course">
-        <option value="">All Courses</option>
+        <option value="" data-i18n="students_all_courses">All Courses</option>
       </select>
       <select id="yearFilter" aria-label="Filter by year">
-        <option value="">All Years</option>
+        <option value="" data-i18n="students_all_years">All Years</option>
       </select>
       <span class="student-count" id="resultCount"></span>
     </div>
@@ -181,37 +191,38 @@
     <div class="container footer-inner">
       <div class="footer-brand">
         <a href="index.html" class="logo">
-          <img src="images/logo-white-tight.png" alt="SIOSS Logo" class="logo-img" />
+          <img src="images/logo-white-tight.png" alt="SIOSS Logo" class="logo-img" width="430" height="160" />
         </a>
-        <p>Swedish International Organization of Sport Science — advancing fitness through science and innovation since 2015.</p>
+        <p data-i18n="footer_tagline">Swedish International Organization of Sport Science — advancing fitness through science and innovation since 2015.</p>
       </div>
       <div class="footer-col">
-        <h4>Navigation</h4>
+        <h4 data-i18n="footer_nav">Navigation</h4>
         <ul>
-          <li><a href="index.html#home">Home</a></li>
-          <li><a href="index.html#about">About</a></li>
-          <li><a href="index.html#team">Instructors</a></li>
-          <li><a href="students.html">Our Students</a></li>
-          <li><a href="index.html#contact">Contact</a></li>
+          <li><a href="index.html#home" data-i18n="nav_home">Home</a></li>
+          <li><a href="index.html#about" data-i18n="nav_about">About</a></li>
+          <li><a href="index.html#team" data-i18n="nav_instructors">Instructors</a></li>
+          <li><a href="students.html" data-i18n="nav_students">Our Students</a></li>
+          <li><a href="index.html#contact" data-i18n="nav_contact">Contact</a></li>
         </ul>
       </div>
       <div class="footer-col">
-        <h4>Contact</h4>
+        <h4 data-i18n="footer_contact">Contact</h4>
         <ul>
-          <li>+46 70 718 11 37</li>
-          <li>info@sioss.se</li>
-          <li>Linköping, Sweden</li>
+          <li><a href="tel:+46707181137" dir="ltr">+46 70 718 11 37</a></li>
+          <li><a href="mailto:info@sioss.se">info@sioss.se</a></li>
+          <li data-i18n="contact_location">Linköping, Sweden</li>
         </ul>
       </div>
     </div>
     <div class="footer-bottom">
-      <p>© 2026 SIOSS — Swedish International Organization of Sport Science. All Rights Reserved.</p>
+      <p data-i18n="footer_copy">© 2026 SIOSS — Swedish International Organization of Sport Science. All Rights Reserved.</p>
       <a href="admin.html" class="footer-admin">Admin</a>
     </div>
   </footer>
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="supabase-config.js"></script>
+  <script src="i18n.js"></script>
   <script>
     /* ── Navbar ── */
     window.addEventListener('scroll', () => {
@@ -281,25 +292,25 @@
 
     /* ── Render registry ── */
     function renderCards(list) {
-      document.getElementById('resultCount').textContent = `${list.length} graduate${list.length !== 1 ? 's' : ''}`;
+      document.getElementById('resultCount').textContent = `${list.length} ${siossT(list.length === 1 ? 'students_count_one' : 'students_count_many')}`;
       const grid = document.getElementById('studentGrid');
       if (list.length === 0) {
         grid.innerHTML = `<div class="empty-state">
           <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
-          <p>No graduates match your search.</p></div>`;
+          <p>${siossT('students_none')}</p></div>`;
         return;
       }
       const cell = (label, value, cls) => value
         ? `<td class="${cls}" data-label="${label}">${escapeHtml(value)}</td>`
         : `<td class="${cls} r-blank"><span class="r-empty">—</span></td>`;
       grid.innerHTML = `<table class="registry">
-        <thead><tr><th scope="col">No.</th><th scope="col">Name</th><th scope="col">Course</th><th scope="col">Date</th><th scope="col">Instructor</th></tr></thead>
+        <thead><tr><th scope="col">${siossT('students_col_no')}</th><th scope="col">${siossT('students_col_name')}</th><th scope="col">${siossT('students_col_course')}</th><th scope="col">${siossT('students_col_date')}</th><th scope="col">${siossT('students_col_inst')}</th></tr></thead>
         <tbody>${list.map(s => `<tr>
           <td class="r-num">${pad(s.id)}</td>
           <td class="r-name">${escapeHtml(s.name)}</td>
-          <td><span class="course-tag ${badgeClass(s.course)}">${escapeHtml(s.course) || 'SIOSS Graduate'}</span></td>
-          ${cell('Date', s.date, 'r-date')}
-          ${cell('Instructor', s.instructor, 'r-inst')}
+          <td><span class="course-tag ${badgeClass(s.course)}">${escapeHtml(s.course) || siossT('students_default')}</span></td>
+          ${cell(siossT('students_col_date'), s.date, 'r-date')}
+          ${cell(siossT('students_col_inst'), s.instructor, 'r-inst')}
         </tr>`).join('')}</tbody>
       </table>`;
     }
@@ -319,23 +330,28 @@
 
     /* ── Boot ── */
     let ALL = [];
-    document.getElementById('resultCount').textContent = 'Loading…';
+    let LOADED = false;
 
     loadStudents().then(students => {
-      ALL = students;
+      ALL = students; LOADED = true;
       updateStats(ALL);
       populateFilters(ALL);
       renderCards(ALL);
     }).catch(err => {
       console.error(err);
       document.getElementById('resultCount').textContent = '';
-      document.getElementById('studentGrid').innerHTML = `<div class="empty-state"><p>Could not load students. Please try again later.</p></div>`;
+      document.getElementById('studentGrid').innerHTML = `<div class="empty-state"><p>${siossT('students_error')}</p></div>`;
+    });
+
+    // Re-render JS-built text when the language changes
+    document.addEventListener('sioss:lang', () => {
+      if (LOADED) renderCards(applyFilters(ALL));
+      else if (!document.querySelector('#studentGrid .empty-state')) document.getElementById('resultCount').textContent = siossT('students_loading');
     });
 
     ['searchInput','courseFilter','yearFilter'].forEach(id => {
       document.getElementById(id).addEventListener('input', () => renderCards(applyFilters(ALL)));
     });
   </script>
-  <script src="i18n.js"></script>
 </body>
 </html>

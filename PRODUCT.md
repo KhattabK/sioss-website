@@ -24,8 +24,8 @@ A Swedish-founded sport-science institution that brings European coaching educat
 - Existing logo (images/logo-white.png, images/logo.jpeg) and current identity are kept (refinement, not rebrand).
 
 ## Evidence on Hand
-- Certificates/recognitions: images/cert_*.png (SvFF, Univ. of Basrah, Baghdad, Baghdad Women, Samarra, Wasit, Ashur).
-- Course photos: images/bahrain*.png, images/iraq*.png, images/gallery*.png.
+- Certificates/recognitions: images/cert_*.jpg (SvFF, Univ. of Basrah, Baghdad, Baghdad Women, Samarra, Wasit, Ashur).
+- Course photos: images/bahrain*.jpg, images/iraq*.jpg, images/gallery*.jpg.
 - Instructor photos and names (index.html #team), student testimonial videos and highlight reels on R2, HRV YouTube video.
 - Graduate registry in Supabase.
 - No verified statistics: do NOT show figures like class counts, satisfaction rates or community size.

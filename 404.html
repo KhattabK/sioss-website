@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" data-page="404">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex" />
+  <title>Page not found – SIOSS</title>
+  <meta name="theme-color" content="#0a0e15" />
+  <link rel="icon" href="/favicon.ico" sizes="32x32" />
+  <link rel="stylesheet" href="/style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=IBM+Plex+Sans:wght@400;500;600;700&family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    .nf { min-height: 100vh; min-height: 100svh; display: flex; align-items: center; padding: 120px 0 72px; }
+    .nf-code { font-family: var(--font-display); font-size: .95rem; font-weight: 700; color: var(--accent); margin-bottom: 16px; }
+    .nf h1 { font-size: clamp(2.5rem, 6vw, 4.5rem); font-weight: 800; line-height: 1; letter-spacing: -0.035em; color: var(--white); margin-bottom: 24px; }
+    .nf p { font-size: 1.1rem; max-width: 46ch; margin-bottom: 36px; }
+  </style>
+</head>
+<body>
+
+  <header class="navbar" id="navbar">
+    <div class="container nav-inner">
+      <a href="/" class="logo">
+        <img src="/images/logo-white-tight.png" alt="SIOSS Logo" class="logo-img" width="430" height="160" />
+      </a>
+      <div class="lang-switch" style="margin-inline-start:auto">
+        <button class="lang-btn active" data-lang="en">EN</button>
+        <span class="lang-sep">|</span>
+        <button class="lang-btn" data-lang="ar">عربي</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="nf">
+    <div class="container">
+      <p class="nf-code">404</p>
+      <h1 data-i18n="nf_h1">Page not found</h1>
+      <p data-i18n="nf_desc">The page you are looking for does not exist or has been moved.</p>
+      <a href="/" class="btn btn-primary" data-i18n="nf_home">Back to the homepage</a>
+    </div>
+  </main>
+
+  <script src="/i18n.js"></script>
+</body>
+</html>

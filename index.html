@@ -4,6 +4,47 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>SIOSS – Swedish International Organization of Sport Science</title>
+  <meta name="description" content="SIOSS trains and certifies sports coaches — personal training, football fitness, strength &amp; mobility and HRV. Founded in Sweden in 2015 and recognised by universities and Svenska Fotbollsförbundet." />
+  <link rel="canonical" href="https://www.sioss.se/" />
+  <link rel="alternate" hreflang="en" href="https://www.sioss.se/" />
+  <link rel="alternate" hreflang="ar" href="https://www.sioss.se/?lang=ar" />
+  <link rel="alternate" hreflang="x-default" href="https://www.sioss.se/" />
+  <meta name="theme-color" content="#0a0e15" />
+  <link rel="icon" href="favicon.ico" sizes="32x32" />
+  <link rel="icon" type="image/png" sizes="512x512" href="images/icon-512.png" />
+  <link rel="apple-touch-icon" href="images/apple-touch-icon.png" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="SIOSS" />
+  <meta property="og:url" content="https://www.sioss.se/" />
+  <meta property="og:title" content="SIOSS – Swedish International Organization of Sport Science" />
+  <meta property="og:description" content="Sports coach education and certification, founded in Sweden in 2015. Evidence-based training, expert instructors, recognised certificates." />
+  <meta property="og:image" content="https://www.sioss.se/images/og-image.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:locale" content="en_GB" />
+  <meta property="og:locale:alternate" content="ar_IQ" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "EducationalOrganization",
+    "name": "SIOSS – Swedish International Organization of Sport Science",
+    "alternateName": "SIOSS",
+    "url": "https://www.sioss.se/",
+    "logo": "https://www.sioss.se/images/icon-512.png",
+    "image": "https://www.sioss.se/images/og-image.jpg",
+    "foundingDate": "2015",
+    "email": "info@sioss.se",
+    "telephone": "+46707181137",
+    "address": { "@type": "PostalAddress", "addressLocality": "Linköping", "addressCountry": "SE" },
+    "sameAs": [
+      "https://www.facebook.com/sioss.iraq",
+      "https://www.instagram.com/sioss.sweden/"
+    ]
+  }
+  </script>
   <link rel="stylesheet" href="style.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -15,7 +56,7 @@
   <header class="navbar" id="navbar">
     <div class="container nav-inner">
       <a href="#home" class="logo">
-        <img src="images/logo-white-tight.png" alt="SIOSS Logo" class="logo-img" />
+        <img src="images/logo-white-tight.png" alt="SIOSS Logo" class="logo-img" width="430" height="160" />
       </a>
       <nav class="nav-links" id="navLinks">
         <a href="#home" data-i18n="nav_home">Home</a>
@@ -23,6 +64,7 @@
         <a href="#team" data-i18n="nav_instructors">Instructors</a>
         <a href="students.html" data-i18n="nav_students">Our Students</a>
         <a href="#gallery" data-i18n="nav_gallery">Gallery</a>
+        <a href="journal/" data-i18n="nav_journal">Journal</a>
         <a href="#contact" data-i18n="nav_contact">Contact</a>
       </nav>
       <div class="lang-switch">
@@ -39,7 +81,7 @@
 
   <!-- ===== HERO ===== -->
   <section class="hero" id="home">
-    <video class="hero-video" autoplay muted loop playsinline preload="auto">
+    <video class="hero-video" autoplay muted loop playsinline preload="metadata">
       <source src="https://pub-daf60fd082344b8eb459b49e9201e897.r2.dev/videos/hero.mp4" type="video/mp4" />
     </video>
     <div class="hero-bg"></div>
@@ -76,53 +118,53 @@
       <p class="section-intro" data-i18n="certs_desc">Official recognition from leading universities and sports federations — validating SIOSS as a trusted sports science institution.</p>
       <div class="photo-scroll-wrapper">
         <div class="certs-scroll-track" id="certsTrack">
-          <div class="cert-card" onclick="openCert('images/cert_svff.png','Svenska Fotbollsförbundet')">
-            <div class="cert-thumb"><img src="images/cert_svff.png" alt="Svenska Fotbollsförbundet" loading="lazy" /></div>
+          <div class="cert-card" onclick="openCert('images/cert_svff.jpg', this)">
+            <div class="cert-thumb"><img src="images/cert_svff.jpg" alt="Svenska Fotbollsförbundet" loading="lazy" /></div>
             <div class="cert-info">
-              <span class="cert-tag">Football Federation</span>
-              <p class="cert-title">Svenska Fotbollsförbundet</p>
+              <span class="cert-tag" data-i18n="cert_tag_fed">Football Federation</span>
+              <p class="cert-title" data-i18n="cert_svff">Svenska Fotbollsförbundet</p>
             </div>
           </div>
-          <div class="cert-card" onclick="openCert('images/cert_basrah.png','University of Basrah')">
-            <div class="cert-thumb"><img src="images/cert_basrah.png" alt="University of Basrah" loading="lazy" /></div>
+          <div class="cert-card" onclick="openCert('images/cert_basrah.jpg', this)">
+            <div class="cert-thumb"><img src="images/cert_basrah.jpg" alt="University of Basrah" loading="lazy" /></div>
             <div class="cert-info">
-              <span class="cert-tag">University</span>
-              <p class="cert-title">University of Basrah</p>
+              <span class="cert-tag" data-i18n="cert_tag_uni">University</span>
+              <p class="cert-title" data-i18n="cert_basrah">University of Basrah</p>
             </div>
           </div>
-          <div class="cert-card" onclick="openCert('images/cert_baghdad.png','University of Baghdad')">
-            <div class="cert-thumb"><img src="images/cert_baghdad.png" alt="University of Baghdad" loading="lazy" /></div>
+          <div class="cert-card" onclick="openCert('images/cert_baghdad.jpg', this)">
+            <div class="cert-thumb"><img src="images/cert_baghdad.jpg" alt="University of Baghdad" loading="lazy" /></div>
             <div class="cert-info">
-              <span class="cert-tag">University</span>
-              <p class="cert-title">University of Baghdad</p>
+              <span class="cert-tag" data-i18n="cert_tag_uni">University</span>
+              <p class="cert-title" data-i18n="cert_baghdad">University of Baghdad</p>
             </div>
           </div>
-          <div class="cert-card" onclick="openCert('images/cert_samarra.png','University of Samarra')">
-            <div class="cert-thumb"><img src="images/cert_samarra.png" alt="University of Samarra" loading="lazy" /></div>
+          <div class="cert-card" onclick="openCert('images/cert_samarra.jpg', this)">
+            <div class="cert-thumb"><img src="images/cert_samarra.jpg" alt="University of Samarra" loading="lazy" /></div>
             <div class="cert-info">
-              <span class="cert-tag">University</span>
-              <p class="cert-title">University of Samarra</p>
+              <span class="cert-tag" data-i18n="cert_tag_uni">University</span>
+              <p class="cert-title" data-i18n="cert_samarra">University of Samarra</p>
             </div>
           </div>
-          <div class="cert-card" onclick="openCert('images/cert_wasit.png','University of Wasit')">
-            <div class="cert-thumb"><img src="images/cert_wasit.png" alt="University of Wasit" loading="lazy" /></div>
+          <div class="cert-card" onclick="openCert('images/cert_wasit.jpg', this)">
+            <div class="cert-thumb"><img src="images/cert_wasit.jpg" alt="University of Wasit" loading="lazy" /></div>
             <div class="cert-info">
-              <span class="cert-tag">University</span>
-              <p class="cert-title">University of Wasit</p>
+              <span class="cert-tag" data-i18n="cert_tag_uni">University</span>
+              <p class="cert-title" data-i18n="cert_wasit">University of Wasit</p>
             </div>
           </div>
-          <div class="cert-card" onclick="openCert('images/cert_baghdad_women.png','University of Baghdad – Women')">
-            <div class="cert-thumb"><img src="images/cert_baghdad_women.png" alt="University of Baghdad – Women" loading="lazy" /></div>
+          <div class="cert-card" onclick="openCert('images/cert_baghdad_women.jpg', this)">
+            <div class="cert-thumb"><img src="images/cert_baghdad_women.jpg" alt="University of Baghdad – Women" loading="lazy" /></div>
             <div class="cert-info">
-              <span class="cert-tag">University</span>
-              <p class="cert-title">University of Baghdad – Women</p>
+              <span class="cert-tag" data-i18n="cert_tag_uni">University</span>
+              <p class="cert-title" data-i18n="cert_baghdad_women">University of Baghdad – Women</p>
             </div>
           </div>
-          <div class="cert-card" onclick="openCert('images/cert_ashur.png','Ashur University')">
-            <div class="cert-thumb"><img src="images/cert_ashur.png" alt="Ashur University" loading="lazy" /></div>
+          <div class="cert-card" onclick="openCert('images/cert_ashur.jpg', this)">
+            <div class="cert-thumb"><img src="images/cert_ashur.jpg" alt="Ashur University" loading="lazy" /></div>
             <div class="cert-info">
-              <span class="cert-tag">University</span>
-              <p class="cert-title">Ashur University</p>
+              <span class="cert-tag" data-i18n="cert_tag_uni">University</span>
+              <p class="cert-title" data-i18n="cert_ashur">Ashur University</p>
             </div>
           </div>
         </div>
@@ -144,10 +186,10 @@
     <div class="container about-grid">
       <div class="about-visual">
         <div class="about-img-main">
-          <img src="images/about_main.png" alt="About SIOSS" />
+          <img src="images/about_main.jpg" alt="About SIOSS" width="1496" height="1051" loading="lazy" />
         </div>
         <div class="about-img-float">
-          <img src="images/about_float.png" alt="SIOSS Training" />
+          <img src="images/about_float.jpg" alt="SIOSS Training" width="857" height="477" loading="lazy" />
         </div>
       </div>
       <div class="about-text">
@@ -200,19 +242,19 @@
       <div class="team-grid">
         <div class="team-card">
           <div class="team-avatar" data-initials="AK"><img src="images/team_khalil.jpg" alt="Dr. Abduladeem Ahmed Khalil" onerror="this.remove()" /></div>
-          <h3>Dr. Abduladeem Ahmed Khalil</h3>
+          <h3 data-i18n="team1_name">Dr. Abduladeem Ahmed Khalil</h3>
           <span class="team-role" data-i18n="team1_role">HRV Trainer & Sport Scientist</span>
           <p data-i18n="team1_desc">Specialist in heart rate variability training and performance optimisation.</p>
         </div>
         <div class="team-card">
           <div class="team-avatar" data-initials="MK"><img src="images/team_khateeb.jpg" alt="Dr. Mahmoud Al Khateeb" onerror="this.remove()" /></div>
-          <h3>Dr. Mahmoud Al Khateeb</h3>
+          <h3 data-i18n="team2_name">Dr. Mahmoud Al Khateeb</h3>
           <span class="team-role" data-i18n="team2_role">Nutrition & Sports Dietetics</span>
           <p data-i18n="team2_desc">Expert in sports nutrition, dietary planning, and athlete performance fuelling.</p>
         </div>
         <div class="team-card">
           <div class="team-avatar" data-initials="HS"><img src="images/team_haider.jpg" alt="Mr. Haider Sabah" onerror="this.remove()" /></div>
-          <h3>Mr. Haider Sabah</h3>
+          <h3 data-i18n="team3_name">Mr. Haider Sabah</h3>
           <span class="team-role" data-i18n="team3_role">Personal Training Specialist</span>
           <p data-i18n="team3_desc">Certified PT trainer with extensive experience in strength and conditioning.</p>
         </div>
@@ -226,15 +268,15 @@
       <h2 data-i18n="test_h2">What Our Students Say</h2>
       <div class="testimonial-videos">
         <div class="tv-wrap">
-          <video src="https://pub-daf60fd082344b8eb459b49e9201e897.r2.dev/videos/testimonial1.mp4" playsinline preload="metadata"></video>
+          <video data-src="https://pub-daf60fd082344b8eb459b49e9201e897.r2.dev/videos/testimonial1.mp4" playsinline preload="none"></video>
           <button class="tv-play" aria-label="Play"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="6,3 20,12 6,21"/></svg></button>
         </div>
         <div class="tv-wrap">
-          <video src="https://pub-daf60fd082344b8eb459b49e9201e897.r2.dev/videos/testimonial2.mp4" playsinline preload="metadata"></video>
+          <video data-src="https://pub-daf60fd082344b8eb459b49e9201e897.r2.dev/videos/testimonial2.mp4" playsinline preload="none"></video>
           <button class="tv-play" aria-label="Play"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="6,3 20,12 6,21"/></svg></button>
         </div>
         <div class="tv-wrap">
-          <video src="https://pub-daf60fd082344b8eb459b49e9201e897.r2.dev/videos/testimonial3.mp4" playsinline preload="metadata"></video>
+          <video data-src="https://pub-daf60fd082344b8eb459b49e9201e897.r2.dev/videos/testimonial3.mp4" playsinline preload="none"></video>
           <button class="tv-play" aria-label="Play"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="6,3 20,12 6,21"/></svg></button>
         </div>
       </div>
@@ -255,55 +297,55 @@
       <div class="video-grid" id="videoGrid">
 
         <div class="reel-wrap">
-          <video src="https://pub-daf60fd082344b8eb459b49e9201e897.r2.dev/videos/video12.mp4" playsinline loop preload="metadata"></video>
+          <video data-src="https://pub-daf60fd082344b8eb459b49e9201e897.r2.dev/videos/video12.mp4" playsinline loop preload="none"></video>
           <button class="play-btn" aria-label="Play"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="6,3 20,12 6,21"/></svg></button>
         </div>
         <div class="reel-wrap">
-          <video src="https://pub-daf60fd082344b8eb459b49e9201e897.r2.dev/videos/video12.1.mp4" playsinline loop preload="metadata"></video>
+          <video data-src="https://pub-daf60fd082344b8eb459b49e9201e897.r2.dev/videos/video12.1.mp4" playsinline loop preload="none"></video>
           <button class="play-btn" aria-label="Play"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="6,3 20,12 6,21"/></svg></button>
         </div>
         <div class="reel-wrap">
-          <video src="https://pub-daf60fd082344b8eb459b49e9201e897.r2.dev/videos/video1.mp4" playsinline loop preload="metadata"></video>
+          <video data-src="https://pub-daf60fd082344b8eb459b49e9201e897.r2.dev/videos/video1.mp4" playsinline loop preload="none"></video>
           <button class="play-btn" aria-label="Play"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="6,3 20,12 6,21"/></svg></button>
         </div>
         <div class="reel-wrap">
-          <video src="https://pub-daf60fd082344b8eb459b49e9201e897.r2.dev/videos/video2.mp4" playsinline loop preload="metadata"></video>
+          <video data-src="https://pub-daf60fd082344b8eb459b49e9201e897.r2.dev/videos/video2.mp4" playsinline loop preload="none"></video>
           <button class="play-btn" aria-label="Play"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="6,3 20,12 6,21"/></svg></button>
         </div>
         <div class="reel-wrap">
-          <video src="https://pub-daf60fd082344b8eb459b49e9201e897.r2.dev/videos/video3.mp4" playsinline loop preload="metadata"></video>
+          <video data-src="https://pub-daf60fd082344b8eb459b49e9201e897.r2.dev/videos/video3.mp4" playsinline loop preload="none"></video>
           <button class="play-btn" aria-label="Play"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="6,3 20,12 6,21"/></svg></button>
         </div>
         <div class="reel-wrap">
-          <video src="https://pub-daf60fd082344b8eb459b49e9201e897.r2.dev/videos/video4.mp4" playsinline loop preload="metadata"></video>
+          <video data-src="https://pub-daf60fd082344b8eb459b49e9201e897.r2.dev/videos/video4.mp4" playsinline loop preload="none"></video>
           <button class="play-btn" aria-label="Play"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="6,3 20,12 6,21"/></svg></button>
         </div>
         <div class="reel-wrap">
-          <video src="https://pub-daf60fd082344b8eb459b49e9201e897.r2.dev/videos/video5.mp4" playsinline loop preload="metadata"></video>
+          <video data-src="https://pub-daf60fd082344b8eb459b49e9201e897.r2.dev/videos/video5.mp4" playsinline loop preload="none"></video>
           <button class="play-btn" aria-label="Play"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="6,3 20,12 6,21"/></svg></button>
         </div>
         <div class="reel-wrap">
-          <video src="https://pub-daf60fd082344b8eb459b49e9201e897.r2.dev/videos/video6.mp4" playsinline loop preload="metadata"></video>
+          <video data-src="https://pub-daf60fd082344b8eb459b49e9201e897.r2.dev/videos/video6.mp4" playsinline loop preload="none"></video>
           <button class="play-btn" aria-label="Play"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="6,3 20,12 6,21"/></svg></button>
         </div>
         <div class="reel-wrap">
-          <video src="https://pub-daf60fd082344b8eb459b49e9201e897.r2.dev/videos/video7.mp4" playsinline loop preload="metadata"></video>
+          <video data-src="https://pub-daf60fd082344b8eb459b49e9201e897.r2.dev/videos/video7.mp4" playsinline loop preload="none"></video>
           <button class="play-btn" aria-label="Play"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="6,3 20,12 6,21"/></svg></button>
         </div>
         <div class="reel-wrap">
-          <video src="https://pub-daf60fd082344b8eb459b49e9201e897.r2.dev/videos/video8.mp4" playsinline loop preload="metadata"></video>
+          <video data-src="https://pub-daf60fd082344b8eb459b49e9201e897.r2.dev/videos/video8.mp4" playsinline loop preload="none"></video>
           <button class="play-btn" aria-label="Play"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="6,3 20,12 6,21"/></svg></button>
         </div>
         <div class="reel-wrap">
-          <video src="https://pub-daf60fd082344b8eb459b49e9201e897.r2.dev/videos/video9.mp4" playsinline loop preload="metadata"></video>
+          <video data-src="https://pub-daf60fd082344b8eb459b49e9201e897.r2.dev/videos/video9.mp4" playsinline loop preload="none"></video>
           <button class="play-btn" aria-label="Play"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="6,3 20,12 6,21"/></svg></button>
         </div>
         <div class="reel-wrap">
-          <video src="https://pub-daf60fd082344b8eb459b49e9201e897.r2.dev/videos/video10.mp4" playsinline loop preload="metadata"></video>
+          <video data-src="https://pub-daf60fd082344b8eb459b49e9201e897.r2.dev/videos/video10.mp4" playsinline loop preload="none"></video>
           <button class="play-btn" aria-label="Play"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="6,3 20,12 6,21"/></svg></button>
         </div>
         <div class="reel-wrap">
-          <video src="https://pub-daf60fd082344b8eb459b49e9201e897.r2.dev/videos/video11.mp4" playsinline loop preload="metadata"></video>
+          <video data-src="https://pub-daf60fd082344b8eb459b49e9201e897.r2.dev/videos/video11.mp4" playsinline loop preload="none"></video>
           <button class="play-btn" aria-label="Play"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="6,3 20,12 6,21"/></svg></button>
         </div>
 
@@ -321,7 +363,7 @@
           <img src="images/team_khalil.jpg" alt="Dr. Abduladeem Ahmed Khalil" onerror="this.remove()" />
         </div>
         <div class="hrv-host-info">
-          <strong>Dr. Abduladeem Ahmed Khalil</strong>
+          <strong data-i18n="team1_name">Dr. Abduladeem Ahmed Khalil</strong>
           <span data-i18n="team1_role">HRV Trainer & Sport Scientist</span>
         </div>
       </div>
@@ -348,11 +390,11 @@
       </div>
       <div class="photo-scroll-wrapper">
         <div class="photo-scroll-track" id="bahrainTrack">
-          <div class="photo-slide"><img src="images/bahrain1.png" alt="SIOSS Bahrain – Mobility" loading="lazy" /></div>
-          <div class="photo-slide"><img src="images/bahrain2.png" alt="SIOSS Bahrain – Strength Training" loading="lazy" /></div>
-          <div class="photo-slide"><img src="images/bahrain3.png" alt="SIOSS Bahrain – Course Session" loading="lazy" /></div>
-          <div class="photo-slide"><img src="images/bahrain4.png" alt="SIOSS Bahrain – Group Training" loading="lazy" /></div>
-          <div class="photo-slide"><img src="images/bahrain7.png" alt="SIOSS Bahrain – Certificates" loading="lazy" /></div>
+          <div class="photo-slide"><img src="images/bahrain1.jpg" alt="SIOSS Bahrain – Mobility" loading="lazy" /></div>
+          <div class="photo-slide"><img src="images/bahrain2.jpg" alt="SIOSS Bahrain – Strength Training" loading="lazy" /></div>
+          <div class="photo-slide"><img src="images/bahrain3.jpg" alt="SIOSS Bahrain – Course Session" loading="lazy" /></div>
+          <div class="photo-slide"><img src="images/bahrain4.jpg" alt="SIOSS Bahrain – Group Training" loading="lazy" /></div>
+          <div class="photo-slide"><img src="images/bahrain7.jpg" alt="SIOSS Bahrain – Certificates" loading="lazy" /></div>
           <div class="photo-slide photo-slide-wide"><img src="images/bahrain_group.jpg" alt="SIOSS Bahrain – Group Photo" loading="lazy" /></div>
         </div>
       </div>
@@ -371,25 +413,25 @@
       </div>
       <div class="photo-scroll-wrapper">
         <div class="photo-scroll-track" id="iraqTrack">
-          <div class="photo-slide"><img src="images/iraq1.png"  alt="SIOSS Iraq" loading="lazy" /></div>
-          <div class="photo-slide"><img src="images/iraq2.png"  alt="SIOSS Iraq" loading="lazy" /></div>
-          <div class="photo-slide"><img src="images/iraq3.png"  alt="SIOSS Iraq" loading="lazy" /></div>
-          <div class="photo-slide"><img src="images/iraq4.png"  alt="SIOSS Iraq" loading="lazy" /></div>
-          <div class="photo-slide"><img src="images/iraq5.png"  alt="SIOSS Iraq" loading="lazy" /></div>
-          <div class="photo-slide"><img src="images/iraq6.png"  alt="SIOSS Iraq" loading="lazy" /></div>
-          <div class="photo-slide"><img src="images/iraq7.png"  alt="SIOSS Iraq" loading="lazy" /></div>
-          <div class="photo-slide"><img src="images/iraq8.png"  alt="SIOSS Iraq" loading="lazy" /></div>
-          <div class="photo-slide"><img src="images/iraq9.png"  alt="SIOSS Iraq" loading="lazy" /></div>
-          <div class="photo-slide"><img src="images/iraq10.png" alt="SIOSS Iraq" loading="lazy" /></div>
-          <div class="photo-slide"><img src="images/iraq11.png" alt="SIOSS Iraq" loading="lazy" /></div>
-          <div class="photo-slide"><img src="images/iraq12.png" alt="SIOSS Middle East" loading="lazy" /></div>
-          <div class="photo-slide"><img src="images/iraq13.png" alt="SIOSS Middle East" loading="lazy" /></div>
-          <div class="photo-slide"><img src="images/iraq14.png" alt="SIOSS Middle East" loading="lazy" /></div>
-          <div class="photo-slide"><img src="images/iraq15.png" alt="SIOSS Middle East" loading="lazy" /></div>
-          <div class="photo-slide"><img src="images/iraq16.png" alt="SIOSS Middle East" loading="lazy" /></div>
-          <div class="photo-slide"><img src="images/iraq17.png" alt="SIOSS Middle East" loading="lazy" /></div>
-          <div class="photo-slide"><img src="images/iraq18.png" alt="SIOSS Middle East" loading="lazy" /></div>
-          <div class="photo-slide"><img src="images/iraq19.png" alt="SIOSS Middle East" loading="lazy" /></div>
+          <div class="photo-slide"><img src="images/iraq1.jpg"  alt="SIOSS Iraq" loading="lazy" /></div>
+          <div class="photo-slide"><img src="images/iraq2.jpg"  alt="SIOSS Iraq" loading="lazy" /></div>
+          <div class="photo-slide"><img src="images/iraq3.jpg"  alt="SIOSS Iraq" loading="lazy" /></div>
+          <div class="photo-slide"><img src="images/iraq4.jpg"  alt="SIOSS Iraq" loading="lazy" /></div>
+          <div class="photo-slide"><img src="images/iraq5.jpg"  alt="SIOSS Iraq" loading="lazy" /></div>
+          <div class="photo-slide"><img src="images/iraq6.jpg"  alt="SIOSS Iraq" loading="lazy" /></div>
+          <div class="photo-slide"><img src="images/iraq7.jpg"  alt="SIOSS Iraq" loading="lazy" /></div>
+          <div class="photo-slide"><img src="images/iraq8.jpg"  alt="SIOSS Iraq" loading="lazy" /></div>
+          <div class="photo-slide"><img src="images/iraq9.jpg"  alt="SIOSS Iraq" loading="lazy" /></div>
+          <div class="photo-slide"><img src="images/iraq10.jpg" alt="SIOSS Iraq" loading="lazy" /></div>
+          <div class="photo-slide"><img src="images/iraq11.jpg" alt="SIOSS Iraq" loading="lazy" /></div>
+          <div class="photo-slide"><img src="images/iraq12.jpg" alt="SIOSS Middle East" loading="lazy" /></div>
+          <div class="photo-slide"><img src="images/iraq13.jpg" alt="SIOSS Middle East" loading="lazy" /></div>
+          <div class="photo-slide"><img src="images/iraq14.jpg" alt="SIOSS Middle East" loading="lazy" /></div>
+          <div class="photo-slide"><img src="images/iraq15.jpg" alt="SIOSS Middle East" loading="lazy" /></div>
+          <div class="photo-slide"><img src="images/iraq16.jpg" alt="SIOSS Middle East" loading="lazy" /></div>
+          <div class="photo-slide"><img src="images/iraq17.jpg" alt="SIOSS Middle East" loading="lazy" /></div>
+          <div class="photo-slide"><img src="images/iraq18.jpg" alt="SIOSS Middle East" loading="lazy" /></div>
+          <div class="photo-slide"><img src="images/iraq19.jpg" alt="SIOSS Middle East" loading="lazy" /></div>
         </div>
       </div>
     </div>
@@ -407,13 +449,13 @@
       </div>
       <div class="photo-scroll-wrapper">
         <div class="photo-scroll-track" id="fieldTrack">
-          <div class="photo-slide"><img src="images/gallery1.png" alt="SIOSS Football Academy" loading="lazy" /></div>
-          <div class="photo-slide"><img src="images/gallery2.png" alt="SIOSS – Harness Your Power" loading="lazy" /></div>
-          <div class="photo-slide"><img src="images/gallery3.png" alt="SIOSS Football Match" loading="lazy" /></div>
-          <div class="photo-slide"><img src="images/gallery4.png" alt="SIOSS Team Photo" loading="lazy" /></div>
-          <div class="photo-slide"><img src="images/gallery5.png" alt="SIOSS – Dream Closer" loading="lazy" /></div>
-          <div class="photo-slide"><img src="images/gallery6.png" alt="SIOSS Team Photo" loading="lazy" /></div>
-          <div class="photo-slide"><img src="images/gallery7.png" alt="SIOSS Football Player" loading="lazy" /></div>
+          <div class="photo-slide"><img src="images/gallery1.jpg" alt="SIOSS Football Academy" loading="lazy" /></div>
+          <div class="photo-slide"><img src="images/gallery2.jpg" alt="SIOSS – Harness Your Power" loading="lazy" /></div>
+          <div class="photo-slide"><img src="images/gallery3.jpg" alt="SIOSS Football Match" loading="lazy" /></div>
+          <div class="photo-slide"><img src="images/gallery4.jpg" alt="SIOSS Team Photo" loading="lazy" /></div>
+          <div class="photo-slide"><img src="images/gallery5.jpg" alt="SIOSS – Dream Closer" loading="lazy" /></div>
+          <div class="photo-slide"><img src="images/gallery6.jpg" alt="SIOSS Team Photo" loading="lazy" /></div>
+          <div class="photo-slide"><img src="images/gallery7.jpg" alt="SIOSS Football Player" loading="lazy" /></div>
         </div>
       </div>
     </div>
@@ -428,11 +470,15 @@
         <ul class="contact-list">
           <li>
             <span class="contact-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.27h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.91a16 16 0 0 0 6 6l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7a2 2 0 0 1 1.72 2.02z"/></svg></span>
-            <span>+46 70 718 11 37</span>
+            <a href="tel:+46707181137" dir="ltr">+46 70 718 11 37</a>
+          </li>
+          <li>
+            <span class="contact-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2a9.9 9.9 0 0 0-8.5 14.97L2 22l5.17-1.5A9.9 9.9 0 1 0 12.04 2Zm0 1.8a8.1 8.1 0 1 1-4.13 15.07l-.3-.17-3.06.89.9-2.98-.2-.31A8.1 8.1 0 0 1 12.04 3.8Zm-3.4 3.9c-.2 0-.5.07-.76.36-.26.28-1 .97-1 2.37s1.02 2.75 1.17 2.94c.14.19 2 3.06 4.86 4.29 2.4 1.03 2.89.83 3.4.78.53-.05 1.7-.69 1.93-1.36.24-.67.24-1.24.17-1.36-.07-.12-.26-.19-.55-.33-.28-.14-1.69-.83-1.95-.93-.26-.1-.45-.14-.64.14-.19.29-.74.93-.9 1.12-.17.19-.33.21-.62.07-.28-.14-1.2-.44-2.29-1.41a8.6 8.6 0 0 1-1.58-1.97c-.17-.29-.02-.44.12-.58.13-.13.29-.33.43-.5.14-.17.19-.29.28-.48.1-.19.05-.36-.02-.5-.07-.14-.63-1.55-.88-2.12-.22-.52-.45-.53-.64-.53h-.53Z"/></svg></span>
+            <a href="https://wa.me/46707181137" target="_blank" rel="noopener" data-i18n="contact_whatsapp">Chat on WhatsApp</a>
           </li>
           <li>
             <span class="contact-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg></span>
-            <span>info@sioss.se</span>
+            <a href="mailto:info@sioss.se">info@sioss.se</a>
           </li>
           <li>
             <span class="contact-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg></span>
@@ -478,7 +524,7 @@
     <div class="container footer-inner">
       <div class="footer-brand">
         <a href="#home" class="logo">
-          <img src="images/logo-white-tight.png" alt="SIOSS Logo" class="logo-img" />
+          <img src="images/logo-white-tight.png" alt="SIOSS Logo" class="logo-img" width="430" height="160" />
         </a>
         <p data-i18n="footer_tagline">Swedish International Organization of Sport Science — advancing fitness through science and innovation since 2015.</p>
       </div>
@@ -490,14 +536,15 @@
           <li><a href="#team" data-i18n="nav_instructors">Instructors</a></li>
           <li><a href="students.html" data-i18n="nav_students">Our Students</a></li>
           <li><a href="#gallery" data-i18n="nav_gallery">Gallery</a></li>
+          <li><a href="journal/" data-i18n="nav_journal">Journal</a></li>
           <li><a href="#contact" data-i18n="nav_contact">Contact</a></li>
         </ul>
       </div>
       <div class="footer-col">
         <h4 data-i18n="footer_contact">Contact</h4>
         <ul>
-          <li>+46 70 718 11 37</li>
-          <li>info@sioss.se</li>
+          <li><a href="tel:+46707181137" dir="ltr">+46 70 718 11 37</a></li>
+          <li><a href="mailto:info@sioss.se">info@sioss.se</a></li>
           <li data-i18n="contact_location">Linköping, Sweden</li>
         </ul>
       </div>
@@ -506,6 +553,11 @@
       <p data-i18n="footer_copy">© 2026 SIOSS — Swedish International Organization of Sport Science. All Rights Reserved.</p>
     </div>
   </footer>
+
+  <!-- Floating WhatsApp -->
+  <a class="wa-float" href="https://wa.me/46707181137" target="_blank" rel="noopener" aria-label="Chat on WhatsApp" data-i18n-aria="contact_whatsapp">
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.04 2a9.9 9.9 0 0 0-8.5 14.97L2 22l5.17-1.5A9.9 9.9 0 1 0 12.04 2Zm-3.4 5.7h.53c.19 0 .42.01.64.53.25.57.81 1.98.88 2.12.07.14.12.31.02.5-.09.19-.14.31-.28.48-.14.17-.3.37-.43.5-.14.14-.29.29-.12.58.17.28.74 1.21 1.58 1.97 1.09.97 2.01 1.27 2.29 1.41.29.14.45.12.62-.07.16-.19.71-.83.9-1.12.19-.28.38-.24.64-.14.26.1 1.67.79 1.95.93.29.14.48.21.55.33.07.12.07.69-.17 1.36-.23.67-1.4 1.31-1.93 1.36-.51.05-1 .25-3.4-.78-2.86-1.23-4.72-4.1-4.86-4.29-.15-.19-1.17-1.54-1.17-2.94s.74-2.09 1-2.37c.26-.29.56-.36.76-.36Z"/></svg>
+  </a>
 
   <!-- Lightbox -->
   <div class="lightbox" id="lightbox">
@@ -516,8 +568,10 @@
   <script src="i18n.js"></script>
   <script src="script.js"></script>
   <script>
-    function openCert(src, title) {
+    function openCert(src, card) {
+      const title = card.querySelector('.cert-title').textContent;
       document.getElementById('certLbImg').src = src;
+      document.getElementById('certLbImg').alt = title;
       document.getElementById('certLbTitle').textContent = title;
       document.getElementById('certLightbox').classList.add('open');
       document.body.style.overflow = 'hidden';

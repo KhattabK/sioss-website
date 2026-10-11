@@ -16,6 +16,18 @@ navLinks.querySelectorAll('a').forEach(link => {
   link.addEventListener('click', () => navLinks.classList.remove('open'));
 });
 
+// ── Lazy videos: fetch nothing until the section is near the viewport ──
+const lazyVideoObserver = new IntersectionObserver((entries, obs) => {
+  entries.forEach(entry => {
+    if (!entry.isIntersecting) return;
+    const video = entry.target;
+    video.preload = 'metadata';
+    video.src = video.dataset.src;
+    obs.unobserve(video);
+  });
+}, { rootMargin: '600px 0px' });
+document.querySelectorAll('video[data-src]').forEach(v => lazyVideoObserver.observe(v));
+
 // ── Video play / pause ──
 document.querySelectorAll('.reel-wrap').forEach(wrap => {
   const video = wrap.querySelector('video');
@@ -69,7 +81,7 @@ document.getElementById('contactForm').addEventListener('submit', function (e) {
   const note = document.getElementById('formNote');
   const btn  = this.querySelector('[type="submit"]');
   btn.disabled = true;
-  btn.textContent = '…';
+  btn.textContent = siossT('form_sending');
 
   const data = {
     name:    this.querySelector('[name="name"]').value,
@@ -86,24 +98,23 @@ document.getElementById('contactForm').addEventListener('submit', function (e) {
   .then(res => res.json().then(body => ({ ok: res.ok, body })))
   .then(({ ok, body }) => {
     if (ok && body.ok) {
-      note.textContent = 'Thank you! Your message has been sent.';
+      note.textContent = siossT('form_success');
       note.className   = 'form-note success';
       this.reset();
       setTimeout(() => { note.textContent = ''; note.className = 'form-note'; }, 6000);
     } else {
-      const msg = body.errors?.map(err => err.message).join(', ') || body.error || 'Something went wrong.';
-      note.textContent = 'Error: ' + msg;
+      console.error('Contact form error:', body.errors || body.error);
+      note.textContent = siossT('form_error');
       note.className   = 'form-note error';
     }
   })
   .catch(() => {
-    note.textContent = 'Network error — please try again.';
+    note.textContent = siossT('form_network');
     note.className   = 'form-note error';
   })
   .finally(() => {
     btn.disabled = false;
-    const lang = document.documentElement.lang;
-    btn.textContent = (lang === 'ar') ? 'إرسال الرسالة' : 'Send Message';
+    btn.textContent = siossT('form_submit');
   });
 });
 

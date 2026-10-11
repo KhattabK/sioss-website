@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url>
+    <loc>https://www.sioss.se/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sioss.se/" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.sioss.se/?lang=ar" />
+  </url>
+  <url>
+    <loc>https://www.sioss.se/?lang=ar</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sioss.se/" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.sioss.se/?lang=ar" />
+  </url>
+  <url>
+    <loc>https://www.sioss.se/students.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sioss.se/students.html" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.sioss.se/students.html?lang=ar" />
+  </url>
+  <url><loc>https://www.sioss.se/journal/</loc></url>
+  <url><loc>https://www.sioss.se/journal/about.html</loc></url>
+  <url><loc>https://www.sioss.se/journal/editorial-board.html</loc></url>
+  <url><loc>https://www.sioss.se/journal/authors.html</loc></url>
+  <url><loc>https://www.sioss.se/journal/peer-review.html</loc></url>
+  <url><loc>https://www.sioss.se/journal/archive.html</loc></url>
+  <url><loc>https://www.sioss.se/journal/articles/sjss-2017-1-1-01.html</loc></url>
+  <url><loc>https://www.sioss.se/journal/articles/sjss-2017-1-1-02.html</loc></url>
+  <url><loc>https://www.sioss.se/journal/articles/sjss-2017-1-1-03.html</loc></url>
+  <url><loc>https://www.sioss.se/journal/articles/sjss-2017-1-1-04.html</loc></url>
+  <url><loc>https://www.sioss.se/journal/articles/sjss-2017-1-1-05.html</loc></url>
+</urlset>

@@ -7,7 +7,58 @@ const TRANSLATIONS = {
     nav_students:     'Our Students',
     nav_gallery:      'Gallery',
     nav_contact:      'Contact',
+    nav_journal:      'Journal',
     nav_cta:          'Get in Touch',
+
+    meta_title:       'SIOSS – Swedish International Organization of Sport Science',
+    meta_desc:        'SIOSS trains and certifies sports coaches — personal training, football fitness, strength & mobility and HRV. Founded in Sweden in 2015 and recognised by universities and Svenska Fotbollsförbundet.',
+    meta_title_students: 'Our Students – SIOSS',
+    meta_desc_students:  'The public registry of SIOSS graduates — search coaches and athletes who have earned a SIOSS diploma by name, course or year.',
+    meta_title_404:   'Page not found – SIOSS',
+
+    cert_tag_fed:       'Football Federation',
+    cert_tag_uni:       'University',
+    cert_svff:          'Svenska Fotbollsförbundet',
+    cert_basrah:        'University of Basrah',
+    cert_baghdad:       'University of Baghdad',
+    cert_samarra:       'University of Samarra',
+    cert_wasit:         'University of Wasit',
+    cert_baghdad_women: 'University of Baghdad – Women',
+    cert_ashur:         'Ashur University',
+
+    team1_name: 'Dr. Abduladeem Ahmed Khalil',
+    team2_name: 'Dr. Mahmoud Al Khateeb',
+    team3_name: 'Mr. Haider Sabah',
+
+    contact_whatsapp: 'Chat on WhatsApp',
+    form_sending:     'Sending…',
+    form_success:     'Thank you! Your message has been sent.',
+    form_error:       'Something went wrong. Please try again.',
+    form_network:     'Network error — please try again.',
+
+    students_h1:      'Our Students',
+    students_intro:   'Meet the coaches and athletes who have earned their SIOSS diploma — a recognised mark of excellence in sports science education.',
+    students_stat_grads:   'Graduates',
+    students_stat_courses: 'Courses',
+    students_stat_years:   'Years',
+    students_search_ph:    'Search by name…',
+    students_all_courses:  'All Courses',
+    students_all_years:    'All Years',
+    students_loading:      'Loading…',
+    students_count_one:    'graduate',
+    students_count_many:   'graduates',
+    students_none:         'No graduates match your search.',
+    students_error:        'Could not load students. Please try again later.',
+    students_default:      'SIOSS Graduate',
+    students_col_no:       'No.',
+    students_col_name:     'Name',
+    students_col_course:   'Course',
+    students_col_date:     'Date',
+    students_col_inst:     'Instructor',
+
+    nf_h1:   'Page not found',
+    nf_desc: 'The page you are looking for does not exist or has been moved.',
+    nf_home: 'Back to the homepage',
 
     hero_eyebrow: 'Swedish International Organization of Sport Science',
     hero_h1:      'Where <span class="accent">Science</span><br />Meets Sport',
@@ -99,7 +150,58 @@ const TRANSLATIONS = {
     nav_students:     'طلابنا',
     nav_gallery:      'المعرض',
     nav_contact:      'تواصل',
+    nav_journal:      'المجلة',
     nav_cta:          'تواصل معنا',
+
+    meta_title:       'SIOSS – المنظمة الدولية السويدية لعلوم الرياضة',
+    meta_desc:        'SIOSS مؤسسة تعليمية تأسست في السويد عام 2015 لتدريب واعتماد المدربين الرياضيين: التدريب الشخصي، اللياقة لكرة القدم، القوة والحركة، وتقنية HRV. معترف بها من جامعات عراقية والاتحاد السويدي لكرة القدم.',
+    meta_title_students: 'طلابنا – SIOSS',
+    meta_desc_students:  'السجل العام لخريجي SIOSS — ابحث بالاسم أو الدورة أو السنة عن المدربين والرياضيين الحاصلين على دبلوم SIOSS.',
+    meta_title_404:   'الصفحة غير موجودة – SIOSS',
+
+    cert_tag_fed:       'اتحاد كرة القدم',
+    cert_tag_uni:       'جامعة',
+    cert_svff:          'الاتحاد السويدي لكرة القدم',
+    cert_basrah:        'جامعة البصرة',
+    cert_baghdad:       'جامعة بغداد',
+    cert_samarra:       'جامعة سامراء',
+    cert_wasit:         'جامعة واسط',
+    cert_baghdad_women: 'جامعة بغداد – البنات',
+    cert_ashur:         'جامعة آشور',
+
+    team1_name: 'د. عبد العظيم أحمد خليل',
+    team2_name: 'د. محمود الخطيب',
+    team3_name: 'أ. حيدر صباح',
+
+    contact_whatsapp: 'راسلنا على واتساب',
+    form_sending:     'جارٍ الإرسال…',
+    form_success:     'شكراً لك! تم إرسال رسالتك.',
+    form_error:       'حدث خطأ. يرجى المحاولة مرة أخرى.',
+    form_network:     'خطأ في الاتصال — يرجى المحاولة مرة أخرى.',
+
+    students_h1:      'طلابنا',
+    students_intro:   'تعرّف على المدربين والرياضيين الحاصلين على دبلوم SIOSS — علامة تميّز معترف بها في تعليم علوم الرياضة.',
+    students_stat_grads:   'خريج',
+    students_stat_courses: 'دورات',
+    students_stat_years:   'السنوات',
+    students_search_ph:    'ابحث بالاسم…',
+    students_all_courses:  'كل الدورات',
+    students_all_years:    'كل السنوات',
+    students_loading:      'جارٍ التحميل…',
+    students_count_one:    'خريج',
+    students_count_many:   'خريج',
+    students_none:         'لا يوجد خريجون مطابقون لبحثك.',
+    students_error:        'تعذّر تحميل قائمة الطلاب. يرجى المحاولة لاحقاً.',
+    students_default:      'خريج SIOSS',
+    students_col_no:       'الرقم',
+    students_col_name:     'الاسم',
+    students_col_course:   'الدورة',
+    students_col_date:     'التاريخ',
+    students_col_inst:     'المدرب',
+
+    nf_h1:   'الصفحة غير موجودة',
+    nf_desc: 'الصفحة التي تبحث عنها غير موجودة أو تم نقلها.',
+    nf_home: 'العودة إلى الصفحة الرئيسية',
 
     hero_eyebrow: 'المنظمة الدولية السويدية لعلوم الرياضة',
     hero_h1:      'حيث يلتقي <span class="accent">العلم</span><br />بالرياضة',
@@ -207,19 +309,58 @@ function applyLang(lang) {
     if (t[key] !== undefined) el.placeholder = t[key];
   });
 
+  document.querySelectorAll('[data-i18n-aria]').forEach(el => {
+    const key = el.dataset.i18nAria;
+    if (t[key] !== undefined) el.setAttribute('aria-label', t[key]);
+  });
+
+  // Page title / description: <html data-page="students"> picks the *_students keys
+  const page   = document.documentElement.dataset.page;
+  const suffix = page ? '_' + page : '';
+  if (t['meta_title' + suffix]) document.title = t['meta_title' + suffix];
+  const desc = document.querySelector('meta[name="description"]');
+  if (desc && t['meta_desc' + suffix]) desc.setAttribute('content', t['meta_desc' + suffix]);
+
   document.querySelectorAll('.lang-btn').forEach(btn => {
     btn.classList.toggle('active', btn.dataset.lang === lang);
   });
 
   try { localStorage.setItem('sioss_lang', lang); } catch (_) {}
+
+  document.dispatchEvent(new CustomEvent('sioss:lang', { detail: { lang } }));
+}
+
+// Translate a key in the current language (for text rendered from JS)
+function siossT(key) {
+  const lang = document.documentElement.lang;
+  return (TRANSLATIONS[lang] && TRANSLATIONS[lang][key]) || TRANSLATIONS.en[key] || key;
+}
+
+// Keep ?lang=ar in the address bar so the Arabic version has its own shareable, indexable URL
+function syncLangUrl(lang) {
+  try {
+    const url = new URL(location.href);
+    if (lang === 'ar') url.searchParams.set('lang', 'ar'); else url.searchParams.delete('lang');
+    history.replaceState(null, '', url);
+    const canonical = document.querySelector('link[rel="canonical"]');
+    if (canonical) {
+      const c = new URL(canonical.href);
+      if (lang === 'ar') c.searchParams.set('lang', 'ar'); else c.searchParams.delete('lang');
+      canonical.href = c.href;
+    }
+  } catch (_) {}
 }
 
 document.addEventListener('DOMContentLoaded', () => {
   document.querySelectorAll('.lang-btn').forEach(btn => {
-    btn.addEventListener('click', () => applyLang(btn.dataset.lang));
+    btn.addEventListener('click', () => { applyLang(btn.dataset.lang); syncLangUrl(btn.dataset.lang); });
   });
 
-  let saved = 'en';
-  try { saved = localStorage.getItem('sioss_lang') || 'en'; } catch (_) {}
-  applyLang(saved);
+  let lang = new URLSearchParams(location.search).get('lang');
+  if (!TRANSLATIONS[lang]) {
+    lang = 'en';
+    try { lang = localStorage.getItem('sioss_lang') || 'en'; } catch (_) {}
+  }
+  applyLang(lang);
+  syncLangUrl(lang);
 });
