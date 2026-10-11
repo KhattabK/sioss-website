@@ -30,6 +30,7 @@ const TRANSLATIONS = {
     team2_name: 'Dr. Mahmoud Al Khateeb',
     team3_name: 'Mr. Haider Sabah',
     team4_name: 'Ghadeer Ahmed Juma Alzadjali',
+    team5_name: 'Abrar Alyaminy',
 
     contact_whatsapp: 'Chat on WhatsApp',
     form_sending:     'Sending…',
@@ -105,6 +106,8 @@ const TRANSLATIONS = {
     team3_desc:  'Certified PT trainer with extensive experience in strength and conditioning.',
     team4_role:  'Certified Lecturer',
     team4_desc:  'Director of the SIOSS Office in the Sultanate of Oman.',
+    team5_role:  'Certified Trainer',
+    team5_desc:  'Director of the SIOSS Office in the Kingdom of Saudi Arabia.',
 
     test_label:  'Testimonials',
     test_h2:     'What Our Students Say',
@@ -176,6 +179,7 @@ const TRANSLATIONS = {
     team2_name: 'د. محمود الخطيب',
     team3_name: 'أ. حيدر صباح',
     team4_name: 'غدير أحمد جمعة الزدجالي',
+    team5_name: 'أبرار اليميني',
 
     contact_whatsapp: 'راسلنا على واتساب',
     form_sending:     'جارٍ الإرسال…',
@@ -251,6 +255,8 @@ const TRANSLATIONS = {
     team3_desc:  'مدرب شخصي معتمد بخبرة واسعة في القوة والتكييف البدني.',
     team4_role:  'محاضرة معتمدة',
     team4_desc:  'مديرة مكتب المنظمة السويدية الدولية للعلوم الرياضية (SIOSS) في سلطنة عُمان.',
+    team5_role:  'مدربة معتمدة',
+    team5_desc:  'مديرة مكتب المنظمة السويدية الدولية للعلوم الرياضية (SIOSS) في المملكة العربية السعودية.',
 
     test_label:  'آراء الطلاب',
     test_h2:     'ما يقوله طلابنا',
