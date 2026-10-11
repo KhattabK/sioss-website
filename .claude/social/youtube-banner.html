@@ -1,0 +1,88 @@
+<!doctype html>
+<!-- Local tool (not deployed): renders the YouTube channel banner to marketing/youtube-banner.png.
+     Open through .claude/serve.ps1; it runs on load. 2560x1440, text kept inside the 1546x423 safe area. -->
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>SIOSS YouTube banner</title>
+<style>body{background:#111;color:#ccc;font-family:system-ui;padding:20px} img{max-width:100%;border:1px solid #333}</style>
+</head>
+<body>
+<p id="status">working…</p>
+<div id="out"></div>
+<script>
+const C = { dark: '#0a0e15', navy: '#0e2038', primary: '#1a6fc4', accent: '#4cc3f7', yellow: '#f5b83d', white: '#ffffff', muted: '#9aa5b8', soft: '#c4cddb' };
+const AR = "Cairo, 'Segoe UI', Tahoma, sans-serif";
+const EN = "Archivo, 'Segoe UI', Arial, sans-serif";
+const W = 2560, H = 1440;
+
+// Embed the web fonts as data URIs so an SVG rendered as an image can use them
+async function fontCss() {
+  const css = await (await fetch('https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=Cairo:wght@400;600;700;800&display=swap')).text();
+  const blocks = css.split('/*').slice(1).map(b => '/*' + b).filter(b => /^\/\* (arabic|latin) \*\//.test(b));
+  const cache = {};
+  let out = '';
+  for (const b of blocks) {
+    const url = b.match(/url\((https:[^)]+)\)/)[1];
+    if (!cache[url]) {
+      const buf = await (await fetch(url)).arrayBuffer();
+      let bin = ''; new Uint8Array(buf).forEach(x => bin += String.fromCharCode(x));
+      cache[url] = 'data:font/woff2;base64,' + btoa(bin);
+    }
+    out += b.replace(url, cache[url]);
+  }
+  return out;
+}
+async function dataUri(path) {
+  const blob = await (await fetch(path)).blob();
+  return new Promise(r => { const f = new FileReader(); f.onload = () => r(f.result); f.readAsDataURL(blob); });
+}
+const loadImg = src => new Promise((res, rej) => { const i = new Image(); i.onload = () => res(i); i.onerror = rej; i.src = src; });
+
+(async () => {
+  const fonts = await fontCss();
+  const logoUri = await dataUri('/images/logo-white-tight.png');
+  const logo = await loadImg(logoUri);
+  const LH = 176, LW = Math.round(LH * logo.width / logo.height);
+  const LX = 530, TX = LX + LW + 96, MID = 720;
+
+  const lanes = [300, 380, 460, 540, 620, 700, 780, 860, 940].map((r, i) =>
+    `<circle cx="-120" cy="${MID}" r="${r}" ${i === 2 ? `stroke="${C.yellow}" stroke-width="5" opacity=".9"` : `opacity="${0.6 - i * 0.055}"`}/>`).join('');
+  const lanesR = [260, 340, 420, 500, 580, 660].map((r, i) =>
+    `<circle cx="${W + 160}" cy="${H + 60}" r="${r}" opacity="${0.35 - i * 0.05}"/>`).join('');
+
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="${W}" height="${H}" viewBox="0 0 ${W} ${H}">
+  <defs>
+    <style>${fonts}</style>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="${C.dark}"/><stop offset="1" stop-color="${C.navy}"/></linearGradient>
+    <radialGradient id="glow" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="${C.primary}" stop-opacity=".28"/><stop offset="1" stop-color="${C.primary}" stop-opacity="0"/></radialGradient>
+    <linearGradient id="pulse" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="${C.accent}" stop-opacity="0"/><stop offset=".25" stop-color="${C.accent}"/><stop offset=".8" stop-color="${C.accent}"/><stop offset="1" stop-color="${C.accent}" stop-opacity="0"/></linearGradient>
+  </defs>
+  <rect width="${W}" height="${H}" fill="url(#bg)"/>
+  <ellipse cx="1280" cy="${MID}" rx="1150" ry="520" fill="url(#glow)"/>
+  <g fill="none" stroke="${C.primary}" stroke-width="3">${lanes}${lanesR}</g>
+  <path d="M2130 ${MID + 40} H2230 l18 -36 l20 64 l28 -160 l32 208 l26 -110 l16 34 H2560" fill="none" stroke="url(#pulse)" stroke-width="5" stroke-linejoin="round" stroke-linecap="round"/>
+
+  <image href="${logoUri}" x="${LX}" y="${MID - LH / 2}" width="${LW}" height="${LH}"/>
+  <rect x="${TX - 50}" y="${MID - 128}" width="4" height="256" fill="${C.yellow}"/>
+
+  <text x="${TX}" y="${MID - 84}" font-family="${EN}" font-size="40" font-weight="800" fill="${C.white}" letter-spacing="1.5">SWEDISH INTERNATIONAL ORGANIZATION</text>
+  <text x="${TX}" y="${MID - 32}" font-family="${EN}" font-size="40" font-weight="800" fill="${C.accent}" letter-spacing="1.5">OF SPORT SCIENCE</text>
+  <text x="${TX}" y="${MID + 48}" font-family="${AR}" font-size="50" font-weight="700" fill="${C.white}" direction="rtl" unicode-bidi="plaintext" text-anchor="end">المنظمة السويدية الدولية للعلوم الرياضية</text>
+  <rect x="${TX}" y="${MID + 96}" width="16" height="16" fill="${C.yellow}"/>
+  <text x="${TX + 32}" y="${MID + 114}" font-family="${EN}" font-size="30" font-weight="600" fill="${C.soft}" letter-spacing=".5">Where Science Meets Sport  ·  sioss.se  ·  Since 2015</text>
+</svg>`;
+
+  const img = await loadImg('data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svg));
+  await document.fonts.ready;
+  const c = Object.assign(document.createElement('canvas'), { width: W, height: H });
+  c.getContext('2d').drawImage(img, 0, 0);
+  const blob = await new Promise(r => c.toBlob(r, 'image/png'));
+  const res = await fetch('/__save/youtube-banner.png', { method: 'POST', body: blob });
+  const out = new Image(); out.src = URL.createObjectURL(blob); document.getElementById('out').append(out);
+  window.__done = `${res.status} ${blob.size} logo ${LW}x${LH} textX ${TX}`;
+  document.getElementById('status').textContent = 'saved marketing/youtube-banner.png — ' + window.__done;
+})().catch(e => { window.__done = 'ERR ' + e; document.getElementById('status').textContent = String(e); });
+</script>
+</body>
+</html>
