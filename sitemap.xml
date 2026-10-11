@@ -2,16 +2,19 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://www.sioss.se/</loc>
+    <lastmod>2026-10-11</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.sioss.se/" />
     <xhtml:link rel="alternate" hreflang="ar" href="https://www.sioss.se/?lang=ar" />
   </url>
   <url>
     <loc>https://www.sioss.se/?lang=ar</loc>
+    <lastmod>2026-10-11</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.sioss.se/" />
     <xhtml:link rel="alternate" hreflang="ar" href="https://www.sioss.se/?lang=ar" />
   </url>
   <url>
     <loc>https://www.sioss.se/students.html</loc>
+    <lastmod>2026-10-11</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.sioss.se/students.html" />
     <xhtml:link rel="alternate" hreflang="ar" href="https://www.sioss.se/students.html?lang=ar" />
   </url>

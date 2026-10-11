@@ -8,12 +8,38 @@ window.addEventListener('scroll', () => {
 const burger = document.getElementById('burger');
 const navLinks = document.getElementById('navLinks');
 burger.addEventListener('click', () => {
-  navLinks.classList.toggle('open');
+  burger.setAttribute('aria-expanded', navLinks.classList.toggle('open'));
 });
 
 // Close nav on link click (mobile)
 navLinks.querySelectorAll('a').forEach(link => {
-  link.addEventListener('click', () => navLinks.classList.remove('open'));
+  link.addEventListener('click', () => {
+    navLinks.classList.remove('open');
+    burger.setAttribute('aria-expanded', 'false');
+  });
+});
+
+// ── Hero video: the poster paints first; the 18 MB clip loads after the page,
+//    and not at all on data-saver / slow connections or with reduced motion ──
+const heroVideo = document.querySelector('.hero-video[data-hero-src]');
+if (heroVideo) {
+  const conn = navigator.connection || {};
+  const skip = conn.saveData || /(^|-)2g$/.test(conn.effectiveType || '') ||
+    window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!skip) {
+    window.addEventListener('load', () => {
+      heroVideo.autoplay = true;
+      heroVideo.src = heroVideo.dataset.heroSrc;
+      heroVideo.play().catch(() => {});
+    });
+  }
+}
+
+// Certificate cards open with Enter / Space as well as a click
+document.querySelectorAll('.cert-card[role="button"]').forEach(card => {
+  card.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); card.click(); }
+  });
 });
 
 // ── Lazy videos: fetch nothing until the section is near the viewport ──
@@ -86,6 +112,8 @@ document.getElementById('contactForm').addEventListener('submit', function (e) {
   e.preventDefault();
   const note = document.getElementById('formNote');
   const btn  = this.querySelector('[type="submit"]');
+  // Honeypot: a real visitor never fills the hidden field
+  if (this.querySelector('[name="_gotcha"]').value) return;
   btn.disabled = true;
   btn.textContent = siossT('form_sending');
 

@@ -25,13 +25,17 @@
   <meta property="og:locale" content="en_GB" />
   <meta property="og:locale:alternate" content="ar_IQ" />
   <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="SIOSS – Swedish International Organization of Sport Science" />
+  <meta name="twitter:description" content="Sports coach education and certification, founded in Sweden in 2015. Evidence-based training, expert instructors, recognised certificates." />
+  <meta name="twitter:image" content="https://www.sioss.se/images/og-image.jpg" />
+  <link rel="preload" as="image" href="images/hero_poster.jpg" fetchpriority="high" />
 
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "EducationalOrganization",
     "name": "SIOSS – Swedish International Organization of Sport Science",
-    "alternateName": "SIOSS",
+    "alternateName": ["SIOSS", "المنظمة السويدية الدولية للعلوم الرياضية", "سيوس"],
     "url": "https://www.sioss.se/",
     "logo": "https://www.sioss.se/images/icon-512.png",
     "image": "https://www.sioss.se/images/og-image.jpg",
@@ -39,6 +43,13 @@
     "email": "hello@sioss.se",
     "telephone": "+46707181137",
     "address": { "@type": "PostalAddress", "addressLocality": "Linköping", "addressCountry": "SE" },
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "contactType": "customer service",
+      "telephone": "+46707181137",
+      "email": "hello@sioss.se",
+      "availableLanguage": ["en", "ar", "sv"]
+    },
     "sameAs": [
       "https://www.facebook.com/sioss.se",
       "https://www.facebook.com/sioss.iraq",
@@ -76,7 +87,7 @@
         <button class="lang-btn" data-lang="ar">عربي</button>
       </div>
       <a href="#contact" class="btn btn-sm btn-primary" data-i18n="nav_cta">Get in Touch</a>
-      <button class="burger" id="burger" aria-label="Toggle menu">
+      <button class="burger" id="burger" aria-label="Toggle menu" aria-expanded="false" aria-controls="navLinks">
         <span></span><span></span><span></span>
       </button>
     </div>
@@ -84,9 +95,8 @@
 
   <!-- ===== HERO ===== -->
   <section class="hero" id="home">
-    <video class="hero-video" autoplay muted loop playsinline preload="metadata">
-      <source src="https://pub-daf60fd082344b8eb459b49e9201e897.r2.dev/videos/hero.mp4" type="video/mp4" />
-    </video>
+    <video class="hero-video" muted loop playsinline preload="none" poster="images/hero_poster.jpg"
+           data-hero-src="https://pub-daf60fd082344b8eb459b49e9201e897.r2.dev/videos/hero.mp4"></video>
     <div class="hero-bg"></div>
     <div class="container hero-inner">
       <div class="hero-content">
@@ -121,49 +131,49 @@
       <p class="section-intro" data-i18n="certs_desc">Official recognition from leading universities and sports federations — validating SIOSS as a trusted sports science institution.</p>
       <div class="photo-scroll-wrapper">
         <div class="certs-scroll-track" id="certsTrack">
-          <div class="cert-card" onclick="openCert('images/cert_svff.jpg', this)">
+          <div class="cert-card" role="button" tabindex="0" onclick="openCert('images/cert_svff.jpg', this)">
             <div class="cert-thumb"><img src="images/cert_svff.jpg" alt="Svenska Fotbollsförbundet" loading="lazy" /></div>
             <div class="cert-info">
               <span class="cert-tag" data-i18n="cert_tag_fed">Football Federation</span>
               <p class="cert-title" data-i18n="cert_svff">Svenska Fotbollsförbundet</p>
             </div>
           </div>
-          <div class="cert-card" onclick="openCert('images/cert_basrah.jpg', this)">
+          <div class="cert-card" role="button" tabindex="0" onclick="openCert('images/cert_basrah.jpg', this)">
             <div class="cert-thumb"><img src="images/cert_basrah.jpg" alt="University of Basrah" loading="lazy" /></div>
             <div class="cert-info">
               <span class="cert-tag" data-i18n="cert_tag_uni">University</span>
               <p class="cert-title" data-i18n="cert_basrah">University of Basrah</p>
             </div>
           </div>
-          <div class="cert-card" onclick="openCert('images/cert_baghdad.jpg', this)">
+          <div class="cert-card" role="button" tabindex="0" onclick="openCert('images/cert_baghdad.jpg', this)">
             <div class="cert-thumb"><img src="images/cert_baghdad.jpg" alt="University of Baghdad" loading="lazy" /></div>
             <div class="cert-info">
               <span class="cert-tag" data-i18n="cert_tag_uni">University</span>
               <p class="cert-title" data-i18n="cert_baghdad">University of Baghdad</p>
             </div>
           </div>
-          <div class="cert-card" onclick="openCert('images/cert_samarra.jpg', this)">
+          <div class="cert-card" role="button" tabindex="0" onclick="openCert('images/cert_samarra.jpg', this)">
             <div class="cert-thumb"><img src="images/cert_samarra.jpg" alt="University of Samarra" loading="lazy" /></div>
             <div class="cert-info">
               <span class="cert-tag" data-i18n="cert_tag_uni">University</span>
               <p class="cert-title" data-i18n="cert_samarra">University of Samarra</p>
             </div>
           </div>
-          <div class="cert-card" onclick="openCert('images/cert_wasit.jpg', this)">
+          <div class="cert-card" role="button" tabindex="0" onclick="openCert('images/cert_wasit.jpg', this)">
             <div class="cert-thumb"><img src="images/cert_wasit.jpg" alt="University of Wasit" loading="lazy" /></div>
             <div class="cert-info">
               <span class="cert-tag" data-i18n="cert_tag_uni">University</span>
               <p class="cert-title" data-i18n="cert_wasit">University of Wasit</p>
             </div>
           </div>
-          <div class="cert-card" onclick="openCert('images/cert_baghdad_women.jpg', this)">
+          <div class="cert-card" role="button" tabindex="0" onclick="openCert('images/cert_baghdad_women.jpg', this)">
             <div class="cert-thumb"><img src="images/cert_baghdad_women.jpg" alt="University of Baghdad – Women" loading="lazy" /></div>
             <div class="cert-info">
               <span class="cert-tag" data-i18n="cert_tag_uni">University</span>
               <p class="cert-title" data-i18n="cert_baghdad_women">University of Baghdad – Women</p>
             </div>
           </div>
-          <div class="cert-card" onclick="openCert('images/cert_ashur.jpg', this)">
+          <div class="cert-card" role="button" tabindex="0" onclick="openCert('images/cert_ashur.jpg', this)">
             <div class="cert-thumb"><img src="images/cert_ashur.jpg" alt="Ashur University" loading="lazy" /></div>
             <div class="cert-info">
               <span class="cert-tag" data-i18n="cert_tag_uni">University</span>
@@ -244,67 +254,67 @@
       <h2 data-i18n="team_h2">Meet the Instructors</h2>
       <div class="team-grid">
         <div class="team-card">
-          <div class="team-avatar" data-initials="AK"><img src="images/team_khalil.jpg" alt="Dr. Abduladeem Ahmed Khalil" onerror="this.remove()" /></div>
+          <div class="team-avatar" data-initials="AK"><img src="images/team_khalil.jpg" alt="Dr. Abduladeem Ahmed Khalil" loading="lazy" decoding="async" onerror="this.remove()" /></div>
           <h3 data-i18n="team1_name">Dr. Abduladeem Ahmed Khalil</h3>
           <span class="team-role" data-i18n="team1_role">HRV Trainer & Sport Scientist</span>
           <p data-i18n="team1_desc">Specialist in heart rate variability training and performance optimisation.</p>
         </div>
         <div class="team-card">
-          <div class="team-avatar" data-initials="MK"><img src="images/team_khateeb.jpg" alt="Dr. Mahmoud Al Khateeb" onerror="this.remove()" /></div>
+          <div class="team-avatar" data-initials="MK"><img src="images/team_khateeb.jpg" alt="Dr. Mahmoud Al Khateeb" loading="lazy" decoding="async" onerror="this.remove()" /></div>
           <h3 data-i18n="team2_name">Dr. Mahmoud Al Khateeb</h3>
           <span class="team-role" data-i18n="team2_role">Nutrition & Sports Dietetics</span>
           <p data-i18n="team2_desc">Expert in sports nutrition, dietary planning, and athlete performance fuelling.</p>
         </div>
         <div class="team-card">
-          <div class="team-avatar" data-initials="HS"><img src="images/team_haider.jpg" alt="Mr. Haider Sabah" onerror="this.remove()" /></div>
+          <div class="team-avatar" data-initials="HS"><img src="images/team_haider.jpg" alt="Mr. Haider Sabah" loading="lazy" decoding="async" onerror="this.remove()" /></div>
           <h3 data-i18n="team3_name">Mr. Haider Sabah</h3>
           <span class="team-role" data-i18n="team3_role">Personal Training Specialist</span>
           <p data-i18n="team3_desc">Certified PT trainer with extensive experience in strength and conditioning.</p>
         </div>
         <div class="team-card">
-          <div class="team-avatar" data-initials="GA"><img src="images/team_ghadeer.webp" alt="Ghadeer Ahmed Juma Alzadjali" onerror="this.remove()" /></div>
+          <div class="team-avatar" data-initials="GA"><img src="images/team_ghadeer.webp" alt="Ghadeer Ahmed Juma Alzadjali" loading="lazy" decoding="async" onerror="this.remove()" /></div>
           <h3 data-i18n="team4_name">Ghadeer Ahmed Juma Alzadjali</h3>
           <span class="team-role" data-i18n="team4_role">Certified Lecturer</span>
           <p data-i18n="team4_desc">Director of the SIOSS Office in the Sultanate of Oman.</p>
         </div>
         <div class="team-card">
-          <div class="team-avatar team-avatar--flag" data-initials="AA"><img src="images/flag_sa.svg" alt="Flag of Saudi Arabia" onerror="this.remove()" /></div>
+          <div class="team-avatar team-avatar--flag" data-initials="AA"><img src="images/flag_sa.svg" alt="Flag of Saudi Arabia" loading="lazy" decoding="async" onerror="this.remove()" /></div>
           <h3 data-i18n="team5_name">Abrar Alyaminy</h3>
           <span class="team-role" data-i18n="team5_role">Certified Trainer</span>
           <p data-i18n="team5_desc">Director of the SIOSS Office in the Kingdom of Saudi Arabia.</p>
         </div>
         <div class="team-card">
-          <div class="team-avatar" data-initials="TB"><img src="images/team_tariq.jpg" alt="Capt. Tariq Al-Bannai" onerror="this.remove()" /></div>
+          <div class="team-avatar" data-initials="TB"><img src="images/team_tariq.jpg" alt="Capt. Tariq Al-Bannai" loading="lazy" decoding="async" onerror="this.remove()" /></div>
           <h3 data-i18n="team6_name">Capt. Tariq Al-Bannai</h3>
           <span class="team-role" data-i18n="team6_role">Certified Lecturer</span>
           <p data-i18n="team6_desc">Football fitness coach.</p>
         </div>
         <div class="team-card">
-          <div class="team-avatar" data-initials="FS"><img src="images/team_fekry.jpg" alt="Capt. Fekry Saleh" onerror="this.remove()" /></div>
+          <div class="team-avatar" data-initials="FS"><img src="images/team_fekry.jpg" alt="Capt. Fekry Saleh" loading="lazy" decoding="async" onerror="this.remove()" /></div>
           <h3 data-i18n="team7_name">Capt. Fekry Saleh</h3>
           <span class="team-role" data-i18n="team7_role">Certified Lecturer</span>
           <p data-i18n="team7_desc">Football goalkeeping coach.</p>
         </div>
         <div class="team-card">
-          <div class="team-avatar" data-initials="AD"><img src="images/team_ashraf.jpg" alt="Dr. Ashraf El-Desouky" onerror="this.remove()" /></div>
+          <div class="team-avatar" data-initials="AD"><img src="images/team_ashraf.jpg" alt="Dr. Ashraf El-Desouky" loading="lazy" decoding="async" onerror="this.remove()" /></div>
           <h3 data-i18n="team8_name">Dr. Ashraf El-Desouky</h3>
           <span class="team-role" data-i18n="team8_role">Certified Lecturer</span>
           <p data-i18n="team8_desc">Expert in sports injuries.</p>
         </div>
         <div class="team-card">
-          <div class="team-avatar" data-initials="FS"><img src="images/team_frida.jpg" alt="Frida Södermark" onerror="this.remove()" /></div>
+          <div class="team-avatar" data-initials="FS"><img src="images/team_frida.jpg" alt="Frida Södermark" loading="lazy" decoding="async" onerror="this.remove()" /></div>
           <h3 data-i18n="team9_name">Frida Södermark</h3>
           <span class="team-role" data-i18n="team9_role">Certified Lecturer</span>
           <p data-i18n="team9_desc">Fitness coach from Sweden.</p>
         </div>
         <div class="team-card">
-          <div class="team-avatar" data-initials="LR"><img src="images/team_lasse.jpg" alt="Lasse Rantola" onerror="this.remove()" /></div>
+          <div class="team-avatar" data-initials="LR"><img src="images/team_lasse.jpg" alt="Lasse Rantola" loading="lazy" decoding="async" onerror="this.remove()" /></div>
           <h3 data-i18n="team10_name">Lasse Rantola</h3>
           <span class="team-role" data-i18n="team10_role">Certified Lecturer</span>
           <p data-i18n="team10_desc">Fitness coach from Finland.</p>
         </div>
         <div class="team-card">
-          <div class="team-avatar" data-initials="MW"><img src="images/team_markus.jpg" alt="Markus Wikström" onerror="this.remove()" /></div>
+          <div class="team-avatar" data-initials="MW"><img src="images/team_markus.jpg" alt="Markus Wikström" loading="lazy" decoding="async" onerror="this.remove()" /></div>
           <h3 data-i18n="team11_name">Markus Wikström</h3>
           <span class="team-role" data-i18n="team11_role">Certified Lecturer</span>
           <p data-i18n="team11_desc">Fitness coach from Sweden.</p>
@@ -420,7 +430,7 @@
       </div>
       <p class="hrv-desc" data-i18n="hrv_desc">Heart Rate Variability (HRV) is one of the most powerful tools in modern sport science — used to monitor recovery, optimize training load, and maximize athletic performance.</p>
       <a class="hrv-video-wrap" href="https://youtu.be/Xfcc_ZL5X3k" target="_blank" rel="noopener" aria-label="Watch HRV video on YouTube">
-        <img src="https://img.youtube.com/vi/Xfcc_ZL5X3k/maxresdefault.jpg" alt="Understanding HRV – SIOSS" />
+        <img src="https://img.youtube.com/vi/Xfcc_ZL5X3k/maxresdefault.jpg" alt="Understanding HRV – SIOSS" loading="lazy" decoding="async" />
         <div class="hrv-play-btn">
           <svg viewBox="0 0 68 48" width="68" height="48"><path d="M66.52 7.74c-.78-2.93-2.49-5.41-5.42-6.19C55.79.13 34 0 34 0S12.21.13 6.9 1.55c-2.93.78-4.63 3.26-5.42 6.19C.06 13.05 0 24 0 24s.06 10.95 1.48 16.26c.78 2.93 2.49 5.41 5.42 6.19C12.21 47.87 34 48 34 48s21.79-.13 27.1-1.55c2.93-.78 4.64-3.26 5.42-6.19C67.94 34.95 68 24 68 24s-.06-10.95-1.48-16.26z" fill="#ff0000"/><path d="M45 24 27 14v20" fill="#fff"/></svg>
           <span data-i18n="hrv_watch">Watch on YouTube</span>
@@ -573,6 +583,7 @@
           <label for="message" data-i18n="form_message">Message</label>
           <textarea id="message" name="message" rows="5" placeholder="Write your message here…" data-i18n-ph="form_message_ph" required></textarea>
         </div>
+        <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true" hidden />
         <button type="submit" class="btn btn-primary btn-full" data-i18n="form_submit">Send Message</button>
         <p class="form-note" id="formNote"></p>
       </form>

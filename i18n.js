@@ -406,8 +406,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   let lang = new URLSearchParams(location.search).get('lang');
   if (!TRANSLATIONS[lang]) {
-    lang = 'en';
-    try { lang = localStorage.getItem('sioss_lang') || 'en'; } catch (_) {}
+    // First visit: Arabic for Arabic-language browsers, English for everyone else
+    lang = /^ar\b/i.test(navigator.language || '') ? 'ar' : 'en';
+    try { lang = localStorage.getItem('sioss_lang') || lang; } catch (_) {}
   }
   applyLang(lang);
   syncLangUrl(lang);
