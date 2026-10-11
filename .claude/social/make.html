@@ -146,6 +146,61 @@ async function render(svg, css, w, h, name) {
   return name + ' ' + Math.round(blob.size / 1024) + ' KB';
 }
 
+// ── TikTok: profile picture and video covers ──
+function avatar() {
+  const lanes = [150, 200, 250, 300, 350, 400].map((r, i) =>
+    `<circle cx="60" cy="700" r="${r}" ${i === 2 ? `stroke="${C.yellow}" stroke-width="5"` : `opacity="${0.75 - i * 0.1}"`}/>`).join('');
+  return `<svg xmlns="http://www.w3.org/2000/svg" width="720" height="720" viewBox="0 0 720 720">
+  <defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="${C.dark}"/><stop offset="1" stop-color="#123055"/></linearGradient></defs>
+  <rect width="720" height="720" fill="url(#bg)"/>
+  <g fill="none" stroke="${C.primary}" stroke-width="3">${lanes}</g>
+  ${ltr(360, 392, 168, 800, C.white, 'SIOSS', 'middle', 'letter-spacing="-5"')}
+  <rect x="300" y="430" width="120" height="10" fill="${C.yellow}"/>
+</svg>`;
+}
+
+const COVERS = [
+  ['علوم الرياضة', ['ما هو HRV؟', 'ولماذا يهم كل مدرب']],
+  ['خريجونا',      ['ماذا قال', 'خريجو SIOSS؟']],
+  ['من نحن',       ['SIOSS', 'في 30 ثانية']],
+  ['علوم الرياضة', ['3 علامات أن', 'لاعبك يحتاج راحة']],
+  ['من دوراتنا',   ['دورة القوة والحركة', 'في البحرين']],
+  ['المجلة',       ['انشر بحثك', 'في مجلة علمية محكّمة']],
+  ['علوم الرياضة', ['خطأ شائع', 'في الإحماء']],
+  ['اعتماداتنا',   ['من يعترف', 'بشهادات SIOSS؟']],
+  ['التغذية',      ['ماذا يأكل اللاعب', 'قبل المباراة؟']],
+  ['خريجونا',      ['تجربتي مع', 'دورات SIOSS']],
+  ['علوم الرياضة', ['كيف تقرأ رقم', 'الـ HRV الصباحي؟']],
+  ['المجلة',       ['شروط النشر', 'خطوة بخطوة']],
+];
+
+function cover(cat, lines) {
+  const H = 1920, pillW = 60 + cat.length * 24;
+  const lanes = [260, 330, 400, 470, 540, 610, 680].map((r, i) =>
+    `<circle cx="-90" cy="1500" r="${r}" ${i === 3 ? `stroke="${C.yellow}" stroke-width="5"` : `opacity="${0.7 - i * 0.08}"`}/>`).join('');
+  return `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" viewBox="0 0 ${W} ${H}">
+  <defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="${C.dark}"/><stop offset="1" stop-color="#123055"/></linearGradient></defs>
+  <rect width="${W}" height="${H}" fill="url(#bg)"/>
+  <g fill="none" stroke="${C.primary}" stroke-width="3">${lanes}</g>
+  <rect x="${1000 - pillW}" y="640" width="${pillW}" height="70" rx="35" fill="${C.yellow}"/>
+  <text x="${1000 - pillW / 2}" y="689" font-family="${AR}" font-size="36" font-weight="800" fill="${C.dark}" text-anchor="middle">${cat}</text>
+  ${rtl(1000, 880, Math.min(118, Math.floor(900 / (lines[0].length * 0.5))), 800, C.white, lines[0])}
+  ${rtl(1000, 1030, Math.min(96, Math.floor(900 / (lines[1].length * 0.5))), 800, C.accent, lines[1])}
+  <rect x="880" y="1090" width="120" height="10" fill="${C.yellow}"/>
+  ${ltr(1000, 1250, 64, 800, C.white, 'SIOSS', 'end', 'letter-spacing="-2"')}
+</svg>`;
+}
+
+window.makeTikTok = async function () {
+  const css = await fontCss();
+  const done = [await render(avatar(), css, 720, 720, 'tiktok-profile-picture.png')];
+  for (let i = 0; i < COVERS.length; i++) {
+    done.push(await render(cover(...COVERS[i]), css, W, 1920, `tiktok-cover-${String(i + 1).padStart(2, '0')}.png`));
+  }
+  document.getElementById('status').textContent = 'saved: ' + done.join(' | ');
+  return done;
+};
+
 window.makeAll = async function () {
   const css = await fontCss();
   const cover = (await (await fetch('/journal/cover.svg')).text()).replace('<svg ', '<svg width="840" height="1188" ');
