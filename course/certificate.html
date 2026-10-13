@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex">
+<meta name="viewport" content="width=1200">
+<title>SIOSS Certificate – Football Fitness Coach</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;800&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  @page { size: A4 landscape; margin: 0; }
+  :root { --navy:#0a2a5e; --blue:#1a6fc4; --gold:#f2c94c; --ink:#16202b; --muted:#5b6876; --paper:#fdfcf8; }
+  * { box-sizing:border-box; }
+  html, body { margin:0; background:#d9dde3; }
+  .sheet {
+    width:297mm; height:210mm; margin:0 auto; position:relative; overflow:hidden;
+    background:var(--paper); color:var(--ink); font-family:'IBM Plex Sans',sans-serif;
+    display:grid; grid-template-columns:78mm 1fr;
+  }
+  /* Left band */
+  .band { background:linear-gradient(180deg,#003b78 0%,#00438a 22%,#003a76 45%,#002a5c 100%); color:#fff; position:relative; padding:12mm 10mm 14mm; display:flex; flex-direction:column; align-items:center; }
+  .band::after { content:""; position:absolute; top:0; right:0; width:2.2mm; height:100%; background:var(--gold); }
+  .band img { width:68mm; height:auto; margin:0 -6mm 0 -7mm; display:block; -webkit-mask-image:linear-gradient(180deg,transparent 0,#000 22%,#000 78%,transparent 100%); mask-image:linear-gradient(180deg,transparent 0,#000 22%,#000 78%,transparent 100%); }
+  .org { margin-top:1mm; text-align:center; font:500 7.6pt/1.5 'Archivo',sans-serif; letter-spacing:.05em; white-space:nowrap; text-transform:uppercase; color:#dbe6f7; }
+  .seal { margin-top:auto; width:42mm; height:42mm; }
+  .place { margin-top:6mm; font-size:8.5pt; letter-spacing:.14em; text-transform:uppercase; color:#b9c9e6; }
+
+  /* Main */
+  .main { padding:20mm 22mm 14mm 24mm; display:flex; flex-direction:column; position:relative; }
+  .main::before { content:""; position:absolute; inset:8mm 8mm 8mm 6mm; border:0.35mm solid #c9b46a; pointer-events:none; }
+  .kicker { font:700 9.5pt 'Archivo',sans-serif; letter-spacing:.32em; text-transform:uppercase; color:var(--blue); }
+  h1 { margin:3mm 0 0; font:800 30pt/1.1 'Archivo',sans-serif; letter-spacing:.02em; color:var(--navy); text-transform:uppercase; }
+  .lead { margin:11mm 0 0; font-size:11.5pt; color:var(--muted); }
+  .name { margin:3mm 0 0; font:600 34pt/1.15 'Cormorant Garamond',serif; color:var(--ink); border-bottom:0.3mm solid #c9b46a; padding-bottom:3mm; min-height:19mm; }
+  .body { margin:7mm 0 0; font-size:11.5pt; line-height:1.6; color:var(--muted); }
+  .course { display:block; margin:1.5mm 0; font:700 19pt/1.25 'Archivo',sans-serif; color:var(--navy); }
+  .topics { margin:6mm 0 0; font-size:9.2pt; line-height:1.65; color:var(--muted); max-width:165mm; }
+  .topics b { color:var(--ink); font-weight:600; }
+  .foot { margin-top:auto; margin-bottom:7mm; display:grid; grid-template-columns:1fr 1fr 1.25fr; gap:10mm; align-items:end; }
+  .cell small { display:block; font-size:7.8pt; letter-spacing:.16em; text-transform:uppercase; color:var(--muted); margin-bottom:1.2mm; }
+  .cell b { font:600 11pt 'IBM Plex Sans',sans-serif; color:var(--ink); }
+  .sig { text-align:center; }
+  .sig .line { border-top:0.3mm solid var(--ink); padding-top:1.5mm; font-weight:600; font-size:10.5pt; }
+  .sig .role { font-size:8.5pt; color:var(--muted); }
+  .verify { position:absolute; left:24mm; bottom:10.5mm; font-size:7.6pt; color:var(--muted); letter-spacing:.02em; }
+  @media screen { body { padding:10mm 0; } .sheet { box-shadow:0 6px 30px rgba(0,0,0,.25); } }
+  .tools { width:297mm; margin:0 auto 6mm; display:flex; justify-content:space-between; align-items:center; font:500 11pt 'IBM Plex Sans',sans-serif; }
+  .tools a { color:#0a2a5e; }
+  .tools button { background:#0a2a5e; color:#fff; border:0; border-radius:6px; padding:10px 20px; font:600 11pt 'IBM Plex Sans',sans-serif; cursor:pointer; }
+  @media print { html, body { background:#fff; } .tools { display:none; } }
+</style>
+</head>
+<body>
+<div class="tools"><a href="./">← Back to the course</a><button type="button" onclick="print()">Print / Save as PDF</button></div>
+<div class="sheet">
+  <aside class="band">
+    <img src="cert-logo.png" alt="SIOSS">
+    <div class="org">The Swedish International<br>Organization of Sport Science</div>
+
+    <svg class="seal" viewBox="0 0 200 200" aria-hidden="true">
+      <defs><path id="arc" d="M100,100 m-74,0 a74,74 0 1,1 148,0 a74,74 0 1,1 -148,0"/></defs>
+      <circle cx="100" cy="100" r="96" fill="none" stroke="#f2c94c" stroke-width="3"/>
+      <circle cx="100" cy="100" r="88" fill="none" stroke="#f2c94c" stroke-width="1"/>
+      <circle cx="100" cy="100" r="58" fill="none" stroke="#f2c94c" stroke-width="1"/>
+      <text font-family="Archivo, sans-serif" font-size="14.5" font-weight="700" fill="#f2c94c" letter-spacing="2.2">
+        <textPath href="#arc" startOffset="0" textLength="452" lengthAdjust="spacing">SIOSS · SWEDEN · SPORT SCIENCE · EST. 2015 ·</textPath>
+      </text>
+      <text x="100" y="94" text-anchor="middle" font-family="Archivo, sans-serif" font-size="15" font-weight="700" fill="#fff" letter-spacing="2">CERTIFIED</text>
+      <text x="100" y="116" text-anchor="middle" font-family="Archivo, sans-serif" font-size="11" font-weight="500" fill="#dbe6f7" letter-spacing="3">GRADUATE</text>
+    </svg>
+    <div class="place">Linköping · Sweden</div>
+  </aside>
+
+  <main class="main">
+    <div class="kicker">Certificate of Completion</div>
+    <h1>Football Fitness Coach</h1>
+
+    <p class="lead">This is to certify that</p>
+    <div class="name"><span id="cName"></span></div>
+
+    <p class="body">
+      has successfully completed the online course
+      <span class="course">Football Fitness Coach</span>
+      and passed the final examination set by SIOSS.
+    </p>
+
+    <p class="topics">
+      <b>Course content:</b> season planning and periodisation · the training week and match demands ·
+      football-specific endurance · strength and power · speed and plyometrics · injury prevention ·
+      training-load monitoring · field practice.
+    </p>
+
+    <div class="foot">
+      <div class="cell"><small>Date of issue</small><b><span id="cDate"></span></b></div>
+      <div class="cell"><small>Certificate No.</small><b><span id="cNo"></span></b></div>
+      <div class="sig">
+        <div class="line">Dr. Abduladeem Khalil</div>
+        <div class="role">Manager, SIOSS</div>
+      </div>
+    </div>
+    <div class="verify">Verify this certificate in the SIOSS graduate registry: www.sioss.se/students.html</div>
+  </main>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="../supabase-config.js"></script>
+<script>
+  // Fills the certificate from the signed-in learner's own record (local preview: from the demo store).
+  (async () => {
+    const demo = /^(localhost|127\.0\.0\.1)$/.test(location.hostname) && /[?&]demo\b/.test(location.search);
+    const c = demo
+      ? JSON.parse(localStorage.getItem('ffc-demo-cert') || 'null')
+      : (await sb.from('course_certificates').select('cert_no,name,issued_at').eq('course', 'ffc').maybeSingle()).data;
+    if (!c) { location.replace('./' + location.search); return; }
+    document.querySelector('.tools a').href = './' + location.search;
+    document.getElementById('cName').textContent = c.name;
+    document.getElementById('cNo').textContent = c.cert_no;
+    document.getElementById('cDate').textContent = new Date(c.issued_at).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+  })();
+</script>
+</body>
+</html>
