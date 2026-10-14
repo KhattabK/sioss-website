@@ -8,6 +8,7 @@ const TRANSLATIONS = {
     nav_gallery:      'Gallery',
     nav_contact:      'Contact',
     nav_journal:      'Journal',
+    nav_ffc_course:   'Online Course',
     nav_cta:          'Get in Touch',
 
     meta_title:       'SIOSS – Swedish International Organization of Sport Science',
@@ -175,6 +176,7 @@ const TRANSLATIONS = {
     nav_gallery:      'المعرض',
     nav_contact:      'تواصل',
     nav_journal:      'المجلة',
+    nav_ffc_course:   'الدورة الأونلاين',
     nav_cta:          'تواصل معنا',
 
     meta_title:       'SIOSS – المنظمة السويدية الدولية للعلوم الرياضية',

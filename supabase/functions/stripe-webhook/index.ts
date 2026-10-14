@@ -12,7 +12,10 @@ const COURSE_BY_PAYMENT_LINK: Record<string, string> = {
 };
 
 const secret = Deno.env.get("STRIPE_WEBHOOK_SECRET")!;
-const db = createClient(Deno.env.get("SUPABASE_URL")!, Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!);
+// Projects on the new API keys expose the secret key in SUPABASE_SECRET_KEYS instead of SUPABASE_SERVICE_ROLE_KEY.
+const serverKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") ||
+  JSON.parse(Deno.env.get("SUPABASE_SECRET_KEYS") ?? "{}").default;
+const db = createClient(Deno.env.get("SUPABASE_URL")!, serverKey);
 const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 
 async function signatureOk(body: string, header: string | null): Promise<boolean> {
