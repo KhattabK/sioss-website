@@ -216,12 +216,26 @@
     const bar = document.createElement('div');
     bar.className = 'quiz-bar';
     bar.innerHTML = (isExam && !cert ? `
-        <label for="certName">اسمك الكامل بالأحرف اللاتينية، كما سيُكتب في الشهادة</label>
-        <input id="certName" dir="ltr" autocomplete="name" placeholder="Full name">` : '') +
+        <div class="name-box">
+          <b>⚠ اسمك في الشهادة</b>
+          <p>اكتب اسمك <strong>الكامل</strong> (الاسم الأول واسم الأب واسم العائلة) <strong>بالأحرف الإنجليزية</strong>، مضبوطاً كما في جواز السفر. سيُطبع في الشهادة كما تكتبه تماماً، <strong>ولا يمكن تغييره بعد صدورها</strong>.</p>
+          <label for="certName">الاسم بالإنجليزية</label>
+          <input id="certName" dir="ltr" autocomplete="name" placeholder="e.g. Ahmed Ali Hassan">
+          <p class="preview" id="namePreview" dir="ltr" hidden></p>
+          <label class="check"><input type="checkbox" id="nameOk"> راجعتُ اسمي، وهو مكتوب صحيحاً</label>
+        </div>` : '') +
       `<button class="btn" type="button">${isExam ? 'أرسل الاختبار' : 'تحقّق من إجاباتي'}</button>
        <p class="quiz-result" role="status"></p>`;
     qs[qs.length - 1].after(bar);
-    const btn = $('button', bar), out = $('.quiz-result', bar);
+    const btn = $('button.btn', bar), out = $('.quiz-result', bar);
+    const tidy = s => s.trim().replace(/\s+/g, ' ');
+    if ($('#certName', bar)) {
+      $('#certName', bar).oninput = e => {
+        const v = tidy(e.target.value), pv = $('#namePreview', bar);
+        pv.hidden = !v; pv.textContent = 'In the certificate: ' + v;
+        $('#nameOk', bar).checked = false;
+      };
+    }
 
     btn.onclick = async () => {
       if (locked) { viewLesson(u.n); return; }
@@ -235,9 +249,12 @@
       const picks = qs.map(q => [...q.querySelectorAll('li')].findIndex(li => li.classList.contains('picked')));
 
       if (isExam) {
-        const name = cert ? cert.name : $('#certName').value.trim();
-        if (!cert && !/^[A-Za-z][A-Za-z .'-]{4,}$/.test(name)) {
-          out.className = 'quiz-result fail'; out.textContent = 'اكتب اسمك الكامل بالأحرف اللاتينية أولاً.'; $('#certName').focus(); return;
+        const name = cert ? cert.name : tidy($('#certName').value);
+        if (!cert && !/^[A-Za-z][A-Za-z.'-]*( [A-Za-z][A-Za-z.'-]*)+$/.test(name)) {
+          out.className = 'quiz-result fail'; out.textContent = 'اكتب اسمك الكامل (كلمتان على الأقل) بالأحرف الإنجليزية فقط.'; $('#certName').focus(); return;
+        }
+        if (!cert && !$('#nameOk').checked) {
+          out.className = 'quiz-result fail'; out.textContent = 'راجع اسمك ثم ضع علامة على «راجعتُ اسمي».'; $('#nameOk').focus(); return;
         }
         btn.disabled = true;
         const r = await api.submitExam(picks, name);

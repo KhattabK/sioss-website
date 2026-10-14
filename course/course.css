@@ -87,6 +87,12 @@ a.row[href]:hover { border-color:var(--primary); }
 .unit.quiz-done .q.wrong li.picked { border-color:var(--red); background:#2a1414; color:var(--red); }
 .quiz-bar { margin:22px 0; }
 .quiz-bar input { max-width:420px; margin-bottom:14px; }
+.name-box { background:#2a2410; border:1px solid var(--yellow); border-radius:var(--radius); padding:16px 18px; margin-bottom:18px; }
+.name-box > b { color:var(--yellow); }
+.name-box p { margin:6px 0 4px; }
+.name-box .preview { font-weight:700; color:var(--white); font-size:18px; margin:-6px 0 10px; }
+.name-box .check { display:flex; gap:10px; align-items:center; font-weight:600; margin:4px 0 0; cursor:pointer; }
+.name-box .check input { width:20px; height:20px; margin:0; accent-color:var(--yellow); }
 .quiz-result { font-weight:700; margin:12px 0 0; }
 .quiz-result.pass { color:var(--green); } .quiz-result.fail { color:var(--red); }
 .quiz-result .btn { margin-inline-start:10px; }
