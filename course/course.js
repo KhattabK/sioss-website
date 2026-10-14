@@ -176,7 +176,10 @@
     if (!isExam && n <= 9) {
       const box = document.createElement('div');
       box.className = 'video';
-      box.innerHTML = u.video_url && !isDemo
+      const yt = (u.video_url || '').match(/(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/|shorts\/|live\/))([\w-]{11})/);
+      box.innerHTML = yt
+        ? `<iframe src="https://www.youtube-nocookie.com/embed/${yt[1]}?rel=0&modestbranding=1" title="فيديو الوحدة ${n}" allow="encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>`
+        : u.video_url && !isDemo
         ? `<video controls playsinline preload="metadata" controlslist="nodownload" src="${u.video_url}"></video>`
         : `<div class="ph">فيديو الوحدة ${n} يظهر هنا بعد رفعه</div>`;
       $('.unit header').after(box);

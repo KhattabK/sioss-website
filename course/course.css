@@ -70,6 +70,7 @@ a.row[href]:hover { border-color:var(--primary); }
 .unit .r { background:#d64545; } .unit .y { background:#e9b100; color:#3a2c00; } .unit .g { background:#2e9e5b; } .unit .o { background:#8a96a3; } .unit .m { background:var(--primary); }
 
 .video { margin:0 0 24px; }
+.video iframe { width:100%; aspect-ratio:16/9; border:0; border-radius:var(--radius); display:block; background:#000; }
 .video video { width:100%; aspect-ratio:16/9; background:#000; border-radius:var(--radius); display:block; }
 .video .ph { aspect-ratio:16/9; display:grid; place-items:center; background:var(--dark-2); border:1px dashed var(--border); border-radius:var(--radius); color:var(--text-muted); }
 
