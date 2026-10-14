@@ -1,7 +1,23 @@
 -- SIOSS online courses: paid access, lesson content, progress, final exam, certificates.
 -- Run once in Supabase: Dashboard → SQL Editor → New query → paste → Run.
--- Requires schema.sql (students, admins, is_admin) to have been run first.
+-- Self-contained: works in the website's own project or in a separate one.
 -- Lesson content itself is loaded by a separate file that is NOT kept in this repository.
+
+-- ── Admins (same definition as schema.sql; harmless if it already exists) ──
+create table if not exists public.admins (
+  user_id uuid primary key references auth.users (id) on delete cascade
+);
+alter table public.admins enable row level security;
+
+create or replace function public.is_admin()
+returns boolean
+language sql
+security definer
+set search_path = public
+stable
+as $$
+  select exists (select 1 from public.admins where user_id = auth.uid());
+$$;
 
 -- ── Tables ──
 
@@ -179,8 +195,11 @@ begin
       v_title := case p_course when 'ffc' then 'Football Fitness Coach (Online)' else p_course end;
       insert into public.course_certificates (cert_no, user_id, course, name)
       values (v_cert, auth.uid(), p_course, trim(p_name));
-      insert into public.students (name, course, date, instructor)
-      values (trim(p_name), v_title, to_char(current_date, 'MM/DD/YYYY'), 'Fredrik Björs');
+      -- Add the graduate to the public registry when it lives in this same project.
+      if to_regclass('public.students') is not null then
+        execute 'insert into public.students (name, course, date, instructor) values ($1, $2, $3, $4)'
+          using trim(p_name), v_title, to_char(current_date, 'MM/DD/YYYY'), 'Fredrik Björs';
+      end if;
     end if;
   end if;
 

@@ -4,8 +4,12 @@
 // Secrets: supabase secrets set STRIPE_WEBHOOK_SECRET=whsec_...
 // Stripe:  Developers → Webhooks → add endpoint
 //          https://<project-ref>.supabase.co/functions/v1/stripe-webhook   event: checkout.session.completed
-// The Payment Link must carry metadata  course = ffc  (Payment Link → Advanced → Metadata).
+// Each Payment Link is mapped to its course below (metadata  course = …  on the link also works).
 import { createClient } from "npm:@supabase/supabase-js@2";
+
+const COURSE_BY_PAYMENT_LINK: Record<string, string> = {
+  plink_1UQXSIA9b6BMh2hbLhcOxrBT: "ffc", // Football Fitness Coach, 149 USD
+};
 
 const secret = Deno.env.get("STRIPE_WEBHOOK_SECRET")!;
 const db = createClient(Deno.env.get("SUPABASE_URL")!, Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!);
@@ -34,7 +38,7 @@ Deno.serve(async (req) => {
   if (event.type !== "checkout.session.completed") return new Response("ignored");
 
   const s = event.data.object;
-  const course = s.metadata?.course;
+  const course = s.metadata?.course ?? COURSE_BY_PAYMENT_LINK[s.payment_link];
   if (s.payment_status !== "paid" || !course) return new Response("ignored");
 
   const email = (s.customer_details?.email ?? s.customer_email ?? "").toLowerCase() || null;
