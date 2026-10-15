@@ -862,3 +862,5 @@ p:last-child { margin-bottom: 0; }
 @media (max-width: 900px) { .promo-grid { grid-template-columns: 1fr; gap: 36px; } }
 @media (max-width: 520px) { .promo-facts { grid-template-columns: 1fr; } .promo-actions .btn { width: 100%; text-align: center; } }
 @media (prefers-reduced-motion: reduce) { .promo-card, .promo-card:hover { transition: none; transform: none; } }
+.promo-next { margin-top: 88px; padding-top: 88px; border-top: 1px solid var(--border); }
+@media (max-width: 680px) { .promo-next { margin-top: 56px; padding-top: 56px; } }

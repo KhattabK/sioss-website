@@ -38,12 +38,12 @@
   };
 
   // Local preview only: http://localhost…/course/?demo  (content file is git-ignored and never deployed)
-  const store = k => JSON.parse(localStorage.getItem('ffc-demo-' + k) || 'null');
-  const put = (k, v) => localStorage.setItem('ffc-demo-' + k, JSON.stringify(v));
+  const store = k => JSON.parse(localStorage.getItem(C.id + '-demo-' + k) || 'null');
+  const put = (k, v) => localStorage.setItem(C.id + '-demo-' + k, JSON.stringify(v));
   let demoData;
   const demo = {
-    async user() { demoData = await (await fetch('../.claude/course-demo/content.json')).json(); return { id: 'demo', email: 'معاينة' }; },
-    signOut: async () => { ['progress', 'cert'].forEach(k => localStorage.removeItem('ffc-demo-' + k)); },
+    async user() { demoData = await (await fetch('/.claude/course-demo/' + C.id + '.json')).json(); return { id: 'demo', email: 'معاينة' }; },
+    signOut: async () => { ['progress', 'cert'].forEach(k => localStorage.removeItem(C.id + '-demo-' + k)); },
     outline: async () => demoData.units,
     lesson: async n => demoData.units.find(u => u.n === n),
     progress: async () => store('progress') || {},
@@ -51,7 +51,7 @@
     cert: async () => store('cert'),
     async submitExam(answers, name) {
       const score = answers.filter((a, i) => a === demoData.key[i]).length, passed = score >= demoData.pass;
-      if (passed && !store('cert')) put('cert', { cert_no: 'SIOSS-FFC-DEMO-0001', name, issued_at: new Date().toISOString().slice(0, 10) });
+      if (passed && !store('cert')) put('cert', { cert_no: 'SIOSS-' + C.id.toUpperCase() + '-DEMO-0001', name, issued_at: new Date().toISOString().slice(0, 10) });
       return { score, total: demoData.key.length, pass: demoData.pass, passed, cert_no: passed ? store('cert').cert_no : null };
     }
   };
@@ -78,7 +78,7 @@
           <button class="btn">دخول</button>
         </form>
         <p class="err" id="e" role="alert"></p>
-        <p class="muted small">لم تشترك بعد؟ <a href="../football-fitness-course.html">تعرّف على الدورة</a></p>
+        <p class="muted small">لم تشترك بعد؟ <a href="${C.salesPage}">تعرّف على الدورة</a></p>
       </section>`;
     let email = '';
     $('#f').onsubmit = async ev => {
@@ -173,7 +173,7 @@
         ${!isExam && prev ? `<a href="#/unit/${prev.n}">→ الوحدة ${prev.n}</a>` : '<span></span>'}
         ${isExam ? '' : next ? `<a href="#/unit/${next.n}">الوحدة ${next.n} ←</a>` : `<a href="#/exam">الاختبار النهائي ←</a>`}
       </nav>`;
-    if (!isExam && n <= 9) {
+    if (!isExam && u.video_url) {
       const box = document.createElement('div');
       box.className = 'video';
       const yt = (u.video_url || '').match(/(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/|shorts\/|live\/))([\w-]{11})/);

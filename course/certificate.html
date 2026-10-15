@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="robots" content="noindex">
 <meta name="viewport" content="width=1200">
-<title>SIOSS Certificate – Football Fitness Coach</title>
+<title>SIOSS Certificate</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;800&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
@@ -74,22 +74,18 @@
 
   <main class="main">
     <div class="kicker">Certificate of Completion</div>
-    <h1>Football Fitness Coach</h1>
+    <h1 id="cTitle"></h1>
 
     <p class="lead">This is to certify that</p>
     <div class="name"><span id="cName"></span></div>
 
     <p class="body">
       has successfully completed the online course
-      <span class="course">Football Fitness Coach</span>
+      <span class="course" id="cCourse"></span>
       and passed the final examination set by SIOSS.
     </p>
 
-    <p class="topics">
-      <b>Course content:</b> season planning and periodisation · the training week and match demands ·
-      football-specific endurance · strength and power · speed and plyometrics · injury prevention ·
-      training-load monitoring · annual programme design · field practice.
-    </p>
+    <p class="topics"><b>Course content:</b> <span id="cTopics"></span></p>
 
     <div class="foot">
       <div class="cell"><small>Date of issue</small><b><span id="cDate"></span></b></div>
@@ -105,13 +101,18 @@
 </div>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="supabase.js"></script>
+<script src="config.js"></script>
 <script>
   // Fills the certificate from the signed-in learner's own record (local preview: from the demo store).
   (async () => {
     const demo = /^(localhost|127\.0\.0\.1)$/.test(location.hostname) && /[?&]demo\b/.test(location.search);
     const c = demo
-      ? JSON.parse(localStorage.getItem('ffc-demo-cert') || 'null')
-      : (await sb.from('course_certificates').select('cert_no,name,issued_at').eq('course', 'ffc').maybeSingle()).data;
+      ? JSON.parse(localStorage.getItem(SIOSS_COURSE.id + '-demo-cert') || 'null')
+      : (await sb.from('course_certificates').select('cert_no,name,issued_at').eq('course', SIOSS_COURSE.id).maybeSingle()).data;
+    document.getElementById('cTitle').textContent = SIOSS_COURSE.certTitle;
+    document.getElementById('cCourse').textContent = SIOSS_COURSE.certTitle;
+    document.getElementById('cTopics').textContent = SIOSS_COURSE.certTopics;
+    document.title = 'SIOSS Certificate – ' + SIOSS_COURSE.certTitle;
     if (!c) { location.replace('./' + location.search); return; }
     document.querySelector('.tools a').href = './' + location.search;
     document.getElementById('cName').textContent = c.name;

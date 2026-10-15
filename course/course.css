@@ -101,3 +101,13 @@ a.row[href]:hover { border-color:var(--primary); }
 
 @media (max-width:600px) { .brand span { display:none; } }
 @media (prefers-reduced-motion:reduce) { * { transition:none !important; scroll-behavior:auto !important; } }
+
+/* Pitch diagrams in tactics units (Football Tactics Course/tools/pitch.py) */
+.unit .pitches { display:flex; flex-wrap:wrap; gap:14px; margin:12px 0; }
+.unit .pitch { margin:0; width:170px; text-align:center; }
+.unit .pitch svg { width:100%; height:auto; display:block; }
+.unit .pitch .grass { fill:#2e7d4f; }
+.unit .pitch .lines * { fill:none; stroke:#ffffffb3; stroke-width:.8; }
+.unit .pitch .pl { fill:#1a6fc4; stroke:#fff; stroke-width:1; }
+.unit .pitch .gk { fill:#e9b100; stroke:#fff; stroke-width:1; }
+.unit .pitch figcaption { font-weight:700; margin-top:4px; }
