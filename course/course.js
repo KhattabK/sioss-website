@@ -100,7 +100,7 @@
   function viewLocked() {
     const justPaid = /[?&]paid\b/.test(location.search);
     const pay = C.stripeLink
-      ? `<a class="btn" href="${C.stripeLink}${C.stripeLink.includes('?') ? '&' : '?'}client_reference_id=${user.id}">ادفع الآن وابدأ الدورة</a>`
+      ? `<a class="btn" href="${C.stripeLink}${C.stripeLink.includes('?') ? '&' : '?'}client_reference_id=${C.id}__${user.id}">ادفع الآن وابدأ الدورة</a>`
       : `<a class="btn" target="_blank" rel="noopener" href="${wa('أرغب بالاشتراك في ' + C.title)}">اشترك عبر واتساب</a>`;
     app.innerHTML = `
       <section class="card narrow">

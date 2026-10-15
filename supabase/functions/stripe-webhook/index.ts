@@ -4,7 +4,8 @@
 // Secrets: supabase secrets set STRIPE_WEBHOOK_SECRET=whsec_...
 // Stripe:  Developers → Webhooks → add endpoint
 //          https://<project-ref>.supabase.co/functions/v1/stripe-webhook   event: checkout.session.completed
-// Each Payment Link is mapped to its course below (metadata  course = …  on the link also works).
+// Which course was bought: the mapping below, else metadata  course = …  on the Payment Link,
+// else the learner area's client_reference_id = "<course>__<user id>".
 import { createClient } from "npm:@supabase/supabase-js@2";
 
 const COURSE_BY_PAYMENT_LINK: Record<string, string> = {
@@ -17,6 +18,7 @@ const serverKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") ||
   JSON.parse(Deno.env.get("SUPABASE_SECRET_KEYS") ?? "{}").default;
 const db = createClient(Deno.env.get("SUPABASE_URL")!, serverKey);
 const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+const REF = /^([a-z]{2,12})__([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})$/i;
 
 async function signatureOk(body: string, header: string | null): Promise<boolean> {
   if (!header) return false;
@@ -41,11 +43,13 @@ Deno.serve(async (req) => {
   if (event.type !== "checkout.session.completed") return new Response("ignored");
 
   const s = event.data.object;
-  const course = s.metadata?.course ?? COURSE_BY_PAYMENT_LINK[s.payment_link];
+  const ref = REF.exec(s.client_reference_id ?? "");
+  // A known Payment Link or its metadata wins over the reference, which the buyer could edit in the URL.
+  const course = COURSE_BY_PAYMENT_LINK[s.payment_link] ?? s.metadata?.course ?? ref?.[1].toLowerCase();
   if (s.payment_status !== "paid" || !course) return new Response("ignored");
 
   const email = (s.customer_details?.email ?? s.customer_email ?? "").toLowerCase() || null;
-  const userId = UUID.test(s.client_reference_id ?? "") ? s.client_reference_id : null;
+  const userId = ref?.[2] ?? (UUID.test(s.client_reference_id ?? "") ? s.client_reference_id : null);
   if (!email && !userId) return new Response("no buyer identity", { status: 400 });
 
   const { error } = await db.from("course_access")
