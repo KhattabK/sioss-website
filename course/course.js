@@ -153,7 +153,7 @@
       <div class="list">
         <a class="row ${cert ? 'done' : ''} ${allDone() ? '' : 'off'}" ${allDone() ? 'href="#/exam"' : 'aria-disabled="true"'}>
           <span class="num">${cert ? '✓' : '★'}</span>
-          <span class="t"><b>الاختبار النهائي</b><small>${allDone() ? '30 سؤالاً · النجاح فيه شرط الشهادة' : 'يُفتح بعد إكمال الوحدات الثلاث عشرة'}</small></span>
+          <span class="t"><b>الاختبار النهائي</b><small>${allDone() ? '30 سؤالاً · النجاح فيه شرط الشهادة' : `يُفتح بعد إكمال الوحدات الـ${lessons().length}`}</small></span>
         </a>
       </div>`;
   }
