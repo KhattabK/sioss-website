@@ -3,7 +3,7 @@ const SIOSS_COURSE = {
   id: "tac",
   title: "دورة التكتيك في كرة القدم",
   priceText: "149$",  // اتركه فارغاً ليظهر «السعر يُعلن قريباً»
-  stripeLink: "",     // Stripe Payment Link. فارغاً يتحول زر الشراء إلى واتساب
+  stripeLink: "https://buy.stripe.com/6oUaEW6Rm4Eh8VC6rC0Ba01",  // Stripe Payment Link. فارغاً يتحول زر الشراء إلى واتساب
   whatsapp: "46707181137",
   salesPage: "../football-tactics-course.html",
   certTitle: "Football Tactics",
