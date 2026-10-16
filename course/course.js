@@ -153,7 +153,7 @@
       <div class="list">
         <a class="row ${cert ? 'done' : ''} ${allDone() ? '' : 'off'}" ${allDone() ? 'href="#/exam"' : 'aria-disabled="true"'}>
           <span class="num">${cert ? '✓' : '★'}</span>
-          <span class="t"><b>الاختبار النهائي</b><small>${allDone() ? '30 سؤالاً · النجاح فيه شرط الشهادة' : `يُفتح بعد إكمال الوحدات الـ${lessons().length}`}</small></span>
+          <span class="t"><b>الاختبار النهائي</b><small>${allDone() ? `${((units.find(u => u.kind === 'exam') || {}).meta || '').split('·')[0].trim()} · النجاح فيه شرط الشهادة` : `يُفتح بعد إكمال الوحدات الـ${lessons().length}`}</small></span>
         </a>
       </div>`;
   }
@@ -174,15 +174,22 @@
         ${isExam ? '' : next ? `<a href="#/unit/${next.n}">الوحدة ${next.n} ←</a>` : `<a href="#/exam">الاختبار النهائي ←</a>`}
       </nav>`;
     if (!isExam && u.video_url) {
-      const box = document.createElement('div');
-      box.className = 'video';
-      const yt = (u.video_url || '').match(/(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/|shorts\/|live\/))([\w-]{11})/);
-      box.innerHTML = yt
-        ? `<iframe src="https://www.youtube-nocookie.com/embed/${yt[1]}?rel=0&modestbranding=1" title="فيديو الوحدة ${n}" allow="encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>`
-        : u.video_url && !isDemo
-        ? `<video controls playsinline preload="metadata" controlslist="nodownload" src="${u.video_url}"></video>`
-        : `<div class="ph">فيديو الوحدة ${n} يظهر هنا بعد رفعه</div>`;
-      $('.unit header').after(box);
+      // A unit may hold several videos, separated by whitespace, shown in order under the header.
+      const urls = u.video_url.trim().split(/\s+/);
+      let at = $('.unit header');
+      urls.forEach((url, k) => {
+        const box = document.createElement('div');
+        box.className = 'video';
+        const label = urls.length > 1 ? `فيديو ${k + 1} من ${urls.length} · الوحدة ${n}` : `فيديو الوحدة ${n}`;
+        const yt = url.match(/(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/|shorts\/|live\/))([\w-]{11})/);
+        box.innerHTML = yt
+          ? `<iframe src="https://www.youtube-nocookie.com/embed/${yt[1]}?rel=0&modestbranding=1" title="${label}" allow="encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>`
+          : /^https?:\/\//.test(url) && !isDemo
+          ? `<video controls playsinline preload="metadata" controlslist="nodownload" src="${url}"></video>`
+          : `<div class="ph">${label} يظهر هنا بعد رفعه</div>`;
+        at.after(box);
+        at = box;
+      });
     }
     quiz($('.unit'), u, isExam);
     scrollTo(0, 0);

@@ -1,0 +1,11 @@
+/* ============ إعدادات دبلوم المدرب الشخصي: عدّل هنا فقط ============ */
+const SIOSS_COURSE = {
+  id: "ptd",
+  title: "دبلوم المدرب الشخصي",
+  priceText: "449$",  // اتركه فارغاً ليظهر «السعر يُعلن قريباً»
+  stripeLink: "",  // Stripe Payment Link. فارغاً يتحول زر الشراء إلى واتساب
+  whatsapp: "46707181137",
+  salesPage: "../personal-trainer-diploma.html",
+  certTitle: "Personal Trainer",
+  certTopics: "Functional training · anatomy and exercise physiology · energy systems · health and fitness assessment · resistance and cardiovascular programme design · flexibility · exercise technique · practical gym instruction · nutrition and weight management · supplements · special populations · injury awareness."
+};

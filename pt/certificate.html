@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex">
+<meta name="viewport" content="width=1200">
+<title>SIOSS Diploma</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;800&family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  @page { size: A4 landscape; margin: 0; }
+  :root { --navy:#0a2a5e; --blue:#1a6fc4; --gold:#c9a24a; --gold-lt:#e8cf8a; --ink:#16202b; --muted:#5b6876; --paper:#fdfbf5; }
+  * { box-sizing:border-box; }
+  html, body { margin:0; background:#d9dde3; }
+  .sheet { width:297mm; height:210mm; margin:0 auto; position:relative; overflow:hidden; background:var(--paper); color:var(--ink); font-family:'IBM Plex Sans',sans-serif; }
+  /* Frames */
+  .sheet::before { content:""; position:absolute; inset:7mm; border:1.6mm solid var(--navy); }
+  .sheet::after { content:""; position:absolute; inset:10.5mm; border:0.5mm solid var(--gold); }
+  .corner { position:absolute; width:16mm; height:16mm; border:0.6mm solid var(--gold); z-index:2; }
+  .c1 { top:13mm; left:13mm; border-right:0; border-bottom:0; } .c2 { top:13mm; right:13mm; border-left:0; border-bottom:0; }
+  .c3 { bottom:13mm; left:13mm; border-right:0; border-top:0; } .c4 { bottom:13mm; right:13mm; border-left:0; border-top:0; }
+  .inner { position:absolute; inset:16mm 24mm 14mm; display:flex; flex-direction:column; align-items:center; text-align:center; z-index:3; }
+  .top { display:flex; align-items:center; gap:7mm; }
+  .top .logo { height:22mm; }
+  .org { font:700 12.5pt/1.35 'Archivo',sans-serif; letter-spacing:.08em; text-transform:uppercase; color:var(--navy); text-align:left; }
+  .org span { color:var(--gold); font-size:9.5pt; letter-spacing:.18em; }
+  .kicker { margin-top:6mm; font:700 9pt 'Archivo',sans-serif; letter-spacing:.42em; text-transform:uppercase; color:var(--gold); }
+  h1 { margin:6mm 0 0; font:700 46pt/1 'Cormorant Garamond',serif; color:var(--navy); letter-spacing:.06em; }
+  .title { margin-top:2mm; font:800 17pt 'Archivo',sans-serif; letter-spacing:.2em; text-transform:uppercase; color:var(--blue); }
+  .rule { width:60mm; height:0.4mm; background:linear-gradient(90deg,transparent,var(--gold),transparent); margin:5mm auto 0; }
+  .name { margin:1.5mm 0 0; font:600 36pt/1.15 'Cormorant Garamond',serif; color:var(--ink); min-width:150mm; min-height:16mm; padding:0 6mm 2mm; border-bottom:0.35mm solid var(--gold); }
+  .body { margin:4mm 0 0; font-size:10.8pt; line-height:1.6; color:var(--muted); max-width:200mm; }
+  .body b { color:var(--ink); font-weight:600; }
+  .topics { margin:3mm 0 0; font-size:8.4pt; line-height:1.6; color:var(--muted); max-width:215mm; }
+  .foot { margin-top:auto; width:100%; display:grid; grid-template-columns:1fr auto 1fr; align-items:end; gap:10mm; }
+  .cell { text-align:left; }
+  .cell small { display:block; font-size:7.4pt; letter-spacing:.16em; text-transform:uppercase; color:var(--muted); margin-bottom:1mm; }
+  .cell b { font:600 10.5pt 'IBM Plex Sans',sans-serif; color:var(--ink); }
+  .cell + .cell { margin-top:3mm; }
+  .seal { width:34mm; height:34mm; }
+  .sig { text-align:center; }
+  .sig-img { display:block; height:24mm; max-width:88mm; margin:0 auto 1mm; object-fit:contain; }
+  .sig .line { border-top:0.3mm solid var(--ink); padding-top:1.4mm; font-weight:600; font-size:10pt; }
+  .sig .role { font-size:8pt; color:var(--muted); }
+  .verify { margin-top:3mm; font-size:7.2pt; color:var(--muted); }
+  @media screen { body { padding:10mm 0; } .sheet { box-shadow:0 6px 30px rgba(0,0,0,.25); } }
+  .tools { width:297mm; margin:0 auto 6mm; display:flex; justify-content:space-between; align-items:center; font:500 11pt 'IBM Plex Sans',sans-serif; }
+  .tools a { color:#0a2a5e; }
+  .tools button { background:#0a2a5e; color:#fff; border:0; border-radius:6px; padding:10px 20px; font:600 11pt 'IBM Plex Sans',sans-serif; cursor:pointer; }
+  @media print { html, body { background:#fff; } .tools { display:none; } }
+</style>
+</head>
+<body>
+<div class="tools"><a href="./">← Back to the course</a><button type="button" onclick="print()">Print / Save as PDF</button></div>
+<div class="sheet">
+  <span class="corner c1"></span><span class="corner c2"></span><span class="corner c3"></span><span class="corner c4"></span>
+  <div class="inner">
+    <div class="top">
+      <img class="logo" src="logo-on-light.png" alt="SIOSS">
+      <div class="org">The Swedish International<br>Organization of Sport Science<br><span>Linköping · Sweden</span></div>
+    </div>
+
+    <div class="kicker">This diploma is awarded to</div>
+    <div class="name" id="cName"></div>
+
+    <h1>Diploma</h1>
+    <div class="title" id="cTitle"></div>
+    <div class="rule"></div>
+
+    <p class="body">
+      for successfully completing the <b>SIOSS <span id="cCourse"></span> Diploma Programme</b>,
+      including all theoretical and practical modules, and passing the final examination set by
+      the Swedish International Organization of Sport Science.
+    </p>
+    <p class="topics" id="cTopics"></p>
+
+    <div class="foot">
+      <div>
+        <div class="cell"><small>Date of issue</small><b id="cDate"></b></div>
+        <div class="cell"><small>Diploma No.</small><b id="cNo"></b></div>
+      </div>
+      <svg class="seal" viewBox="0 0 200 200" aria-hidden="true">
+        <defs><path id="arc" d="M100,100 m-74,0 a74,74 0 1,1 148,0 a74,74 0 1,1 -148,0"/></defs>
+        <circle cx="100" cy="100" r="97" fill="#0a2a5e"/>
+        <circle cx="100" cy="100" r="92" fill="none" stroke="#c9a24a" stroke-width="3"/>
+        <circle cx="100" cy="100" r="58" fill="none" stroke="#c9a24a" stroke-width="1.2"/>
+        <text font-family="Archivo, sans-serif" font-size="14.5" font-weight="700" fill="#e8cf8a" letter-spacing="2.2">
+          <textPath href="#arc" startOffset="0" textLength="452" lengthAdjust="spacing">SIOSS · SWEDEN · SPORT SCIENCE · EST. 2015 ·</textPath>
+        </text>
+        <text x="100" y="94" text-anchor="middle" font-family="Archivo, sans-serif" font-size="15" font-weight="700" fill="#fff" letter-spacing="2">DIPLOMA</text>
+        <text x="100" y="116" text-anchor="middle" font-family="Archivo, sans-serif" font-size="10" font-weight="500" fill="#e8cf8a" letter-spacing="2.4">CERTIFIED</text>
+      </svg>
+      <div class="sig">
+        <img class="sig-img" src="../course/signature.png" alt="" onerror="this.remove()">
+        <div class="line">Dr. Abduladeem Khalil</div>
+        <div class="role">Manager, SIOSS</div>
+      </div>
+    </div>
+    <div class="verify">Verify this diploma in the SIOSS graduate registry: www.sioss.se/students.html</div>
+  </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="../course/supabase.js"></script>
+<script src="config.js"></script>
+<script>
+  // Fills the diploma from the signed-in learner's own record (local preview: from the demo store).
+  (async () => {
+    const demo = /^(localhost|127\.0\.0\.1)$/.test(location.hostname) && /[?&]demo\b/.test(location.search);
+    const c = demo
+      ? JSON.parse(localStorage.getItem(SIOSS_COURSE.id + '-demo-cert') || 'null')
+      : (await sb.from('course_certificates').select('cert_no,name,issued_at').eq('course', SIOSS_COURSE.id).maybeSingle()).data;
+    document.getElementById('cTitle').textContent = SIOSS_COURSE.certTitle;
+    document.getElementById('cCourse').textContent = SIOSS_COURSE.certTitle;
+    document.getElementById('cTopics').textContent = SIOSS_COURSE.certTopics;
+    document.title = 'SIOSS Diploma – ' + SIOSS_COURSE.certTitle;
+    if (!c) { location.replace('./' + location.search); return; }
+    document.querySelector('.tools a').href = './' + location.search;
+    document.getElementById('cName').textContent = c.name;
+    document.getElementById('cNo').textContent = c.cert_no;
+    document.getElementById('cDate').textContent = new Date(c.issued_at).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+  })();
+</script>
+</body>
+</html>

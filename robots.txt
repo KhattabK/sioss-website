@@ -2,5 +2,7 @@ User-agent: *
 Allow: /
 Disallow: /admin.html
 Disallow: /course/
+Disallow: /tactics/
+Disallow: /pt/
 
 Sitemap: https://www.sioss.se/sitemap.xml
