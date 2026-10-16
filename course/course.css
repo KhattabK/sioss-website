@@ -116,3 +116,8 @@ a.row[href]:hover { border-color:var(--primary); }
 .unit figure.fig { margin:16px auto; max-width:720px; }
 .unit figure.fig svg { width:100%; height:auto; display:block; }
 .unit figure.fig figcaption { color:var(--text-muted); font-size:14px; text-align:center; margin-top:6px; }
+
+/* Faint e-mail watermark over lessons (course.js watermark()) */
+.unit { position:relative; }
+.unit .wm { position:absolute; inset:0; pointer-events:none; z-index:5; background-repeat:repeat; }
+@media print { .unit .wm { display:block; } }

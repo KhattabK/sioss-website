@@ -4,6 +4,14 @@
   const C = SIOSS_COURSE, EXAM = 99;
   const app = document.getElementById('app');
   const $ = (sel, root = document) => root.querySelector(sel);
+  // A random id for this browser, so the account can be active on one device at a time.
+  const deviceId = (() => {
+    try {
+      let id = localStorage.getItem('sioss-device');
+      if (!id) { id = (crypto.randomUUID ? crypto.randomUUID() : String(Math.random()).slice(2) + Date.now()); localStorage.setItem('sioss-device', id); }
+      return id;
+    } catch { return 'no-storage-' + Date.now(); }
+  })();
   const wa = text => 'https://wa.me/' + C.whatsapp + '?text=' + encodeURIComponent(text);
 
   // ── Backends ──────────────────────────────────────────────────────────────
@@ -34,6 +42,12 @@
     async submitExam(answers, name) {
       const { data, error } = await sb.rpc('submit_final_exam', { p_course: C.id, p_answers: answers, p_name: name });
       return error ? { error: error.message } : data;
+    },
+    // One active device per account (supabase/course-security.sql). Errors are ignored so the course keeps working without it.
+    claimDevice: () => sb.rpc('claim_device', { p_device: deviceId, p_ua: navigator.userAgent }).then(() => {}, () => {}),
+    async activeDevice() {
+      const { data, error } = await sb.rpc('active_device');
+      return error ? null : data;
     }
   };
 
@@ -49,6 +63,8 @@
     progress: async () => store('progress') || {},
     async savePass(n, score) { put('progress', { ...(store('progress') || {}), [n]: score }); },
     cert: async () => store('cert'),
+    claimDevice: async () => {},
+    activeDevice: async () => null,
     async submitExam(answers, name) {
       const score = answers.filter((a, i) => a === demoData.key[i]).length, passed = score >= demoData.pass;
       if (passed && !store('cert')) put('cert', { cert_no: 'SIOSS-' + C.id.toUpperCase() + '-DEMO-0001', name, issued_at: new Date().toISOString().slice(0, 10) });
@@ -59,6 +75,42 @@
   const isDemo = /^(localhost|127\.0\.0\.1)$/.test(location.hostname) && /[?&]demo\b/.test(location.search);
   const api = isDemo ? demo : live;
   let user = null, units = [], progress = {}, cert = null;
+
+  const TERMS = 'الاشتراك شخصي لصاحب البريد وحده، ويعمل على جهاز واحد في الوقت نفسه. مشاركة الحساب أو نشر المحتوى تؤدي إلى إيقاف الاشتراك دون استرداد المبلغ.';
+
+  // The learner's e-mail, faint and repeated over the lesson: discourages screenshots and sharing.
+  function watermark(root) {
+    if (!user || !user.email) return;
+    const t = user.email.replace(/[&<>"']/g, '');
+    const svg = `<svg xmlns='http://www.w3.org/2000/svg' width='360' height='200'><text x='20' y='120' transform='rotate(-24 180 100)' font-family='Arial' font-size='15' fill='#8a96a3' fill-opacity='0.22'>${t}</text></svg>`;
+    const wm = document.createElement('div');
+    wm.className = 'wm';
+    wm.setAttribute('aria-hidden', 'true');
+    wm.style.backgroundImage = `url("data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg)}")`;
+    root.appendChild(wm);
+  }
+
+  // Signed in on another device: this one stops.
+  async function kicked() {
+    clearInterval(watch);
+    await api.signOut();
+    user = null;
+    $('#who').hidden = true;
+    app.innerHTML = `
+      <section class="card narrow">
+        <h1>فُتح حسابك على جهاز آخر</h1>
+        <p class="muted">سُجّل الدخول إلى حسابك من جهاز آخر، فأُغلقت الجلسة هنا. الاشتراك يعمل على جهاز واحد في الوقت نفسه.</p>
+        <p class="muted">إن كنت أنت، فسجّل الدخول من جديد للمتابعة على هذا الجهاز. وإن لم تكن أنت، فراسلنا على واتساب.</p>
+        <button class="btn" id="relogin" type="button">سجّل الدخول من جديد</button>
+      </section>`;
+    $('#relogin').onclick = () => { location.hash = ''; viewLogin(); };
+  }
+  let watch = null;
+  async function checkDevice() {
+    if (!user) return;
+    const active = await api.activeDevice();
+    if (active && active !== deviceId) kicked();
+  }
 
   // ── Views ─────────────────────────────────────────────────────────────────
   function viewLogin() {
@@ -79,6 +131,7 @@
         </form>
         <p class="err" id="e" role="alert"></p>
         <p class="muted small">لم تشترك بعد؟ <a href="${C.salesPage}">تعرّف على الدورة</a></p>
+        <p class="muted small">${TERMS}</p>
       </section>`;
     let email = '';
     $('#f').onsubmit = async ev => {
@@ -111,6 +164,7 @@
         ${justPaid ? '' : pay}
         <button class="btn ghost" id="again" type="button">دفعتُ للتو، حدّث</button>
         <p class="muted small">إن دفعت ببريد مختلف فسجّل الدخول به، أو راسلنا على واتساب.</p>
+        <p class="muted small">${TERMS}</p>
       </section>`;
     $('#again').onclick = start;
     if (justPaid) {  // the Stripe webhook may land a few seconds after the redirect
@@ -140,6 +194,7 @@
       </section>
       <section class="how">
         <b>طريقة الدراسة:</b> شاهد فيديو الوحدة، ثم اقرأ النص، ثم أجب عن اختبارها. تُحسب الوحدة مكتملة عند النجاح في اختبارها.
+        <br><small class="muted">${TERMS}</small>
       </section>
       ${sections.map(s => `
         <h2>${s}</h2>
@@ -193,6 +248,7 @@
         at = box;
       });
     }
+    watermark($('.unit'));
     quiz($('.unit'), u, isExam);
     scrollTo(0, 0);
   }
@@ -312,7 +368,10 @@
     $('#who').hidden = !user;
     if (user) {
       $('#whoEmail').textContent = user.email;
+      await api.claimDevice();
       [units, progress, cert] = await Promise.all([api.outline(), api.progress(), api.cert()]);
+      clearInterval(watch);
+      watch = setInterval(checkDevice, 60000);
     }
     route();
   }
@@ -322,7 +381,8 @@
   $('#waHelp').href = wa('أحتاج مساعدة في ' + C.title);
   $('#signOut').textContent = isDemo ? 'امسح تقدّم المعاينة' : 'خروج';
   $('#signOut').onclick = async () => { await api.signOut(); location.hash = ''; location.reload(); };
-  addEventListener('hashchange', route);
+  addEventListener('hashchange', () => { checkDevice(); route(); });
+  document.addEventListener('visibilitychange', () => { if (!document.hidden) checkDevice(); });
   if (!isDemo) sb.auth.onAuthStateChange(ev => { if (ev === 'SIGNED_IN' && !user) start(); });
   start();
 })();
