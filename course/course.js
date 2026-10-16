@@ -178,6 +178,8 @@
 
   const lessons = () => units.filter(u => u.kind === 'unit');
   const allDone = () => lessons().every(u => u.n in progress);
+  // Units open in order: a unit opens once the quiz of the unit before it is passed.
+  const isOpen = n => { const ls = lessons(), i = ls.findIndex(u => u.n === n); return i <= 0 || n in progress || ls[i - 1].n in progress; };
 
   function viewHome() {
     const ls = lessons(), done = ls.filter(u => u.n in progress).length;
@@ -199,9 +201,9 @@
       ${sections.map(s => `
         <h2>${s}</h2>
         <div class="list">${ls.filter(u => u.section === s).map(u => `
-          <a class="row ${u.n in progress ? 'done' : ''}" href="#/unit/${u.n}">
-            <span class="num">${u.n in progress ? '✓' : u.n}</span>
-            <span class="t"><b>${u.title.replace(/^الوحدة \d+:\s*/, '')}</b><small>${u.meta}</small></span>
+          <a class="row ${u.n in progress ? 'done' : ''} ${isOpen(u.n) ? '' : 'off'}" ${isOpen(u.n) ? `href="#/unit/${u.n}"` : 'aria-disabled="true"'}>
+            <span class="num">${u.n in progress ? '✓' : isOpen(u.n) ? u.n : '🔒'}</span>
+            <span class="t"><b>${u.title.replace(/^الوحدة \d+:\s*/, '')}</b><small>${isOpen(u.n) ? u.meta : 'تُفتح بعد النجاح في اختبار الوحدة السابقة'}</small></span>
           </a>`).join('')}
         </div>`).join('')}
       <h2>الاختبار النهائي والشهادة</h2>
@@ -218,7 +220,7 @@
     const u = await api.lesson(n);
     if (!u) { location.hash = '#/'; return; }
     const isExam = u.kind === 'exam';
-    if (isExam && !allDone()) { location.hash = '#/'; return; }
+    if (isExam ? !allDone() : !isOpen(n)) { location.hash = '#/'; return; }
     const ls = lessons(), i = ls.findIndex(x => x.n === n);
     const prev = ls[i - 1], next = ls[i + 1];
     app.innerHTML = `
@@ -226,7 +228,7 @@
       <article class="unit">${u.html}</article>
       <nav class="pn">
         ${!isExam && prev ? `<a href="#/unit/${prev.n}">→ الوحدة ${prev.n}</a>` : '<span></span>'}
-        ${isExam ? '' : next ? `<a href="#/unit/${next.n}">الوحدة ${next.n} ←</a>` : `<a href="#/exam">الاختبار النهائي ←</a>`}
+        ${isExam ? '' : !(n in progress) ? '<span class="muted">انجح في اختبار الوحدة لتُفتح التالية</span>' : next ? `<a href="#/unit/${next.n}">الوحدة ${next.n} ←</a>` : `<a href="#/exam">الاختبار النهائي ←</a>`}
       </nav>`;
     if (!isExam && u.video_url) {
       // A unit may hold several videos, separated by whitespace, shown in order under the header.
@@ -349,7 +351,14 @@
       out.className = 'quiz-result ' + (ok ? 'pass' : 'fail');
       out.textContent = `نتيجتك: ${score} من ${qs.length}. ` + (ok ? 'ناجح. أحسنت، الوحدة مكتملة.' : `لم تبلغ درجة النجاح (${pass}). راجع الوحدة ثم أعد المحاولة.`);
       btn.textContent = 'أعد المحاولة';
-      if (ok) { progress[u.n] = Math.max(score, progress[u.n] || 0); await api.savePass(u.n, score, user.id); }
+      if (ok) {
+        progress[u.n] = Math.max(score, progress[u.n] || 0);
+        await api.savePass(u.n, score, user.id);
+        const ls = lessons(), nx = ls[ls.findIndex(x => x.n === u.n) + 1];
+        const go = nx ? `<a href="#/unit/${nx.n}">الوحدة ${nx.n} ←</a>` : allDone() ? '<a href="#/exam">الاختبار النهائي ←</a>' : '';
+        const pn = $('.pn'); if (pn && go) pn.lastElementChild.outerHTML = go;
+        if (go) out.insertAdjacentHTML('beforeend', ' ' + go.replace('<a ', '<a class="btn" '));
+      }
     };
   }
 
