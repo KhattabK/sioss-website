@@ -95,27 +95,111 @@
   </header>
 
   <!-- ===== HERO ===== -->
-  <section class="hero" id="home">
-    <video class="hero-video" muted loop playsinline preload="none" poster="images/hero_poster.jpg"
-           data-hero-src="https://pub-daf60fd082344b8eb459b49e9201e897.r2.dev/videos/hero.mp4"></video>
-    <div class="hero-bg"></div>
+  <section class="hero" id="home" aria-roledescription="carousel" aria-label="SIOSS">
+    <div class="hero-slide is-active" data-n="0" aria-roledescription="slide">
+      <div class="hero-photo" style="background-image:url('images/iraq18.jpg');background-position:center 35%"></div>
+      <div class="hero-bg"></div>
     <div class="container hero-inner">
-      <div class="hero-content">
-        <h1 class="anim-fade-up" style="--d:.1s" data-i18n-html="hero_h1">Where <span class="accent">Science</span><br />Meets Sport</h1>
-        <p class="hero-sub anim-fade-up" style="--d:.25s" data-i18n="hero_sub">
-          Advancing fitness through evidence-based training, modern sports technology,
-          and expert coaching — available to you, wherever you are.
-        </p>
-        <div class="hero-actions anim-fade-up" style="--d:.4s">
-          <a href="#about" class="btn btn-primary" data-i18n="hero_btn1">Discover SIOSS</a>
-          <a href="#contact" class="btn btn-outline" data-i18n="hero_btn2">Contact Us</a>
-        </div>
-        <div class="hero-meta anim-fade-up" style="--d:.65s">
-          <span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg><span data-i18n="contact_location">Linköping, Sweden</span></span>
-          <span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15a7 7 0 1 0 0-14 7 7 0 0 0 0 14Z"/><path d="M8.2 13.9 7 23l5-3 5 3-1.2-9.1"/></svg><span data-i18n="hero_founded">Founded in 2015</span></span>
+        <div class="hero-content">
+          <h1 class="anim-fade-up" style="--d:.1s" data-i18n-html="hero_h1">Where <span class="accent">Science</span><br />Meets Sport</h1>
+          <p class="hero-sub anim-fade-up" style="--d:.25s" data-i18n="hero_sub">
+            Advancing fitness through evidence-based training, modern sports technology,
+            and expert coaching — available to you, wherever you are.
+          </p>
+          <div class="hero-actions anim-fade-up" style="--d:.4s">
+            <a href="#about" class="btn btn-primary" data-i18n="hero_btn1">Discover SIOSS</a>
+            <a href="#contact" class="btn btn-outline" data-i18n="hero_btn2">Contact Us</a>
+          </div>
+          <div class="hero-meta anim-fade-up" style="--d:.65s">
+            <span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg><span data-i18n="contact_location">Linköping, Sweden</span></span>
+            <span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15a7 7 0 1 0 0-14 7 7 0 0 0 0 14Z"/><path d="M8.2 13.9 7 23l5-3 5 3-1.2-9.1"/></svg><span data-i18n="hero_founded">Founded in 2015</span></span>
+          </div>
         </div>
       </div>
     </div>
+    <div class="hero-slide" data-n="1" aria-roledescription="slide" hidden>
+      <div class="hero-photo" style="background-image:url('images/iraq13.jpg');background-position:center"></div>
+      <div class="hero-bg"></div>
+      <div class="container hero-inner">
+        <div class="hero-content">
+          <span class="hero-tag" data-i18n="slide_ptd_tag">New · Online diploma</span>
+          <h2 class="hero-title" data-i18n-html="slide_ptd_h">Personal <span class="accent">Trainer</span> Diploma</h2>
+          <p class="hero-sub" data-i18n="slide_ptd_sub">Twenty-six units with Swedish coach Fredrik Björs, practical work in the gym, and the First Aid & CPR course as a gift.</p>
+          <div class="hero-actions">
+            <a href="personal-trainer-diploma.html" class="btn btn-primary" data-i18n="slide_ptd_btn1">Enrol now · $449</a>
+            <a href="personal-trainer-diploma.html#program" class="btn btn-outline" data-i18n="slide_ptd_btn2">See the curriculum</a>
+          </div>
+        </div>
+        <a class="hero-card" href="personal-trainer-diploma.html" tabindex="-1" aria-hidden="true"><img src="images/og-ptd.jpg" alt="" loading="lazy"></a>
+      </div>
+    </div>
+    <div class="hero-slide" data-n="2" aria-roledescription="slide" hidden>
+      <div class="hero-photo" style="background-image:url('images/iraq16.jpg');background-position:center"></div>
+      <div class="hero-bg"></div>
+      <div class="container hero-inner">
+        <div class="hero-content">
+          <span class="hero-tag" data-i18n="slide_ffc_tag">Online course</span>
+          <h2 class="hero-title" data-i18n-html="slide_ffc_h">Football <span class="accent">Fitness</span> Coach</h2>
+          <p class="hero-sub" data-i18n="slide_ffc_sub">Twenty-one units of video and Arabic explanation, a library of drills, programmes and test norms, and a SIOSS certificate.</p>
+          <div class="hero-actions">
+            <a href="football-fitness-course.html" class="btn btn-primary" data-i18n="slide_ffc_btn1">Enrol now · $149</a>
+            <a href="football-fitness-course.html#program" class="btn btn-outline" data-i18n="slide_ffc_btn2">See the curriculum</a>
+          </div>
+        </div>
+        <a class="hero-card" href="football-fitness-course.html" tabindex="-1" aria-hidden="true"><img src="images/og-ffc.jpg" alt="" loading="lazy"></a>
+      </div>
+    </div>
+    <div class="hero-slide" data-n="3" aria-roledescription="slide" hidden>
+      <div class="hero-photo" style="background-image:url('images/iraq1.jpg');background-position:center"></div>
+      <div class="hero-bg"></div>
+      <div class="container hero-inner">
+        <div class="hero-content">
+          <span class="hero-tag" data-i18n="slide_tac_tag">Online course</span>
+          <h2 class="hero-title" data-i18n-html="slide_tac_h">Football <span class="accent">Tactics</span></h2>
+          <p class="hero-sub" data-i18n="slide_tac_sub">With Swedish coach Alexander Axén: playing systems, transitions and set pieces, translated and explained in Arabic.</p>
+          <div class="hero-actions">
+            <a href="football-tactics-course.html" class="btn btn-primary" data-i18n="slide_tac_btn1">Enrol now · $149</a>
+            <a href="football-tactics-course.html#program" class="btn btn-outline" data-i18n="slide_tac_btn2">See the curriculum</a>
+          </div>
+        </div>
+        <a class="hero-card" href="football-tactics-course.html" tabindex="-1" aria-hidden="true"><img src="images/og-tac.jpg" alt="" loading="lazy"></a>
+      </div>
+    </div>
+    <div class="hero-slide" data-n="4" aria-roledescription="slide" hidden>
+      <div class="hero-photo" style="background-image:url('images/iraq10.jpg');background-position:center"></div>
+      <div class="hero-bg"></div>
+      <div class="container hero-inner">
+        <div class="hero-content">
+          <span class="hero-tag" data-i18n="slide_cpr_tag">Short online course</span>
+          <h2 class="hero-title" data-i18n-html="slide_cpr_h">First Aid <span class="accent">& CPR</span></h2>
+          <p class="hero-sub" data-i18n="slide_cpr_sub">Recognise cardiac arrest, give CPR, use a defibrillator and place someone in the recovery position, step by step.</p>
+          <div class="hero-actions">
+            <a href="first-aid-cpr-course.html" class="btn btn-primary" data-i18n="slide_cpr_btn1">Enrol now · $99</a>
+            <a href="first-aid-cpr-course.html#program" class="btn btn-outline" data-i18n="slide_cpr_btn2">See the curriculum</a>
+          </div>
+        </div>
+        <a class="hero-card" href="first-aid-cpr-course.html" tabindex="-1" aria-hidden="true"><img src="images/og-cpr.jpg" alt="" loading="lazy"></a>
+      </div>
+    </div>
+    <div class="hero-slide" data-n="5" aria-roledescription="slide" hidden>
+      <div class="hero-photo" style="background-image:url('images/iraq12.jpg');background-position:center"></div>
+      <div class="hero-bg"></div>
+      <div class="container hero-inner">
+        <div class="hero-content">
+          <span class="hero-tag" data-i18n="slide_sjss_tag">Peer-reviewed · Open access</span>
+          <h2 class="hero-title" data-i18n-html="slide_sjss_h">The SIOSS <span class="accent">Journal</span> of Sport Science</h2>
+          <p class="hero-sub" data-i18n="slide_sjss_sub">A peer-reviewed, open-access journal (ISSN 2519-6634). Publish your research and share it with the sport community.</p>
+          <div class="hero-actions">
+            <a href="journal/authors.html" class="btn btn-primary" data-i18n="slide_sjss_btn1">Submit your paper</a>
+            <a href="journal/" class="btn btn-outline" data-i18n="slide_sjss_btn2">Browse the journal</a>
+          </div>
+        </div>
+        <a class="hero-card tall" href="journal/authors.html" tabindex="-1" aria-hidden="true"><img src="journal/cover.svg" alt="" loading="lazy"></a>
+      </div>
+    </div>
+    <button class="hero-nav prev" type="button" aria-label="Previous slide"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="15,18 9,12 15,6"/></svg></button>
+    <button class="hero-nav next" type="button" aria-label="Next slide"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="9,18 15,12 9,6"/></svg></button>
+    <div class="hero-dots" role="tablist"></div>
   </section>
 
 

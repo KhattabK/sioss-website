@@ -276,3 +276,48 @@ initPhotoScroll('certsTrack',   'certsLeft',   'certsRight');
 initPhotoScroll('bahrainTrack', 'bahrainLeft', 'bahrainRight');
 initPhotoScroll('iraqTrack',    'iraqLeft',    'iraqRight');
 initPhotoScroll('fieldTrack',   'fieldLeft',   'fieldRight');
+
+// ── Hero slider: SIOSS, the online courses and the journal ──
+(function () {
+  const hero = document.querySelector('.hero[aria-roledescription="carousel"]');
+  if (!hero) return;
+  const slides = [...hero.querySelectorAll('.hero-slide')];
+  const dotsBox = hero.querySelector('.hero-dots');
+  const still = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let i = 0, timer = null, paused = false;
+  slides.forEach(s => s.hidden = false);
+  const dots = slides.map((s, k) => {
+    const b = document.createElement('button');
+    b.type = 'button'; b.setAttribute('role', 'tab'); b.setAttribute('aria-label', String(k + 1));
+    b.addEventListener('click', () => { go(k); restart(); });
+    dotsBox.appendChild(b); return b;
+  });
+  function go(k) {
+    i = (k + slides.length) % slides.length;
+    slides.forEach((s, n) => {
+      const on = n === i;
+      s.classList.toggle('is-active', on);
+      s.setAttribute('aria-hidden', on ? 'false' : 'true');
+      s.querySelectorAll('a,button').forEach(el => { if (!el.classList.contains('hero-card')) el.tabIndex = on ? 0 : -1; });
+    });
+    dots.forEach((d, n) => d.setAttribute('aria-selected', n === i ? 'true' : 'false'));
+  }
+  function restart() { clearInterval(timer); if (!still) timer = setInterval(() => { if (!paused && !document.hidden) go(i + 1); }, 7000); }
+  hero.querySelector('.hero-nav.prev').addEventListener('click', () => { go(i - 1); restart(); });
+  hero.querySelector('.hero-nav.next').addEventListener('click', () => { go(i + 1); restart(); });
+  hero.addEventListener('mouseenter', () => paused = true);
+  hero.addEventListener('mouseleave', () => paused = false);
+  hero.addEventListener('focusin', () => paused = true);
+  hero.addEventListener('focusout', () => paused = false);
+  let x0 = null;
+  hero.addEventListener('touchstart', e => { x0 = e.touches[0].clientX; }, { passive: true });
+  hero.addEventListener('touchend', e => {
+    if (x0 === null) return;
+    const dx = e.changedTouches[0].clientX - x0; x0 = null;
+    if (Math.abs(dx) < 50) return;
+    const rtl = document.documentElement.dir === 'rtl';
+    go(i + ((dx < 0) !== rtl ? 1 : -1)); restart();
+  });
+  // ?slide=N opens the page on a given slide (handy for links from adverts)
+  go(parseInt(new URLSearchParams(location.search).get('slide'), 10) || 0); restart();
+})();
