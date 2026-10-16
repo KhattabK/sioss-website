@@ -182,8 +182,10 @@
         box.className = 'video';
         const label = urls.length > 1 ? `فيديو ${k + 1} من ${urls.length} · الوحدة ${n}` : `فيديو الوحدة ${n}`;
         const yt = url.match(/(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/|shorts\/|live\/))([\w-]{11})/);
+        // Optional ?start=SECONDS&end=SECONDS on the link shows only that part of a long lecture.
+        const part = ['start', 'end'].map(k => (url.match(new RegExp('[?&]' + k + '=(\\d+)')) || [])[1]).map((v, k) => v ? `&${k ? 'end' : 'start'}=${v}` : '').join('');
         box.innerHTML = yt
-          ? `<iframe src="https://www.youtube-nocookie.com/embed/${yt[1]}?rel=0&modestbranding=1" title="${label}" allow="encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>`
+          ? `<iframe src="https://www.youtube-nocookie.com/embed/${yt[1]}?rel=0&modestbranding=1${part}" title="${label}" allow="encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>`
           : /^https?:\/\//.test(url) && !isDemo
           ? `<video controls playsinline preload="metadata" controlslist="nodownload" src="${url}"></video>`
           : `<div class="ph">${label} يظهر هنا بعد رفعه</div>`;

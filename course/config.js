@@ -7,5 +7,5 @@ const SIOSS_COURSE = {
   whatsapp: "46707181137",
   salesPage: "../football-fitness-course.html",
   certTitle: "Football Fitness Coach",
-  certTopics: "season planning and periodisation · the training week and match demands · football-specific endurance · strength and power · speed and plyometrics · injury prevention · training-load monitoring · annual programme design · field practice."
+  certTopics: "season planning and periodisation · the training week and match demands · football-specific endurance · strength and power · speed and plyometrics · injury prevention · training-load monitoring · fitness testing and norms · annual programme design · field practice and drill library."
 };
