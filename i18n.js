@@ -24,7 +24,7 @@ const TRANSLATIONS = {
     promo_p3:         'Field practice with a Swedish elite coach',
     promo_p4:         'Endurance, testing, warm-up and goalkeepers',
     promo_p5:         'Annual plan and building your own programme',
-    promo_p6:         'Coach's library: drills, programmes and test norms',
+    promo_p6:         "Coach's library: drills, programmes and test norms",
     promo2_tag:       'New · Online course',
     promo2_h2:        'Football <span class="accent">Tactics</span>',
     promo2_lead:      'How does a coach from the Swedish top flight think about defending, attacking, transitions and set pieces, and turn it into a training week and a match plan? Eleven units of video, Arabic explanation and formation diagrams, ending with an exam and a SIOSS certificate.',
