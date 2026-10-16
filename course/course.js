@@ -194,6 +194,7 @@
           : next ? `<a class="btn" href="#/unit/${next.n}">${done ? 'تابع' : 'ابدأ'}: الوحدة ${next.n}</a>`
           : `<a class="btn" href="#/exam">انتقل إلى الاختبار النهائي</a>`}
       </section>
+      ${C.gift ? `<section class="how gift">🎁 <b>هديتك مع ${C.title}:</b> ${C.gift.title}، مجاناً وبشهادتها. ادخل بالبريد نفسه. <a class="btn" href="${C.gift.href}${location.search}">افتح الهدية</a></section>` : ''}
       <section class="how">
         <b>طريقة الدراسة:</b> شاهد فيديو الوحدة، ثم اقرأ النص، ثم أجب عن اختبارها. تُحسب الوحدة مكتملة عند النجاح في اختبارها.
         <br><small class="muted">${TERMS}</small>
