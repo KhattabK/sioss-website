@@ -111,3 +111,8 @@ a.row[href]:hover { border-color:var(--primary); }
 .unit .pitch .pl { fill:#1a6fc4; stroke:#fff; stroke-width:1; }
 .unit .pitch .gk { fill:#e9b100; stroke:#fff; stroke-width:1; }
 .unit .pitch figcaption { font-weight:700; margin-top:4px; }
+
+/* Course illustrations (inline SVG figures with their own light card) */
+.unit figure.fig { margin:16px auto; max-width:720px; }
+.unit figure.fig svg { width:100%; height:auto; display:block; }
+.unit figure.fig figcaption { color:var(--text-muted); font-size:14px; text-align:center; margin-top:6px; }
