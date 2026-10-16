@@ -238,6 +238,39 @@ function initPhotoScroll(trackId, leftId, rightId) {
     if (Math.abs(dx) > 5) track.dataset.dragged = '1';
     track.scrollLeft = scrollLeft - dx * 1.5;
   });
+
+  // Large coloured arrows on both sides of the row, plus a hint, so visitors see there is more to browse.
+  const wrap = track.parentElement;
+  wrap.classList.add('has-side-arrows');
+  left.parentElement.classList.add('replaced');
+  const chevron = d => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="${d}"/></svg>`;
+  const mk = (side, pts, dir) => {
+    const b = document.createElement('button');
+    b.type = 'button'; b.className = 'side-arrow ' + side; b.setAttribute('aria-label', side === 'left' ? 'Scroll left' : 'Scroll right');
+    b.innerHTML = chevron(pts);
+    b.addEventListener('click', () => track.scrollBy({ left: dir * Math.max(260, track.clientWidth * 0.8), behavior: 'smooth' }));
+    wrap.appendChild(b); return b;
+  };
+  const sl = mk('left', '15,18 9,12 15,6', -1), sr = mk('right', '9,18 15,12 9,6', 1);
+  const hint = document.createElement('p');
+  hint.className = 'scroll-hint';
+  wrap.after(hint);
+  const update = () => {
+    const rtl = getComputedStyle(track).direction === 'rtl';
+    const pos = Math.abs(track.scrollLeft), max = track.scrollWidth - track.clientWidth;
+    const fromStart = pos > 4, toEnd = pos < max - 4;
+    sl.hidden = !(rtl ? toEnd : fromStart);
+    sr.hidden = !(rtl ? fromStart : toEnd);
+    const n = track.children.length;
+    hint.hidden = max < 4;
+    hint.textContent = document.documentElement.lang === 'ar'
+      ? `⟵ اضغط السهم أو اسحب لرؤية الكل (${n}) ⟶`
+      : `⟵ Use the arrows or swipe to see all ${n} ⟶`;
+  };
+  track.addEventListener('scroll', update, { passive: true });
+  addEventListener('resize', update);
+  new MutationObserver(update).observe(document.documentElement, { attributes: true, attributeFilter: ['lang', 'dir'] });
+  update(); setTimeout(update, 800);
 }
 initPhotoScroll('certsTrack',   'certsLeft',   'certsRight');
 initPhotoScroll('bahrainTrack', 'bahrainLeft', 'bahrainRight');
