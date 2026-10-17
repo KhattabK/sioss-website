@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="robots" content="noindex" />
+<title>تم الدفع: أرسل بحثك | مجلة SIOSS لعلوم الرياضة (SJSS)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=IBM+Plex+Sans:wght@400;500;600;700&family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="journal.css" />
+<style>
+  .code { display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap; background:var(--dark-2); border:1px solid var(--border); padding:18px 22px; margin-top:28px; max-width:640px; }
+  .code small { display:block; color:var(--muted); }
+  .code b { font-size:1.7rem; color:var(--note); letter-spacing:2px; direction:ltr; display:block; }
+  .code button { background:transparent; color:var(--white); border:1px solid rgba(232,237,244,.35); padding:8px 16px; font:600 .9rem 'Cairo',sans-serif; cursor:pointer; }
+  .wa { background:#1f9d55; color:#fff; }
+</style>
+</head>
+<body>
+<header class="topbar" dir="ltr">
+  <div class="container topbar-inner">
+    <a class="brand" href="index.html">SJSS <span>The SIOSS Journal of Sport Science</span></a>
+    <nav class="jnav" aria-label="Journal">
+      <a href="index.html">Journal Home</a>
+      <a href="authors.html">For Authors</a>
+      <a href="instructions-ar.html" lang="ar">تعليمات النشر</a>
+      <a class="site" href="../">SIOSS.se &rarr;</a>
+    </nav>
+  </div>
+</header>
+<main>
+<div class="hero"><div class="container">
+  <p class="eyebrow">تمّ الدفع بنجاح</p>
+  <h1>شكراً لك، أرسل الآن ملف بحثك</h1>
+  <p class="lead">استلمنا رسوم النشر. بقيت خطوة واحدة: أرسل ملف البحث PDF مع رقم طلبك، لتبدأ هيئة التحرير بالتحكيم.</p>
+  <div class="code">
+    <div><small>رقم طلبك (اكتبه في رسالتك، فهو إثبات الدفع)</small><b id="code">—</b></div>
+    <button type="button" id="copy">نسخ الرقم</button>
+  </div>
+  <div class="actions">
+    <a class="btn btn-primary" id="mail">افتح رسالة الإرسال إلى hello@sioss.se</a>
+    <a class="btn wa" id="wa" target="_blank" rel="noopener">أو أرسل البحث على واتساب</a>
+  </div>
+</div></div>
+
+<section><div class="container">
+  <h2>أرفق في رسالتك</h2>
+  <ol>
+    <li><strong>ملف البحث كاملاً بصيغة PDF</strong>، معدّاً وفق <a href="files/SJSS-paper-template.docx">قالب المجلة</a>.</li>
+    <li><strong>الملخص (Abstract)</strong> باللغة الإنجليزية، و<strong>الكلمات المفتاحية</strong>.</li>
+    <li><strong>بيانات الباحثين:</strong> عنوان البحث، والأسماء الكاملة بالترتيب، وجهة العمل والبلد لكل باحث، وبريد الباحث المسؤول عن المراسلة.</li>
+    <li><strong>إقرار</strong> بأن البحث لم يُنشر ولم يُقدَّم للنشر في جهة أخرى.</li>
+  </ol>
+  <h3>ماذا يحدث بعد ذلك؟</h3>
+  <ol>
+    <li>نؤكد لك استلام البحث برسالة.</li>
+    <li>يصلك قرار التحكيم خلال أسبوع تقريباً: قبول، أو تعديلات مطلوبة، أو رفض.</li>
+    <li>عند القبول يُنشر بحثك على موقع المجلة خلال أسبوع، بوصول مفتوح.</li>
+    <li>إذا لم يُقبل البحث نعيد إليك الرسوم كاملة.</li>
+  </ol>
+  <p>للاستفسار: <a href="mailto:hello@sioss.se" dir="ltr">hello@sioss.se</a> · <span dir="ltr">+46 70 718 11 37</span></p>
+</div></section>
+</main>
+<footer class="footer" dir="ltr">
+  <div class="container footer-inner">
+    <p>&copy; The SIOSS Journal of Sport Science. ISSN 2519-6634 (Online). Published by the Swedish International Organization of Sport Science (SIOSS).</p>
+    <p><a href="mailto:hello@sioss.se">hello@sioss.se</a> &middot; Link&ouml;ping, Sweden</p>
+  </div>
+</footer>
+<script>
+  const sid = new URLSearchParams(location.search).get("session_id") || "";
+  const code = sid ? "SJSS-" + sid.replace(/[^A-Za-z0-9]/g, "").slice(-8).toUpperCase() : "";
+  document.getElementById("code").textContent = code || "يصلك في إيصال الدفع";
+  const copy = document.getElementById("copy");
+  if (code) copy.onclick = () => navigator.clipboard && navigator.clipboard.writeText(code); else copy.hidden = true;
+  const subject = "SJSS manuscript submission" + (code ? " – " + code : "");
+  const body = "رقم الطلب: " + (code || "—") + "\n\nعنوان البحث:\nأسماء الباحثين بالترتيب:\nجهة العمل والبلد لكل باحث:\nبريد الباحث المسؤول عن المراسلة:\n\nأقر بأن البحث لم يُنشر ولم يُقدَّم للنشر في جهة أخرى.\n\n(أرفق ملف البحث PDF مع هذه الرسالة)";
+  document.getElementById("mail").href = "mailto:hello@sioss.se?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
+  document.getElementById("wa").href = "https://wa.me/46707181137?text=" + encodeURIComponent("دفعت رسوم النشر في مجلة SJSS.\nرقم الطلب: " + (code || "—") + "\nسأرسل ملف البحث PDF هنا.");
+</script>
+</body>
+</html>
