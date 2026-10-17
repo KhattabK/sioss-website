@@ -96,13 +96,26 @@
   .fees .fact b { font-size:28px; color:var(--gold); }
   .branches { color:var(--text-muted); font-size:15px; margin-top:12px; }
   @media (max-width:760px) { .gal { grid-template-columns:1fr 1fr; } .vids, .fees { grid-template-columns:1fr; } }
+  .terms { margin:0 0 6px; padding-inline-start:22px; color:var(--text); }
+  .terms li { margin-bottom:6px; }
+  .terms li::marker { color:var(--accent); font-weight:800; }
+  .lform { display:grid; gap:12px; }
+  .lform label { font-weight:700; font-size:15px; }
+  .lform label small { color:var(--text-muted); font-weight:400; }
+  .lform input, .lform textarea { width:100%; margin-top:4px; background:var(--dark-2); color:var(--text); border:1px solid var(--border); border-radius:10px; padding:10px 12px; font:15px 'Cairo',sans-serif; }
+  .lform input[dir=ltr] { text-align:left; }
+  .lform .chk { display:flex; gap:10px; align-items:flex-start; font-weight:400; }
+  .lform .chk input { width:auto; margin-top:7px; }
+  .lform button[disabled] { opacity:.6; cursor:wait; }
+  .lmsg { display:none; padding:12px 14px; border-radius:10px; }
+  .lmsg.show { display:block; } .lmsg.good { background:#12351f; border:1px solid #1f9d55; } .lmsg.bad { background:#3a1717; border:1px solid #c0392b; }
 </style>
 </head>
 <body>
 <div class="wrap">
   <div class="nav">
     <a href="/"><img src="images/logo-white-tight.png" width="108" height="40" alt="SIOSS"></a>
-    <div class="links"><a href="#apply">قدّم طلبك</a><a href="/">الموقع الرئيسي ←</a></div>
+    <div class="links"><a href="#terms">الشروط</a><a href="#apply">قدّم طلبك</a><a href="/">الموقع الرئيسي ←</a></div>
   </div>
 
   <div class="hero">
@@ -111,7 +124,7 @@
       <h1>افتح أكاديمية كرة قدم <span>معتمدة من SIOSS</span> في مدينتك</h1>
       <p class="lead">نمنح المؤسسات والمدربين الطموحين إذناً رسمياً لافتتاح أكاديمية تحمل اسم <b>SIOSS International Football Academy</b>، بمنهج تدريبي سويدي، وتأهيل للمدربين، ودعم إعلامي وفني متواصل. نجحت التجربة في مصر بسبعة فروع، ونفتح الآن الباب في السعودية ودول الخليج والعراق وبقية الدول العربية.</p>
       <div class="cta-row">
-        <a class="btn" href="#apply">قدّم طلب الاعتماد</a>
+        <a class="btn" href="#apply">قدّم طلبك مجاناً</a>
         <a class="btn ghost" href="#benefits">ماذا تحصل عليه؟</a>
       </div>
     </div>
@@ -159,60 +172,86 @@
   </div>
 </div></section>
 
-<section><div class="wrap">
+<section id="terms"><div class="wrap">
   <h2>الشروط والضوابط</h2>
-  <ul class="check">
-    <li>جهة قانونية مسجّلة، أو استعداد للتسجيل وفق أنظمة البلد والجهات الرياضية المختصة</li>
-    <li>ملعب أو أكثر مناسب وآمن لتدريب الأطفال، بعقد استخدام واضح</li>
-    <li>مدير فني ومدربون مؤهلون، يلتزمون ببرنامج التأهيل من SIOSS</li>
-    <li>الالتزام بالمنهج التدريبي والهوية البصرية لـ SIOSS في كل الأنشطة</li>
-    <li>سلامة الأطفال وحمايتهم أولاً: إسعافات أولية، وإشراف دائم، وبيئة محترمة</li>
-    <li>تقارير دورية عن عدد اللاعبين والأنشطة، وتقييم سنوي يُجدَّد بعده الاعتماد</li>
-    <li>الاعتماد لمنطقة جغرافية محددة يتفق عليها في العقد</li>
-    <li>يحق لـ SIOSS سحب الاعتماد عند الإخلال بالعقد أو بمعايير الجودة</li>
-  </ul>
+  <p class="sub">هذه أهم الشروط. تُفصَّل كلها في عقد الاعتماد الذي نرسله بعد الموافقة على الطلب.</p>
+  <h3 class="part">أولاً: شروط التقديم</h3>
+  <ol class="terms">
+    <li>أن يكون المتقدّم شخصاً أو جهة لها سجل تجاري أو ترخيص رياضي، أو تستطيع استخراجه وفق أنظمة بلدها.</li>
+    <li>توفّر ملعب مناسب وآمن لتدريب الأطفال، ملكاً أو بعقد استخدام لا تقل مدته عن مدة الاعتماد.</li>
+    <li>وجود مدير فني ومدربين مؤهلين، أو التزام بتوفيرهم قبل الافتتاح.</li>
+    <li>القدرة المالية على تشغيل الأكاديمية سنة كاملة على الأقل.</li>
+    <li>ألّا يكون للمتقدّم سجل يسيء إلى سلامة الأطفال أو إلى سمعة الرياضة.</li>
+  </ol>
+  <h3 class="part">ثانياً: الالتزامات أثناء الاعتماد</h3>
+  <ol class="terms" start="6">
+    <li>استخدام اسم SIOSS International Football Academy وشعارها وفق دليل الهوية، وأخذ موافقة SIOSS على المطبوعات والإعلانات قبل نشرها.</li>
+    <li>تطبيق المنهج التدريبي لـ SIOSS حسب الفئات العمرية.</li>
+    <li>إكمال المدربين برنامج التأهيل الذي تحدده SIOSS خلال الأشهر الثلاثة الأولى.</li>
+    <li>سلامة الأطفال وحمايتهم: إشراف دائم، وحقيبة إسعافات أولية، ومدرب واحد على الأقل حاصل على دورة الإسعافات الأولية في كل تدريب، وسياسة واضحة لحماية الطفل.</li>
+    <li>الالتزام بأنظمة البلد والجهات الرياضية المختصة، وتحمّل المسؤولية القانونية والمالية الكاملة عن تشغيل الأكاديمية.</li>
+    <li>تقرير كل ثلاثة أشهر عن عدد اللاعبين والأنشطة والبطولات، والسماح لـ SIOSS بزيارة الأكاديمية أو تقييمها أونلاين.</li>
+    <li>عدم إنشاء حسابات أو مواقع أو تسجيل علامات باسم SIOSS إلا بإذن كتابي، على أن تعود ملكيتها إلى SIOSS عند انتهاء الاعتماد.</li>
+  </ol>
+  <h3 class="part">ثالثاً: الرسوم والتجديد</h3>
+  <ol class="terms" start="13">
+    <li>رسوم الاعتماد <b>2000 دولار سنوياً لكل فرع</b>. من يريد فرعين يدفع 4000 دولار، وهكذا.</li>
+    <li>الاعتماد لفرع واحد في موقع محدد، ومنطقة جغرافية يحددها العقد، ولا تمنح SIOSS اعتماداً آخر داخلها ما دامت الأكاديمية ملتزمة بالمعايير.</li>
+    <li>تُدفع الرسوم كاملة خلال سبعة أيام من توقيع العقد، وقبل استخدام اسم SIOSS.</li>
+    <li>مدة العقد سنة واحدة، ويُجدَّد سنوياً بعد التقييم السنوي ودفع رسوم السنة الجديدة، وللأكاديمية الملتزمة أولوية التجديد في منطقتها.</li>
+  </ol>
+  <h3 class="part">رابعاً: انتهاء الاعتماد</h3>
+  <ol class="terms" start="17">
+    <li>يحق لـ SIOSS سحب الاعتماد عند الإخلال الجسيم بالعقد، خاصة ما يمسّ سلامة الأطفال أو سمعة SIOSS، بعد إنذار مكتوب ومهلة للإصلاح.</li>
+    <li>عند انتهاء الاعتماد أو سحبه تتوقف الأكاديمية عن استخدام اسم SIOSS وشعارها خلال 30 يوماً، وتسلّم الحسابات التي تحمل الاسم.</li>
+  </ol>
 </div></section>
 
 <section><div class="wrap">
   <h2>رسوم الاعتماد</h2>
   <div class="fees">
-    <div class="fact"><b>2000$</b><small>رسوم الاعتماد السنوية للأكاديمية</small></div>
-    <div class="fact"><b>500$</b><small>تُدفع عند تقديم الطلب، وتُخصم من الرسوم السنوية</small></div>
-    <div class="fact"><b>1500$</b><small>باقي الرسوم، تُدفع بعد توقيع العقد</small></div>
+    <div class="fact"><b>مجاناً</b><small>تقديم الطلب ودراسته والمقابلة</small></div>
+    <div class="fact"><b>2000$</b><small>لكل فرع سنوياً، تُدفع بعد توقيع العقد</small></div>
+    <div class="fact"><b>سنة</b><small>مدة العقد، يتجدد سنوياً بعد التقييم</small></div>
   </div>
 </div></section>
 
 <section><div class="wrap">
   <h2>خطوات الحصول على الاعتماد</h2>
   <ol class="steps">
-    <li><b>تقديم الطلب</b>تدفع 500$ وتملأ نموذج الطلب ببيانات الأكاديمية والملعب والطاقم.</li>
-    <li><b>دراسة الطلب</b>مقابلة أونلاين مع إدارة SIOSS، ومراجعة الملعب والطاقم وخطة العمل.</li>
-    <li><b>العقد</b>توقيع عقد الاعتماد السنوي ودفع باقي الرسوم 1500$.</li>
+    <li><b>تقديم الطلب</b>تملأ نموذج الطلب في أسفل الصفحة مجاناً.</li>
+    <li><b>دراسة الطلب</b>نراجع طلبك ونتواصل معك خلال سبعة أيام، ثم مقابلة أونلاين وجولة مصوّرة في الملعب.</li>
+    <li><b>العقد والرسوم</b>عند الموافقة نرسل العقد، وبعد توقيعه تدفع رسوم السنة الأولى (2000$ لكل فرع).</li>
     <li><b>التأسيس والانطلاق</b>تسليم الهوية والمنهج، وتأهيل المدربين، ثم إعلان الافتتاح على منصات SIOSS.</li>
   </ol>
 </div></section>
 
 <section id="apply"><div class="wrap">
-  <h2>قدّم طلب الاعتماد</h2>
+  <h2>نموذج طلب الاعتماد</h2>
   <div class="buy">
-    <div class="price">
-      <div class="amt">500$</div>
-      <div style="color:var(--text-muted)">رسوم تقديم الطلب، تُخصم من رسوم الاعتماد السنوية (2000$)</div>
-      <ul>
-        <li>دراسة الطلب ومقابلة أونلاين مع إدارة SIOSS</li>
-        <li>عرض العقد وشروط المنطقة الجغرافية</li>
-        <li>خطة تأسيس الأكاديمية وتأهيل المدربين</li>
-      </ul>
-      <a class="btn" id="payBtn" href="#">ادفع رسوم الطلب وقدّم بياناتك</a>
-      <small>دفع آمن بالبطاقة عبر Stripe. بعد الدفع تظهر لك صفحة فيها رقم طلبك ونموذج بيانات الأكاديمية.</small>
-      <a class="btn ghost" id="waBtn" style="margin-top:12px" target="_blank" rel="noopener">عندي سؤال قبل التقديم: واتساب</a>
-    </div>
+    <form class="price lform" id="lf" action="https://formspree.io/f/xyeklrky" method="POST">
+      <input type="hidden" name="_subject" value="طلب اعتماد أكاديمية SIOSS جديد">
+      <label>الاسم الكامل لمقدّم الطلب<input name="الاسم" autocomplete="name" required></label>
+      <label>البريد الإلكتروني<input name="email" type="email" dir="ltr" autocomplete="email" required placeholder="name@example.com"></label>
+      <label>رقم واتساب مع رمز الدولة<input name="واتساب" type="tel" dir="ltr" autocomplete="tel" required placeholder="+966 5x xxx xxxx"></label>
+      <label>الدولة والمدينة والحي المقترح<input name="الموقع" required></label>
+      <label>عدد الفروع المطلوبة<input name="عدد الفروع" type="number" min="1" value="1" inputmode="numeric" required></label>
+      <label>الجهة المتقدّمة <small>(شخص، أكاديمية قائمة، نادٍ، مدرسة، شركة…)</small><input name="الجهة" required></label>
+      <label>الملعب <small>(نوعه ومقاسه، ملك أم إيجار)</small><input name="الملعب" required></label>
+      <label>الطاقم التدريبي وخبرته<input name="الطاقم" required></label>
+      <label>عدد اللاعبين المتوقع في السنة الأولى<input name="عدد اللاعبين" inputmode="numeric"></label>
+      <label>لماذا تريد اعتماد SIOSS؟ <small>(اختياري)</small><textarea name="ملاحظات" rows="3"></textarea></label>
+      <label class="chk"><input type="checkbox" name="الموافقة على الشروط" value="نعم" required> اطّلعت على الشروط والضوابط في هذه الصفحة.</label>
+      <button class="btn" type="submit" id="lsend">أرسل طلب الاعتماد</button>
+      <div class="lmsg" id="lmsg" role="status"></div>
+    </form>
     <div>
-      <details open><summary>من يستطيع التقديم؟</summary><p>المدربون وأصحاب الأكاديميات الحالية، والأندية والمدارس الخاصة، والمستثمرون في المجال الرياضي، ممن يملكون ملعباً مناسباً وطاقماً تدريبياً أو يستطيعون توفيره.</p></details>
-      <details><summary>هل أستطيع تحويل أكاديميتي الحالية إلى أكاديمية SIOSS؟</summary><p>نعم. كثير من الأكاديميات القائمة تنضم إلى البرنامج لتحصل على الاسم والمنهج والتأهيل والدعم الإعلامي، مع الحفاظ على لاعبيها وطاقمها.</p></details>
-      <details><summary>كم مدة الاعتماد؟</summary><p>سنة واحدة تتجدد بعد التقييم السنوي ودفع رسوم السنة التالية.</p></details>
-      <details><summary>هل الاعتماد حصري لمدينتي؟</summary><p>يحدد العقد المنطقة الجغرافية لكل أكاديمية، حتى لا تتزاحم فروع SIOSS في المكان نفسه.</p></details>
+      <details open><summary>هل تقديم الطلب مجاني؟</summary><p>نعم. تقديم الطلب ودراسته والمقابلة مجانية. تدفع رسوم الاعتماد (2000$ لكل فرع سنوياً) بعد الموافقة وتوقيع العقد فقط.</p></details>
+      <details><summary>من يستطيع التقديم؟</summary><p>المدربون وأصحاب الأكاديميات الحالية، والأندية والمدارس الخاصة، والمستثمرون في المجال الرياضي، ممن يملكون ملعباً مناسباً وطاقماً تدريبياً أو يستطيعون توفيره.</p></details>
+      <details><summary>هل أستطيع تحويل أكاديميتي الحالية إلى أكاديمية SIOSS؟</summary><p>نعم. تنضم الأكاديمية القائمة إلى البرنامج فتحصل على الاسم والمنهج والتأهيل والدعم الإعلامي، مع الحفاظ على لاعبيها وطاقمها.</p></details>
+      <details><summary>أريد أكثر من فرع في مدينتي. كيف؟</summary><p>الاعتماد لكل فرع على حدة: كل فرع برسوم 2000$ سنوياً وبموقع محدد في العقد. اكتب عدد الفروع في النموذج.</p></details>
       <details><summary>في أي دول يمكن التقديم؟</summary><p>نستقبل الطلبات من السعودية ودول الخليج والعراق وبقية الدول العربية وغيرها، على أن تلتزم الأكاديمية بأنظمة بلدها.</p></details>
+      <p style="margin-top:14px"><a class="btn ghost" id="waBtn" target="_blank" rel="noopener">عندي سؤال: واتساب</a></p>
     </div>
   </div>
 </div></section>
@@ -223,12 +262,22 @@
 </div></footer>
 
 <script>
-  /* رابط دفع رسوم الطلب من Stripe (500$). فارغاً يتحول زر الدفع إلى واتساب */
-  const LIC_PAY = "";
-  const wa = "https://wa.me/46707181137?text=" + encodeURIComponent("أرغب بالحصول على اعتماد لافتتاح أكاديمية SIOSS لكرة القدم");
-  document.getElementById("waBtn").href = wa;
-  const pb = document.getElementById("payBtn");
-  if (LIC_PAY) pb.href = LIC_PAY; else { pb.href = wa; pb.target = "_blank"; pb.rel = "noopener"; pb.textContent = "قدّم طلبك عبر واتساب"; }
+  document.getElementById("waBtn").href = "https://wa.me/46707181137?text=" + encodeURIComponent("لدي سؤال عن اعتماد أكاديميات SIOSS لكرة القدم");
+  const lf = document.getElementById("lf"), lmsg = document.getElementById("lmsg"), lsend = document.getElementById("lsend");
+  lf.addEventListener("submit", async e => {
+    e.preventDefault();
+    if (!lf.reportValidity()) return;
+    lsend.disabled = true; lsend.textContent = "جارٍ الإرسال…";
+    try {
+      const r = await fetch(lf.action, { method: "POST", body: new FormData(lf), headers: { Accept: "application/json" } });
+      if (!r.ok) throw 0;
+      lmsg.className = "lmsg show good"; lmsg.textContent = "وصلنا طلبك، شكراً لك. سندرسه ونتواصل معك خلال سبعة أيام.";
+      lf.querySelectorAll("input,textarea,button").forEach(x => x.disabled = true);
+    } catch {
+      lmsg.className = "lmsg show bad"; lmsg.textContent = "لم يصل الطلب. حاول مرة أخرى أو راسلنا على واتساب.";
+      lsend.disabled = false; lsend.textContent = "أرسل طلب الاعتماد";
+    }
+  });
 </script>
 </body>
 </html>
