@@ -1,2 +1,7 @@
 .vercel
 .claude/course-demo/
+
+# Internal material (contracts, licensed-course notes, curriculum drafts) — never publish
+marketing/academy-licence/
+marketing/curriculum/
+marketing/svff-course/
