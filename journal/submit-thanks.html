@@ -15,6 +15,18 @@
   .code b { font-size:1.7rem; color:var(--note); letter-spacing:2px; direction:ltr; display:block; }
   .code button { background:transparent; color:var(--white); border:1px solid rgba(232,237,244,.35); padding:8px 16px; font:600 .9rem 'Cairo',sans-serif; cursor:pointer; }
   .wa { background:#1f9d55; color:#fff; }
+  form.up { display:grid; gap:14px; max-width:640px; margin-top:8px; }
+  form.up label { font-weight:600; color:var(--white); font-family:'Cairo',sans-serif; }
+  form.up label small { color:var(--muted); font-weight:400; }
+  form.up input { width:100%; margin-top:5px; background:var(--dark-2); color:var(--text); border:1px solid var(--border); padding:11px 14px; font:1rem 'Cairo','IBM Plex Sans',sans-serif; }
+  form.up input[dir=ltr] { text-align:left; }
+  form.up input[type=file] { padding:10px; cursor:pointer; }
+  form.up button { justify-self:start; border:0; cursor:pointer; font-family:'Cairo',sans-serif; }
+  form.up button[disabled] { opacity:.6; cursor:wait; }
+  .chk { display:flex; gap:10px; align-items:flex-start; font-weight:400 !important; color:var(--text) !important; }
+  .chk input { width:auto !important; margin-top:6px !important; }
+  .msg { display:none; padding:14px 18px; border:1px solid; max-width:640px; }
+  .msg.show { display:block; } .msg.good { border-color:#1f9d55; background:#12351f; } .msg.bad { border-color:#c0392b; background:#3a1717; }
 </style>
 </head>
 <body>
@@ -32,32 +44,40 @@
 <main>
 <div class="hero"><div class="container">
   <p class="eyebrow">تمّ الدفع بنجاح</p>
-  <h1>شكراً لك، أرسل الآن ملف بحثك</h1>
-  <p class="lead">استلمنا رسوم النشر. بقيت خطوة واحدة: أرسل ملف البحث PDF مع رقم طلبك، لتبدأ هيئة التحرير بالتحكيم.</p>
+  <h1>شكراً لك، ارفع الآن ملف بحثك</h1>
+  <p class="lead">استلمنا رسوم النشر. بقيت خطوة واحدة: املأ البيانات وارفع ملف البحث PDF من هنا، لتبدأ هيئة التحرير بالتحكيم.</p>
   <div class="code">
-    <div><small>رقم طلبك (اكتبه في رسالتك، فهو إثبات الدفع)</small><b id="code">—</b></div>
+    <div><small>رقم طلبك (احتفظ به، فهو إثبات الدفع)</small><b id="code">—</b></div>
     <button type="button" id="copy">نسخ الرقم</button>
-  </div>
-  <div class="actions">
-    <a class="btn btn-primary" id="mail">افتح رسالة الإرسال إلى hello@sioss.se</a>
-    <a class="btn wa" id="wa" target="_blank" rel="noopener">أو أرسل البحث على واتساب</a>
   </div>
 </div></div>
 
+<section id="upload"><div class="container">
+  <h2>ارفع بحثك</h2>
+  <form class="up" id="f" novalidate>
+    <label>عنوان البحث <small>(بالإنجليزية)</small><input name="title" dir="ltr" required></label>
+    <label>أسماء الباحثين بالترتيب <small>(بالإنجليزية، مع جهة العمل والبلد لكل باحث)</small><input name="authors" dir="ltr" required placeholder="Ahmed Ali (University of Baghdad, Iraq), …"></label>
+    <label>بريد الباحث المسؤول عن المراسلة<input name="email" type="email" dir="ltr" autocomplete="email" required></label>
+    <label>رقم واتساب <small>(اختياري)</small><input name="whatsapp" type="tel" dir="ltr" autocomplete="tel" placeholder="+964 7xx xxx xxxx"></label>
+    <label>ملف البحث <small>(PDF فقط، حتى 25 ميغابايت، معدّ وفق <a href="files/SJSS-paper-template.docx">قالب المجلة</a>)</small><input name="file" type="file" accept="application/pdf,.pdf" required></label>
+    <label class="chk"><input type="checkbox" name="declaration" required> أقرّ بأن البحث أصيل، ولم يُنشر ولم يُقدَّم للنشر في جهة أخرى.</label>
+    <button class="btn btn-primary" type="submit" id="send">ارفع البحث وأرسله</button>
+    <div class="msg" id="msg" role="status"></div>
+  </form>
+  <p style="color:var(--muted);margin-top:22px">إن واجهتك مشكلة في الرفع، أرسل البحث بإحدى الطريقتين:</p>
+  <div class="actions" style="margin-top:10px">
+    <a class="btn btn-outline" id="mail">أرسله بالبريد إلى hello@sioss.se</a>
+    <a class="btn wa" id="wa" target="_blank" rel="noopener">أرسله على واتساب</a>
+  </div>
+</div></section>
+
 <section><div class="container">
-  <h2>أرفق في رسالتك</h2>
+  <h2>ماذا يحدث بعد ذلك؟</h2>
   <ol>
-    <li><strong>ملف البحث كاملاً بصيغة PDF</strong>، معدّاً وفق <a href="files/SJSS-paper-template.docx">قالب المجلة</a>.</li>
-    <li><strong>الملخص (Abstract)</strong> باللغة الإنجليزية، و<strong>الكلمات المفتاحية</strong>.</li>
-    <li><strong>بيانات الباحثين:</strong> عنوان البحث، والأسماء الكاملة بالترتيب، وجهة العمل والبلد لكل باحث، وبريد الباحث المسؤول عن المراسلة.</li>
-    <li><strong>إقرار</strong> بأن البحث لم يُنشر ولم يُقدَّم للنشر في جهة أخرى.</li>
-  </ol>
-  <h3>ماذا يحدث بعد ذلك؟</h3>
-  <ol>
-    <li>نؤكد لك استلام البحث برسالة.</li>
-    <li>يصلك قرار التحكيم خلال أسبوع تقريباً: قبول، أو تعديلات مطلوبة، أو رفض.</li>
+    <li>نؤكد لك استلام البحث على بريدك.</li>
+    <li>يصلك قرار التحكيم خلال أسبوع تقريباً: قبول، أو توصيات تعديل من المحكّمين.</li>
+    <li>إذا احتاج البحث إلى تحسين تعدّله وفق التوصيات وتعيد إرساله دون رسوم إضافية، حتى يُقبل.</li>
     <li>عند القبول يُنشر بحثك على موقع المجلة خلال أسبوع، بوصول مفتوح.</li>
-    <li>إذا احتاج البحث إلى تحسين نرسل إليك توصيات التعديل من المحكّمين، فتعدّله وتعيد إرساله دون رسوم إضافية حتى يُقبل.</li>
   </ol>
   <p>للاستفسار: <a href="mailto:hello@sioss.se" dir="ltr">hello@sioss.se</a> · <span dir="ltr">+46 70 718 11 37</span></p>
 </div></section>
@@ -68,16 +88,53 @@
     <p><a href="mailto:hello@sioss.se">hello@sioss.se</a> &middot; Link&ouml;ping, Sweden</p>
   </div>
 </footer>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
+<script src="../course/supabase.js"></script>
 <script>
+  const $ = id => document.getElementById(id);
   const sid = new URLSearchParams(location.search).get("session_id") || "";
   const code = sid ? "SJSS-" + sid.replace(/[^A-Za-z0-9]/g, "").slice(-8).toUpperCase() : "";
-  document.getElementById("code").textContent = code || "يصلك في إيصال الدفع";
-  const copy = document.getElementById("copy");
-  if (code) copy.onclick = () => navigator.clipboard && navigator.clipboard.writeText(code); else copy.hidden = true;
+  $("code").textContent = code || "يصلك في إيصال الدفع";
+  if (code) $("copy").onclick = () => navigator.clipboard && navigator.clipboard.writeText(code); else $("copy").hidden = true;
   const subject = "SJSS manuscript submission" + (code ? " – " + code : "");
-  const body = "رقم الطلب: " + (code || "—") + "\n\nعنوان البحث:\nأسماء الباحثين بالترتيب:\nجهة العمل والبلد لكل باحث:\nبريد الباحث المسؤول عن المراسلة:\n\nأقر بأن البحث لم يُنشر ولم يُقدَّم للنشر في جهة أخرى.\n\n(أرفق ملف البحث PDF مع هذه الرسالة)";
-  document.getElementById("mail").href = "mailto:hello@sioss.se?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
-  document.getElementById("wa").href = "https://wa.me/46707181137?text=" + encodeURIComponent("دفعت رسوم النشر في مجلة SJSS.\nرقم الطلب: " + (code || "—") + "\nسأرسل ملف البحث PDF هنا.");
+  const mailBody = ["رقم الطلب: " + (code || "—"), "", "عنوان البحث:", "أسماء الباحثين بالترتيب:", "جهة العمل والبلد لكل باحث:",
+    "بريد الباحث المسؤول عن المراسلة:", "", "أقر بأن البحث لم يُنشر ولم يُقدَّم للنشر في جهة أخرى.", "", "(أرفق ملف البحث PDF مع هذه الرسالة)"].join("\n");
+  $("mail").href = "mailto:hello@sioss.se?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(mailBody);
+  $("wa").href = "https://wa.me/46707181137?text=" + encodeURIComponent(["دفعت رسوم النشر في مجلة SJSS.", "رقم الطلب: " + (code || "—"), "سأرسل ملف البحث PDF هنا."].join("\n"));
+
+  const f = $("f"), msg = $("msg"), send = $("send");
+  const say = (ok, text) => { msg.className = "msg show " + (ok ? "good" : "bad"); msg.textContent = text; };
+  if (!code) { f.querySelectorAll("input,button").forEach(x => x.disabled = true); say(false, "لم نجد رقم الطلب في الرابط. أرسل بحثك بالبريد أو على واتساب مع إيصال الدفع."); }
+  f.addEventListener("submit", async e => {
+    e.preventDefault();
+    if (!f.reportValidity()) return;
+    const file = f.file.files[0];
+    if (!/\.pdf$/i.test(file.name) && file.type !== "application/pdf") return say(false, "الملف يجب أن يكون بصيغة PDF.");
+    if (file.size > 25 * 1024 * 1024) return say(false, "حجم الملف أكبر من 25 ميغابايت. صغّره أو أرسله بالبريد.");
+    send.disabled = true; send.textContent = "جارٍ الرفع…";
+    const stamp = new Date().toISOString().replace(/[:.]/g, "-");
+    const path = code + "/" + stamp + "_" + file.name.replace(/[^A-Za-z0-9._-]+/g, "_").slice(-80);
+    try {
+      const { error } = await sb.storage.from("sjss-submissions").upload(path, file, { contentType: "application/pdf", upsert: false });
+      if (error) throw error;
+      const data = new FormData();
+      data.append("_subject", "SJSS: بحث جديد " + code);
+      data.append("رقم الطلب", code);
+      data.append("Stripe session", sid);
+      data.append("عنوان البحث", f.title.value);
+      data.append("الباحثون", f.authors.value);
+      data.append("email", f.email.value);
+      data.append("واتساب", f.whatsapp.value);
+      data.append("الملف في Supabase Storage", "sjss-submissions/" + path);
+      await fetch("https://formspree.io/f/xyeklrky", { method: "POST", body: data, headers: { Accept: "application/json" } }).catch(() => {});
+      f.querySelectorAll("input,button").forEach(x => x.disabled = true);
+      send.textContent = "تم الإرسال";
+      say(true, "وصلنا بحثك بنجاح. سنؤكد لك الاستلام على بريدك، ويصلك قرار التحكيم خلال أسبوع تقريباً.");
+    } catch (err) {
+      send.disabled = false; send.textContent = "ارفع البحث وأرسله";
+      say(false, "تعذّر رفع الملف. حاول مرة أخرى، أو أرسل البحث بالبريد أو على واتساب من الأزرار في الأسفل.");
+    }
+  });
 </script>
 </body>
 </html>
