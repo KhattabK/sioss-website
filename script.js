@@ -202,12 +202,13 @@ lightbox.addEventListener('click', e => { if (e.target === lightbox) closeLightb
 document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
 
 // ── Testimonial videos ──
-document.querySelectorAll('.tv-wrap').forEach(wrap => {
+const tvWraps = [...document.querySelectorAll('.tv-wrap')].filter(w => w.querySelector('video'));
+tvWraps.forEach(wrap => {
   const video = wrap.querySelector('video');
   const btn   = wrap.querySelector('.tv-play');
   video.addEventListener('loadedmetadata', () => { video.currentTime = 0.5; });
   btn.addEventListener('click', () => {
-    document.querySelectorAll('.tv-wrap').forEach(w => {
+    tvWraps.forEach(w => {
       if (w !== wrap) { w.querySelector('video').pause(); w.classList.remove('playing'); w.querySelector('.tv-play').style.display = ''; }
     });
     ensureVideoSrc(video);
@@ -216,6 +217,21 @@ document.querySelectorAll('.tv-wrap').forEach(wrap => {
   });
   video.addEventListener('click', () => { video.pause(); wrap.classList.remove('playing'); });
   video.addEventListener('ended', () => { wrap.classList.remove('playing'); });
+});
+
+// ── YouTube testimonials: swap the thumbnail for the player on click ──
+document.querySelectorAll('.yt-play').forEach(btn => {
+  const id = btn.dataset.yt;
+  btn.parentElement.style.backgroundImage = `url(https://i.ytimg.com/vi/${id}/hqdefault.jpg)`;
+  btn.addEventListener('click', () => {
+    tvWraps.forEach(w => { w.querySelector('video').pause(); w.classList.remove('playing'); });
+    const f = document.createElement('iframe');
+    f.src = `https://www.youtube-nocookie.com/embed/${id}?autoplay=1&rel=0`;
+    f.title = btn.closest('.yt-card').querySelector('b').textContent;
+    f.allow = 'autoplay; encrypted-media; picture-in-picture; fullscreen';
+    f.allowFullscreen = true;
+    btn.replaceWith(f);
+  });
 });
 
 // ── Photo scroll galleries ──
