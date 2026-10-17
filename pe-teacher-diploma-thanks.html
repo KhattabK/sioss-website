@@ -44,14 +44,14 @@
   <div class="nav"><a href="/"><img src="images/logo-white-tight.png" width="108" height="40" alt="SIOSS"></a></div>
   <div class="ok" aria-hidden="true">✓</div>
   <h1>شكراً لك، تمّ الدفع بنجاح</h1>
-  <p class="lead">مرحباً بك في دبلوم إعداد معلمي ومعلمات التربية البدنية. بقيت خطوة واحدة لنضيفك إلى صف الدبلوم في Google Classroom.</p>
+  <p class="lead">مرحباً بك في دبلوم إعداد معلمي ومعلمات التربية البدنية. بقيت خطوة واحدة: أرسل لنا بياناتك، وتنشئ لك الأكاديمية بريداً خاصاً تدخل به إلى صف الدبلوم في Google Classroom.</p>
 
   <div class="code">
     <div><small>رقم طلبك (احتفظ به، فهو إثبات الدفع)</small><b id="code">—</b></div>
     <button class="btn ghost" type="button" id="copy">نسخ الرقم</button>
   </div>
 
-  <h2>أرسل بياناتك لنضيفك إلى الصف</h2>
+  <h2>أرسل بياناتك</h2>
   <form id="f" action="https://formspree.io/f/xyeklrky" method="POST">
     <input type="hidden" name="_subject" value="تسجيل جديد: دبلوم معلمي التربية البدنية">
     <input type="hidden" name="الدورة" value="دبلوم إعداد معلمي ومعلمات التربية البدنية (499$)">
@@ -59,10 +59,8 @@
     <input type="hidden" name="Stripe session" id="fSession">
     <label>الاسم الكامل بالإنجليزية <small>(كما سيُكتب في الدبلوم)</small>
       <input name="الاسم بالإنجليزية" dir="ltr" autocomplete="name" required placeholder="Ahmed Ali Hassan"></label>
-    <label>بريدك على Gmail <small>(نضيف هذا البريد إلى Google Classroom)</small>
-      <input name="بريد Gmail" type="email" dir="ltr" autocomplete="email" required placeholder="name@gmail.com"></label>
-    <label>البريد الذي دفعت به <small>(إن كان غير بريد Gmail)</small>
-      <input name="بريد الدفع" type="email" dir="ltr"></label>
+    <label>بريدك الإلكتروني <small>(البريد الذي دفعت به، ونرسل عليه بيانات الدخول)</small>
+      <input name="البريد" type="email" dir="ltr" autocomplete="email" required placeholder="name@example.com"></label>
     <label>رقم واتساب مع رمز الدولة
       <input name="واتساب" type="tel" dir="ltr" autocomplete="tel" required placeholder="+964 7xx xxx xxxx"></label>
     <label>البلد ومكان العمل <small>(اختياري: مدرسة، كلية…)</small>
@@ -71,13 +69,14 @@
     <div class="msg" id="msg" role="status"></div>
   </form>
 
-  <p class="or">أو أرسل رقم الطلب وبريدك على Gmail مباشرة على واتساب:</p>
+  <p class="or">أو أرسل رقم الطلب واسمك مباشرة على واتساب:</p>
   <a class="btn wa" id="wa" target="_blank" rel="noopener">أرسل عبر واتساب</a>
 
   <h2>ماذا يحدث بعد ذلك؟</h2>
   <ol>
     <li>نتحقق من الدفع برقم طلبك.</li>
-    <li>نضيف بريدك على Gmail إلى صف الدبلوم خلال يوم عمل واحد، ويصلك إشعار من Google Classroom.</li>
+    <li>تنشئ لك الأكاديمية بريداً خاصاً، ونضيفه إلى صف الدبلوم في Google Classroom.</li>
+    <li>نرسل لك اسم الدخول وكلمة المرور على واتساب وبريدك خلال يوم عمل واحد.</li>
     <li>تبدأ بقسم «ابدأ هنا» ثم المحاور بالترتيب.</li>
   </ol>
   <p class="lead">لأي سؤال: <a href="mailto:hello@sioss.se">hello@sioss.se</a> · <span dir="ltr">+46 70 718 11 37</span></p>
@@ -91,14 +90,14 @@
   document.getElementById("copy").onclick = () => navigator.clipboard && navigator.clipboard.writeText(code);
   if (!code) document.getElementById("copy").hidden = true;
   document.getElementById("wa").href = "https://wa.me/46707181137?text=" + encodeURIComponent(
-    "دفعت رسوم دبلوم معلمي التربية البدنية.\nرقم الطلب: " + (code || "—") + "\nبريدي على Gmail: \nاسمي بالإنجليزية: ");
+    "دفعت رسوم دبلوم معلمي التربية البدنية.\nرقم الطلب: " + (code || "—") + "\nاسمي بالإنجليزية: \nبريدي: ");
   const f = document.getElementById("f"), msg = document.getElementById("msg"), send = document.getElementById("send");
   f.addEventListener("submit", async e => {
     e.preventDefault(); send.disabled = true; send.textContent = "جارٍ الإرسال…";
     try {
       const r = await fetch(f.action, { method: "POST", body: new FormData(f), headers: { Accept: "application/json" } });
       if (!r.ok) throw 0;
-      msg.className = "msg show good"; msg.textContent = "وصلتنا بياناتك. سنضيفك إلى الصف خلال يوم عمل واحد، ويصلك إشعار على بريدك.";
+      msg.className = "msg show good"; msg.textContent = "وصلتنا بياناتك. سنرسل لك بيانات الدخول إلى الصف خلال يوم عمل واحد.";
       f.querySelectorAll("input,button").forEach(x => x.disabled = true);
     } catch {
       msg.className = "msg show bad"; msg.textContent = "لم يصل الإرسال. أرسل لنا رقم الطلب عبر زر واتساب بالأسفل.";
