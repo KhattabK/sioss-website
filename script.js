@@ -1,5 +1,5 @@
 // ── Shop: paste the Shopify address here to show the shop section and menu link ──
-const SIOSS_SHOP_URL = '';   // e.g. 'https://shop.sioss.se'
+const SIOSS_SHOP_URL = 'https://yj0gp1-a1.myshopify.com';
 if (SIOSS_SHOP_URL) {
   document.querySelectorAll('.shop-only').forEach(el => { el.hidden = false; });
   document.querySelectorAll('.shop-link').forEach(a => { a.href = SIOSS_SHOP_URL; });
