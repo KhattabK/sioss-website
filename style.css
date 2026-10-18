@@ -529,6 +529,7 @@ p:last-child { margin-bottom: 0; }
 .shop-body h3 { margin: 0 0 4px; }
 .shop-body p { margin: 0 0 8px; color: var(--text-muted); font-size: .92rem; }
 .shop-cta { margin-top: 28px; }
+.shop-sub { margin: 56px 0 8px; font-size: 1.6rem; }
 @media (max-width: 1240px) {
   .nav-links {
     display: none; flex-direction: column; align-items: stretch; gap: 0;
