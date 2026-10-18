@@ -80,6 +80,7 @@
         <a href="students.html" data-i18n="nav_students">Our Students</a>
         <a href="#gallery" data-i18n="nav_gallery">Gallery</a>
         <a href="journal/" data-i18n="nav_journal">Journal</a>
+        <a href="#shop" class="shop-only" data-i18n="nav_shop" hidden>Shop</a>
         <a href="index.html#online-course" data-i18n="nav_ffc_course">Online Courses</a>
         <a href="#contact" data-i18n="nav_contact">Contact</a>
       </nav>
@@ -619,6 +620,25 @@
     </div>
   </section>
 
+  <!-- ===== SHOP (hidden until SIOSS_SHOP_URL is set in script.js) ===== -->
+  <section class="shop section shop-only" id="shop" hidden>
+    <div class="container">
+      <h2 data-i18n="shop_h2">The SIOSS Shop</h2>
+      <p class="shop-lead" data-i18n="shop_lead">Official SIOSS sportswear, printed to order and delivered to your door across Saudi Arabia and the Gulf.</p>
+      <div class="shop-grid">
+        <a class="shop-card shop-link" target="_blank" rel="noopener">
+          <div class="shop-img dark"><img src="images/shop-logo-dark.png" alt="SIOSS T-shirt" width="720" height="276" loading="lazy"></div>
+          <div class="shop-body"><h3 data-i18n="shop_tee">SIOSS T-shirt</h3><p data-i18n="shop_tee_p">Heavyweight cotton · black, navy, white</p><b data-i18n="shop_tee_price">SAR 129</b></div>
+        </a>
+        <a class="shop-card shop-link" target="_blank" rel="noopener">
+          <div class="shop-img light"><img src="images/shop-logo-cap.png" alt="SIOSS cap" width="720" height="209" loading="lazy"></div>
+          <div class="shop-body"><h3 data-i18n="shop_cap">SIOSS Cap</h3><p data-i18n="shop_cap_p">Adjustable · one size fits all</p><b data-i18n="shop_cap_price">SAR 99</b></div>
+        </a>
+      </div>
+      <p class="shop-cta"><a class="btn btn-primary shop-link" target="_blank" rel="noopener" data-i18n="shop_cta">Visit the shop</a></p>
+    </div>
+  </section>
+
   <!-- ===== GALLERY / VIDEOS ===== -->
   <section class="gallery section" id="gallery">
     <div class="container">
@@ -883,6 +903,7 @@
           <li><a href="students.html" data-i18n="nav_students">Our Students</a></li>
           <li><a href="#gallery" data-i18n="nav_gallery">Gallery</a></li>
           <li><a href="journal/" data-i18n="nav_journal">Journal</a></li>
+          <li class="shop-only" hidden><a href="#shop" data-i18n="nav_shop">Shop</a></li>
           <li><a href="index.html#online-course" data-i18n="nav_ffc_course">Online Courses</a></li>
           <li><a href="#contact" data-i18n="nav_contact">Contact</a></li>
         </ul>
