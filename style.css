@@ -518,7 +518,7 @@ p:last-child { margin-bottom: 0; }
 
 /* ── Shop ── */
 .shop-lead { color: var(--text-muted); max-width: 640px; margin: -8px 0 28px; }
-.shop-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+.shop-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
 .shop-card { display: block; text-decoration: none; color: inherit; background: var(--mid); border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; transition: transform var(--transition), border-color var(--transition); }
 .shop-card:hover { transform: translateY(-4px); border-color: var(--primary); }
 .shop-img { aspect-ratio: 1; background: #fff; }
