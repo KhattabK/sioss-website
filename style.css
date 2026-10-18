@@ -137,8 +137,8 @@ p:last-child { margin-bottom: 0; }
 }
 .nav-links { display: flex; gap: 28px; margin-left: auto; }
 .nav-links a {
-  color: var(--text-muted); text-decoration: none;
-  font-size: .9rem; font-weight: 500;
+  color: #facc15; text-decoration: none;
+  font-size: .95rem; font-weight: 600;
   transition: color var(--transition);
 }
 .nav-links a:hover,
