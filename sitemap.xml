@@ -2,45 +2,53 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://www.sioss.se/</loc>
-    <lastmod>2026-10-11</lastmod>
+    <lastmod>2026-10-18</lastmod>
+    <priority>1.0</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.sioss.se/" />
     <xhtml:link rel="alternate" hreflang="ar" href="https://www.sioss.se/?lang=ar" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sioss.se/" />
   </url>
   <url>
     <loc>https://www.sioss.se/?lang=ar</loc>
-    <lastmod>2026-10-11</lastmod>
+    <lastmod>2026-10-18</lastmod>
+    <priority>1.0</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.sioss.se/" />
     <xhtml:link rel="alternate" hreflang="ar" href="https://www.sioss.se/?lang=ar" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sioss.se/" />
   </url>
   <url>
     <loc>https://www.sioss.se/students.html</loc>
-    <lastmod>2026-10-11</lastmod>
+    <lastmod>2026-10-15</lastmod>
+    <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.sioss.se/students.html" />
     <xhtml:link rel="alternate" hreflang="ar" href="https://www.sioss.se/students.html?lang=ar" />
-  </url>
-  <url><loc>https://www.sioss.se/football-fitness-course.html</loc><lastmod>2026-10-15</lastmod></url>
-  <url><loc>https://www.sioss.se/football-tactics-course.html</loc><lastmod>2026-10-15</lastmod></url>
-  <url><loc>https://www.sioss.se/personal-trainer-diploma.html</loc><lastmod>2026-10-16</lastmod></url>
-  <url><loc>https://www.sioss.se/first-aid-cpr-course.html</loc><lastmod>2026-10-16</lastmod></url>
-  <url><loc>https://www.sioss.se/journal/</loc></url>
-  <url><loc>https://www.sioss.se/journal/about.html</loc></url>
-  <url><loc>https://www.sioss.se/journal/editorial-board.html</loc></url>
-  <url><loc>https://www.sioss.se/journal/authors.html</loc></url>
-  <url><loc>https://www.sioss.se/journal/peer-review.html</loc></url>
-  <url><loc>https://www.sioss.se/journal/instructions-ar.html</loc></url>
-  <url><loc>https://www.sioss.se/journal/archive.html</loc></url>
-  <url><loc>https://www.sioss.se/journal/articles/sjss-2017-1-1-01.html</loc></url>
-  <url><loc>https://www.sioss.se/journal/articles/sjss-2017-1-1-02.html</loc></url>
-  <url><loc>https://www.sioss.se/journal/articles/sjss-2017-1-1-03.html</loc></url>
-  <url><loc>https://www.sioss.se/journal/articles/sjss-2017-1-1-04.html</loc></url>
-  <url><loc>https://www.sioss.se/journal/articles/sjss-2017-1-1-05.html</loc></url>
-  <url>
-    <loc>https://www.sioss.se/hrv-coach-course.html</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sioss.se/students.html" />
   </url>
   <url>
-    <loc>https://www.sioss.se/pe-teacher-diploma.html</loc>
+    <loc>https://www.sioss.se/students.html?lang=ar</loc>
+    <lastmod>2026-10-15</lastmod>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sioss.se/students.html" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.sioss.se/students.html?lang=ar" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sioss.se/students.html" />
   </url>
-  <url>
-    <loc>https://www.sioss.se/academy-license.html</loc>
-  </url>
+  <url><loc>https://www.sioss.se/personal-trainer-diploma.html</loc><lastmod>2026-10-18</lastmod><priority>0.9</priority></url>
+  <url><loc>https://www.sioss.se/football-fitness-course.html</loc><lastmod>2026-10-18</lastmod><priority>0.9</priority></url>
+  <url><loc>https://www.sioss.se/football-tactics-course.html</loc><lastmod>2026-10-18</lastmod><priority>0.9</priority></url>
+  <url><loc>https://www.sioss.se/first-aid-cpr-course.html</loc><lastmod>2026-10-18</lastmod><priority>0.8</priority></url>
+  <url><loc>https://www.sioss.se/hrv-coach-course.html</loc><lastmod>2026-10-18</lastmod><priority>0.8</priority></url>
+  <url><loc>https://www.sioss.se/pe-teacher-diploma.html</loc><lastmod>2026-10-18</lastmod><priority>0.9</priority></url>
+  <url><loc>https://www.sioss.se/academy-license.html</loc><lastmod>2026-10-17</lastmod><priority>0.8</priority></url>
+  <url><loc>https://www.sioss.se/journal/</loc><lastmod>2026-10-17</lastmod><priority>0.6</priority></url>
+  <url><loc>https://www.sioss.se/journal/about.html</loc><lastmod>2026-10-17</lastmod><priority>0.6</priority></url>
+  <url><loc>https://www.sioss.se/journal/editorial-board.html</loc><lastmod>2026-10-17</lastmod><priority>0.6</priority></url>
+  <url><loc>https://www.sioss.se/journal/authors.html</loc><lastmod>2026-10-17</lastmod><priority>0.6</priority></url>
+  <url><loc>https://www.sioss.se/journal/peer-review.html</loc><lastmod>2026-10-17</lastmod><priority>0.6</priority></url>
+  <url><loc>https://www.sioss.se/journal/archive.html</loc><lastmod>2026-10-17</lastmod><priority>0.6</priority></url>
+  <url><loc>https://www.sioss.se/journal/instructions-ar.html</loc><lastmod>2026-10-17</lastmod><priority>0.7</priority></url>
+  <url><loc>https://www.sioss.se/journal/articles/sjss-2017-1-1-01.html</loc><lastmod>2026-10-17</lastmod><priority>0.5</priority></url>
+  <url><loc>https://www.sioss.se/journal/articles/sjss-2017-1-1-02.html</loc><lastmod>2026-10-17</lastmod><priority>0.5</priority></url>
+  <url><loc>https://www.sioss.se/journal/articles/sjss-2017-1-1-03.html</loc><lastmod>2026-10-17</lastmod><priority>0.5</priority></url>
+  <url><loc>https://www.sioss.se/journal/articles/sjss-2017-1-1-04.html</loc><lastmod>2026-10-17</lastmod><priority>0.5</priority></url>
+  <url><loc>https://www.sioss.se/journal/articles/sjss-2017-1-1-05.html</loc><lastmod>2026-10-17</lastmod><priority>0.5</priority></url>
 </urlset>
