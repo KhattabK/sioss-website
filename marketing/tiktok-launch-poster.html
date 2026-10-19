@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@600;700;800;900&family=Archivo:wght@800&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing:border-box; margin:0; }
+  html, body { width:1080px; height:1920px; overflow:hidden; background:#0a1426; }
+  body { font-family:'Cairo',sans-serif; color:#fff; position:relative; }
+  .bg { position:absolute; inset:0 0 auto 0; height:700px; background:url(../images/hero_poster.jpg) center/cover; }
+  .bg::after { content:""; position:absolute; inset:0; background:linear-gradient(180deg,rgba(10,20,38,.35) 0%,rgba(10,20,38,.55) 55%,#0a1426 100%); }
+  .rings { position:absolute; left:-330px; bottom:-240px; width:900px; height:900px; border-radius:50%;
+           box-shadow:0 0 0 2px #f4b942, 0 0 0 70px rgba(26,111,196,.0), 0 0 0 72px rgba(26,111,196,.35), 0 0 0 142px rgba(26,111,196,.0), 0 0 0 144px rgba(26,111,196,.22); opacity:.9; }
+  .wrap { position:absolute; inset:0; padding:120px 160px 0 60px; }
+  .logo { height:100px; display:block; margin-right:-6px; }
+  .pill { display:inline-block; margin-top:30px; background:#f4b942; color:#0a1426; font-weight:800; font-size:36px; padding:8px 30px; border-radius:999px; }
+  h1 { margin-top:24px; font-weight:900; font-size:84px; line-height:1.2; }
+  h1 .b { color:#4fc3f7; }
+  .sub { margin-top:14px; font-size:36px; font-weight:600; color:#cfe0f5; line-height:1.5; }
+  ul { list-style:none; margin-top:32px; display:grid; gap:12px; }
+  li { display:flex; align-items:center; justify-content:space-between; gap:24px; background:rgba(255,255,255,.07); border:2px solid rgba(255,255,255,.12); border-radius:20px; padding:10px 24px; font-size:34px; font-weight:700; }
+  li .p { font-family:'Archivo',sans-serif; color:#f4b942; font-size:32px; direction:ltr; white-space:nowrap; }
+  li .p s { color:#8ea3bf; font-size:28px; margin-right:12px; }
+  .offer { margin-top:28px; background:linear-gradient(90deg,#1a6fc4,#0b4f9c); border-radius:28px; padding:20px 30px; border:3px solid #f4b942; }
+  .offer b { display:block; font-size:46px; font-weight:900; }
+  .offer span { font-size:34px; font-weight:700; color:#e6eefa; }
+  .offer .code { font-family:'Archivo',sans-serif; color:#f4b942; letter-spacing:2px; }
+  .cta { margin-top:22px; font-size:40px; font-weight:800; }
+  .cta .u { font-family:'Archivo',sans-serif; color:#4fc3f7; direction:ltr; display:inline-block; }
+</style>
+</head>
+<body>
+  <div class="bg"></div>
+  <div class="rings"></div>
+  <div class="wrap">
+    <img class="logo" src="../images/logo-white-tight.png" alt="SIOSS">
+    <div class="pill">دورات أونلاين · شهادات من السويد</div>
+    <h1>ابدأ مسيرتك<br><span class="b">مدرّباً محترفاً</span></h1>
+    <p class="sub">بالعربي، وبالفيديو، وبالسرعة التي تناسبك</p>
+    <ul>
+      <li>❤️‍🩹 الإسعافات الأولية والإنعاش<span class="p"><s>99$</s>74$</span></li>
+      <li>⚽ مدرب اللياقة في كرة القدم<span class="p"><s>149$</s>112$</span></li>
+      <li>🧠 التكتيك في كرة القدم<span class="p"><s>149$</s>112$</span></li>
+      <li>📈 إعداد مدرب HRV<span class="p"><s>199$</s>149$</span></li>
+      <li>💪 دبلوم المدرب الشخصي<span class="p"><s>449$</s>337$</span></li>
+      <li>🏫 دبلوم معلمي التربية البدنية<span class="p"><s>499$</s>374$</span></li>
+    </ul>
+    <div class="offer">
+      <b>🎁 خصم 25% على كل الدورات</b>
+      <span>بكود <span class="code">SIOSS25</span> · حتى 2 نوفمبر</span>
+    </div>
+    <p class="cta">سجّل الآن: <span class="u">sioss.se</span></p>
+  </div>
+</body>
+</html>
