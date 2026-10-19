@@ -10,7 +10,7 @@
 <style>
   @page { size: A4 landscape; margin: 0; }
   :root { --navy:#0a2a5e; --blue:#1a6fc4; --gold:#c9a24a; --gold-lt:#e8cf8a; --ink:#16202b; --muted:#5b6876; --paper:#fdfbf5; }
-  * { box-sizing:border-box; }
+  * { box-sizing:border-box; -webkit-print-color-adjust:exact; print-color-adjust:exact; }
   html, body { margin:0; background:#d9dde3; }
   .sheet { width:297mm; height:210mm; margin:0 auto; position:relative; overflow:hidden; background:var(--paper); color:var(--ink); font-family:'IBM Plex Sans',sans-serif; }
   /* Frames */
