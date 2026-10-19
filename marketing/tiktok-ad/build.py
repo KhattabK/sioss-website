@@ -40,8 +40,8 @@ def still(path, xc=0.5, blur=0):
 # (icon, name, old price, new price, background, photo shown framed above the card)
 COURSES = [
     ("❤️‍🩹", "الإسعافات الأولية والإنعاش", "99$", "74$", still(MEDIA / "cpr.jpg", blur=18), MEDIA / "cpr.jpg"),
-    ("⚽", "مدرب اللياقة في كرة القدم", "149$", "112$", clip(MEDIA / "fitness.mp4", 0.0, 0.3, keep=0.84), None),
-    ("🧠", "التكتيك في كرة القدم", "149$", "112$", clip(MEDIA / "tactics.mp4", 0.0, 0.5, keep=0.84), None),
+    ("⚽", "مدرب اللياقة في كرة القدم", "149$", "112$", clip(MEDIA / "fitness-long.mp4", 15.0, 0.3, keep=0.84), None),
+    ("🧠", "التكتيك في كرة القدم", "149$", "112$", clip(MEDIA / "tactics-long.mp4", 8.0, 0.5, keep=0.84), None),
     ("📈", "إعداد مدرب HRV", "199$", "149$", still(MEDIA / "hrv.jpg", blur=18), MEDIA / "hrv.jpg"),
     ("💪", "دبلوم المدرب الشخصي", "449$", "337$", clip(ROOT / "videos/video5.mp4", 6.0), None),
     ("🏫", "دبلوم معلمي التربية البدنية", "499$", "374$", still(ROOT / "images/pe-teacher.jpg", xc=0.3), None),
@@ -180,28 +180,30 @@ def beat(path, seconds, bpm=124, sr=44100):
         w.writeframes(bytes(frames))
 
 
-def main():
+def assemble(scenes, out):
+    """Render (overlay body, background, seconds) scenes into one MP4 with the beat."""
     with tempfile.TemporaryDirectory() as tmp:
         tmp_p = Path(tmp)
         parts = []
-        for i, (body, bg, dur) in enumerate(SCENES):
+        for i, (body, bg, dur) in enumerate(scenes):
             ov, part = tmp_p / f"ov{i:02}.png", tmp_p / f"s{i:02}.mp4"
             render_overlay(body, ov, tmp)
             if os.environ.get("KEEP_OVERLAYS"):
                 (HERE / "frames").mkdir(exist_ok=True)
-                (HERE / "frames" / ov.name).write_bytes(ov.read_bytes())
+                (HERE / "frames" / f"{Path(out).stem}-{ov.name}").write_bytes(ov.read_bytes())
             # The first frame doubles as the feed preview, so the hook is there from frame 0.
             render_scene(ov, bg, dur, part, intro=0 if i == 0 else 0.35)
             parts.append(part)
-            print(f"scene {i + 1}/{len(SCENES)}")
-        total = sum(d for _, _, d in SCENES)
+            print(f"  scene {i + 1}/{len(scenes)}")
+        total = sum(d for _, _, d in scenes)
         (tmp_p / "list.txt").write_text("".join(f"file '{p.as_posix()}'\n" for p in parts))
         beat(tmp_p / "beat.wav", total)
+        Path(out).parent.mkdir(parents=True, exist_ok=True)
         run([FF, "-y", "-v", "error", "-f", "concat", "-safe", "0", "-i", str(tmp_p / "list.txt"),
              "-i", str(tmp_p / "beat.wav"), "-c:v", "copy", "-c:a", "aac", "-b:a", "160k",
-             "-shortest", "-movflags", "+faststart", str(OUT)])
-    print(f"wrote {OUT} ({total:.1f}s)")
+             "-shortest", "-movflags", "+faststart", str(out)])
+    print(f"wrote {out} ({total:.1f}s)")
 
 
 if __name__ == "__main__":
-    main()
+    assemble(SCENES, OUT)
