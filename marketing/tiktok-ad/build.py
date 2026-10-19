@@ -1,9 +1,12 @@
-"""Build the 25-second TikTok ad (1080x1920) for the SIOSS25 launch offer.
+"""Build the TikTok ad (1080x1920) for the SIOSS25 launch offer.
 
-Footage comes from videos/hero.mp4 (only the stretches without burned-in
-words). Each scene's Arabic text is an HTML overlay, screenshot by headless
-Edge with a transparent background, then composited over the footage with
-the ffmpeg bundled in imageio-ffmpeg (pip install imageio-ffmpeg).
+Every scene has its own background that matches what it says: the promo
+footage (videos/hero.mp4) for the coaching hook, and for each course a clip
+or photo from that course (marketing/tiktok-ad/media, cut from the course
+videos and slides). Each scene's Arabic text is an HTML overlay, screenshot
+by headless Edge with a transparent background, then composited over the
+background with the ffmpeg bundled in imageio-ffmpeg
+(pip install imageio-ffmpeg).
 
     python marketing/tiktok-ad/build.py
 Output: marketing/tiktok-ad.mp4
@@ -15,47 +18,66 @@ import imageio_ffmpeg
 
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parents[1]
+MEDIA = HERE / "media"
 OUT = HERE.parent / "tiktok-ad.mp4"
 FF = imageio_ffmpeg.get_ffmpeg_exe()
 EDGE = r"C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe"
 W, H, FPS = 1080, 1920, 30
 
+HERO = ROOT / "videos/hero.mp4"
+
+
+def clip(path, start, xc=0.5, keep=1.0):
+    """Background from a video: start second, horizontal focus 0..1, and the
+    top fraction of the picture to keep (cuts off burned-in subtitles)."""
+    return {"path": path, "start": start, "xc": xc, "blur": 0, "keep": keep}
+
+
+def still(path, xc=0.5, blur=0):
+    return {"path": path, "start": None, "xc": xc, "blur": blur, "keep": 1.0}
+
+
+# (icon, name, old price, new price, background, photo shown framed above the card)
 COURSES = [
-    ("❤️‍🩹", "الإسعافات الأولية والإنعاش", "99$", "74$"),
-    ("⚽", "مدرب اللياقة في كرة القدم", "149$", "112$"),
-    ("🧠", "التكتيك في كرة القدم", "149$", "112$"),
-    ("📈", "إعداد مدرب HRV", "199$", "149$"),
-    ("💪", "دبلوم المدرب الشخصي", "449$", "337$"),
-    ("🏫", "دبلوم معلمي التربية البدنية", "499$", "374$"),
+    ("❤️‍🩹", "الإسعافات الأولية والإنعاش", "99$", "74$", still(MEDIA / "cpr.jpg", blur=18), MEDIA / "cpr.jpg"),
+    ("⚽", "مدرب اللياقة في كرة القدم", "149$", "112$", clip(MEDIA / "fitness.mp4", 0.0, 0.3, keep=0.84), None),
+    ("🧠", "التكتيك في كرة القدم", "149$", "112$", clip(MEDIA / "tactics.mp4", 0.0, 0.5, keep=0.84), None),
+    ("📈", "إعداد مدرب HRV", "199$", "149$", still(MEDIA / "hrv.jpg", blur=18), MEDIA / "hrv.jpg"),
+    ("💪", "دبلوم المدرب الشخصي", "449$", "337$", clip(ROOT / "videos/video5.mp4", 6.0), None),
+    ("🏫", "دبلوم معلمي التربية البدنية", "499$", "374$", still(ROOT / "images/pe-teacher.jpg", xc=0.3), None),
 ]
 
-# (overlay body, footage start in hero.mp4, duration)
+# (overlay body, background, duration)
 SCENES = [
     ('<div class="shade top"></div><div class="mid">'
-     '<h1 class="big">حلمك أن تصبح<br><span class="b">مدرباً محترفاً؟</span></h1></div>', 0.0, 2.6),
+     '<h1 class="big">حلمك أن تصبح<br><span class="b">مدرباً محترفاً؟</span></h1></div>', clip(HERO, 4.0), 2.6),
     ('<div class="shade"></div><div class="mid">'
      '<img class="logo" src="{logo}"><div class="pill">منظمة سويدية منذ 2015</div>'
      '<h1>دورات أونلاين<br><span class="b">بشهادات من السويد</span></h1>'
-     '<p class="sub">بالعربي · بالفيديو · بالسرعة التي تناسبك</p></div>', 4.0, 2.8),
+     '<p class="sub">بالعربي · بالفيديو · بالسرعة التي تناسبك</p></div>',
+     still(ROOT / "images/bahrain5.jpg", xc=0.45, blur=4), 2.8),
 ]
-for i, (icon, name, old, new) in enumerate(COURSES):
+for i, (icon, name, old, new, bg, photo) in enumerate(COURSES):
+    top = f'<img class="photo" src="{photo.as_uri()}">' if photo else f'<div class="ic">{icon}</div>'
     SCENES.append((
         '<div class="shade"></div><div class="mid">'
-        f'<div class="count">الدورة {i + 1} من 6</div>'
-        f'<div class="card"><div class="ic">{icon}</div><div class="nm">{name}</div>'
+        f'<div class="count">الدورة {i + 1} من 6</div>{top if photo else ""}'
+        f'<div class="card">{"" if photo else top}<div class="nm">{name}</div>'
         f'<div class="pr"><s>{old}</s> {new}</div><div class="tag">بكود SIOSS25</div></div></div>',
-        [16.0, 18.4, 36.6, 45.0, 47.6, 50.4][i], 1.6))
+        bg, 1.8))
 SCENES += [
     ('<div class="shade"></div><div class="mid">'
      '<img class="cert" src="{cert}"><h1>📜 شهادة صادرة<br><span class="b">من السويد</span></h1>'
-     '<p class="sub">بعد الاختبار، باسمك ورقم تحقق</p></div>', 52.0, 3.0),
+     '<p class="sub">بعد الاختبار، باسمك ورقم تحقق</p></div>',
+     still(ROOT / "images/bahrain7.jpg", blur=6), 3.0),
     ('<div class="shade"></div><div class="mid">'
      '<div class="pill">عرض الإطلاق</div><h1 class="huge">خصم <span class="g">25%</span></h1>'
      '<p class="sub">على كل الدورات</p><div class="code">SIOSS25</div>'
-     '<p class="sub">ينتهي 2 نوفمبر</p></div>', 62.0, 3.5),
+     '<p class="sub">ينتهي 2 نوفمبر</p></div>',
+     still(ROOT / "images/bahrain6.jpg", xc=0.45, blur=6), 3.5),
     ('<div class="shade solid"></div><div class="mid">'
      '<img class="logo lg" src="{logo}"><h1>سجّل الآن</h1><div class="url">sioss.se</div>'
-     '<p class="sub">الرابط في البايو 👆</p></div>', 70.0, 3.5),
+     '<p class="sub">اكتب الموقع في المتصفح أو في جوجل</p></div>', clip(HERO, 70.0), 3.5),
 ]
 
 CSS = """
@@ -76,6 +98,7 @@ h1.huge { font-size:150px; line-height:1.1; }
 .count { font-size:40px; font-weight:800; color:#f4b942; }
 .card { width:100%; background:rgba(10,20,38,.78); border:4px solid #f4b942; border-radius:36px; padding:40px 30px; display:flex; flex-direction:column; align-items:center; gap:14px; }
 .ic { font-size:130px; line-height:1.1; text-shadow:none; }
+.photo { width:100%; height:560px; object-fit:cover; border-radius:30px; border:5px solid #fff; box-shadow:0 20px 60px rgba(0,0,0,.6); }
 .nm { font-size:70px; font-weight:900; line-height:1.25; }
 .pr { font-family:'Archivo',sans-serif; font-size:96px; color:#f4b942; direction:ltr; }
 .pr s { color:#8ea3bf; font-size:62px; }
@@ -106,17 +129,27 @@ def render_overlay(body, path, tmp):
          "--virtual-time-budget=6000", f"--window-size={W},{H}", f"--screenshot={path}", html.as_uri()])
 
 
-def render_scene(overlay, start, dur, path, intro=0.35):
-    # Center-crop the 16:9 footage to 9:16 with a slow push-in, then fade and
-    # slide the overlay up over the first `intro` seconds (0 = shown at once).
-    vf = (f"[0:v]trim=start={start}:duration={dur},setpts=PTS-STARTPTS,fps={FPS},"
-          f"crop=ih*9/16:ih,scale={W}:{H},"
+def render_scene(overlay, bg, dur, path, intro=0.35):
+    # Cover-crop the background to 9:16 around its focus point with a slow
+    # push-in, then fade and slide the overlay up over the first `intro`
+    # seconds (0 = shown at once).
+    if bg["start"] is None:
+        src = ["-loop", "1", "-t", str(dur), "-i", str(bg["path"])]
+        head = f"[0:v]fps={FPS},"
+    else:
+        src = ["-i", str(bg["path"])]
+        head = f"[0:v]trim=start={bg['start']}:duration={dur},setpts=PTS-STARTPTS,fps={FPS},"
+    if bg["keep"] < 1:
+        head += f"crop=iw:ih*{bg['keep']}:0:0,"
+    blur = f"boxblur={bg['blur']}:2," if bg["blur"] else ""
+    vf = (head + f"scale=w='if(gt(a,{W}/{H}),-2,{W})':h='if(gt(a,{W}/{H}),{H},-2)',"
+          f"crop={W}:{H}:x='(iw-{W})*{bg['xc']}':y='(ih-{H})/2',{blur}"
           f"scale=w='{W}*(1+0.06*t/{dur})':h=-2:eval=frame,crop={W}:{H},setsar=1[bg];"
           + (f"[1:v]format=rgba,fade=t=in:st=0:d={intro}:alpha=1[ov];" if intro else "[1:v]format=rgba[ov];")
           + (f"[bg][ov]overlay=x=0:y='max(0,60-60*t/{intro})'" if intro else "[bg][ov]overlay=x=0:y=0")
           + ":shortest=1,format=yuv420p[v]")
-    run([FF, "-y", "-v", "error", "-i", str(ROOT / "videos/hero.mp4"), "-loop", "1", "-t", str(dur),
-         "-i", str(overlay), "-filter_complex", vf, "-map", "[v]", "-an",
+    run([FF, "-y", "-v", "error", *src, "-loop", "1", "-t", str(dur),
+         "-i", str(overlay), "-filter_complex", vf, "-map", "[v]", "-an", "-t", str(dur),
          "-c:v", "libx264", "-preset", "medium", "-crf", "18", "-r", str(FPS), str(path)])
 
 
@@ -151,15 +184,15 @@ def main():
     with tempfile.TemporaryDirectory() as tmp:
         tmp_p = Path(tmp)
         parts = []
-        for i, (body, start, dur) in enumerate(SCENES):
-            ov, clip = tmp_p / f"ov{i:02}.png", tmp_p / f"s{i:02}.mp4"
+        for i, (body, bg, dur) in enumerate(SCENES):
+            ov, part = tmp_p / f"ov{i:02}.png", tmp_p / f"s{i:02}.mp4"
             render_overlay(body, ov, tmp)
             if os.environ.get("KEEP_OVERLAYS"):
                 (HERE / "frames").mkdir(exist_ok=True)
                 (HERE / "frames" / ov.name).write_bytes(ov.read_bytes())
             # The first frame doubles as the feed preview, so the hook is there from frame 0.
-            render_scene(ov, start, dur, clip, intro=0 if i == 0 else 0.35)
-            parts.append(clip)
+            render_scene(ov, bg, dur, part, intro=0 if i == 0 else 0.35)
+            parts.append(part)
             print(f"scene {i + 1}/{len(SCENES)}")
         total = sum(d for _, _, d in SCENES)
         (tmp_p / "list.txt").write_text("".join(f"file '{p.as_posix()}'\n" for p in parts))
