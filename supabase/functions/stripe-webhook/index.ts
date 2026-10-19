@@ -10,6 +10,11 @@ import { createClient } from "npm:@supabase/supabase-js@2";
 
 const COURSE_BY_PAYMENT_LINK: Record<string, string> = {
   plink_1UQXSIA9b6BMh2hbLhcOxrBT: "ffc", // Football Fitness Coach, 149 USD
+  plink_1UQt8DA9b6BMh2hbXeqM49xw: "tac", // Football Tactics, 149 USD
+  plink_1URGMXA9b6BMh2hborMESNeq: "ptd", // Personal Trainer Diploma, 449 USD
+  plink_1URHCLA9b6BMh2hbRCfxAIcS: "cpr", // First Aid & CPR, 99 USD
+  plink_1URToOA9b6BMh2hbdrE6QYtk: "hrv", // HRV Coach, 199 USD
+  plink_1URUmLA9b6BMh2hbNVz0I130: "pe", // PE Teacher Diploma, 499 USD
 };
 
 const secret = Deno.env.get("STRIPE_WEBHOOK_SECRET")!;
@@ -44,8 +49,11 @@ Deno.serve(async (req) => {
 
   const s = event.data.object;
   const ref = REF.exec(s.client_reference_id ?? "");
-  // A known Payment Link or its metadata wins over the reference, which the buyer could edit in the URL.
-  const course = COURSE_BY_PAYMENT_LINK[s.payment_link] ?? s.metadata?.course ?? ref?.[1].toLowerCase();
+  // The buyer can edit the reference in the URL, so a Payment Link decides the course on its own:
+  // a cheap link must never unlock a dearer course. Unmapped links (e.g. the journal fee) open nothing.
+  const course = s.payment_link
+    ? COURSE_BY_PAYMENT_LINK[s.payment_link] ?? s.metadata?.course
+    : s.metadata?.course ?? ref?.[1].toLowerCase();
   if (s.payment_status !== "paid" || !course) return new Response("ignored");
 
   const email = (s.customer_details?.email ?? s.customer_email ?? "").toLowerCase() || null;
