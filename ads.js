@@ -9,7 +9,7 @@
   var IDS = {
     meta: '',    // Meta Pixel ID (أرقام فقط)
     tiktok: '',  // TikTok Pixel ID
-    snap: ''     // Snap Pixel ID
+    snap: 'd3d6d8b4-97f5-4f52-b6e9-274ccea42334'     // Snap Pixel ID
   };
 
   var debug = /[?&]adsdebug\b/.test(location.search);
