@@ -7,7 +7,7 @@
    console without loading the pixels. */
 (function () {
   var IDS = {
-    meta: '',    // Meta Pixel ID (أرقام فقط)
+    meta: '1459400592821990',    // Meta Pixel ID (أرقام فقط)
     tiktok: 'DBBRA4BC77UF91060LSG',  // TikTok Pixel ID
     snap: 'd3d6d8b4-97f5-4f52-b6e9-274ccea42334'     // Snap Pixel ID
   };
