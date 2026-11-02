@@ -53,12 +53,41 @@ body {
   box-shadow: 0 18px 40px -24px rgba(0, 0, 0, .8), inset 0 1px 0 rgba(255, 255, 255, .08);
 }
 .navbar.scrolled { background: rgba(8, 12, 22, .78) !important; }
-.nav-links a { border-radius: 999px; transition: background .2s, color .2s; }
-.nav-links a:hover { background: rgba(255, 255, 255, .08); }
-.navbar .btn-sm, .navbar .btn-sm.btn-primary { border-radius: 999px; background: #facc15 !important; color: #0a0e15 !important;
-  box-shadow: 0 0 0 1px rgba(250, 204, 21, .4), 0 8px 22px -8px rgba(250, 204, 21, .7); }
-.navbar .btn-sm:hover { background: #fff !important; transform: none; }
-.lang-switch { border-radius: 999px; background: rgba(255, 255, 255, .06); border: 1px solid var(--border); }
+/* The yellow section links become yellow glass: a warm tint and a thin gold edge at rest,
+   a glow under the pointer, and solid gold for the section you are in. */
+:root {
+  --gold: #facc15;
+  --g-gold: linear-gradient(135deg, #fff1a6 0%, #ffd84a 40%, #f5b70a 100%);
+}
+.nav-links a {
+  position: relative; border-radius: 999px; padding: 8px 12px;
+  background: rgba(250, 204, 21, .09); color: #ffe27a;
+  box-shadow: inset 0 0 0 1px rgba(250, 204, 21, .32), inset 0 1px 0 rgba(255, 255, 255, .12);
+  transition: background .25s, color .25s, box-shadow .25s, transform .25s var(--ease-out);
+}
+.nav-links a:hover {
+  background: rgba(250, 204, 21, .2); color: #fff6c9; transform: translateY(-1px);
+  box-shadow: inset 0 0 0 1px rgba(250, 204, 21, .7), 0 0 18px -2px rgba(250, 204, 21, .55);
+}
+.nav-links a.active {
+  background: var(--g-gold); color: #1a1300;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .7), 0 0 0 1px rgba(250, 204, 21, .5), 0 6px 20px -6px rgba(250, 204, 21, .75);
+}
+.nav-links a:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+
+/* The one main action keeps solid gold, now with a shine */
+.navbar .btn-sm, .navbar .btn-sm.btn-primary {
+  border-radius: 999px; background: var(--g-gold) !important; background-size: 160% 100% !important; color: #1a1300 !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .7), 0 0 0 1px rgba(250, 204, 21, .5), 0 10px 26px -8px rgba(250, 204, 21, .8);
+  transition: background-position .5s var(--ease-out), box-shadow .25s, transform .25s var(--ease-out);
+}
+.navbar .btn-sm:hover { background-position: 100% 0 !important; transform: translateY(-1px);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .8), 0 0 0 1px rgba(250, 204, 21, .8), 0 0 26px -2px rgba(250, 204, 21, .7); }
+
+/* Language switch: a glass capsule with a gold pill for the current language */
+.lang-switch { border-radius: 999px; padding: 3px; background: rgba(255, 255, 255, .06); border: 1px solid var(--border); }
+.lang-btn { border-radius: 999px !important; }
+.lang-btn.active { background: var(--g-gold) !important; color: #1a1300 !important; box-shadow: 0 0 14px -3px rgba(250, 204, 21, .7); }
 
 /* ── Buttons: neon pills ── */
 .btn { border-radius: 999px; }
@@ -149,8 +178,9 @@ section { border-top-color: rgba(255, 255, 255, .06) !important; }
 
 @media (max-width: 900px) {
   .navbar { top: 6px !important; left: 6px !important; right: 6px !important; border-radius: 18px; }
-  .nav-links { border-radius: 18px; background: rgba(8, 12, 22, .92) !important;
-    -webkit-backdrop-filter: var(--blur); backdrop-filter: var(--blur); }
+  .nav-links { border-radius: 18px; background: rgba(8, 12, 22, .97) !important;
+    -webkit-backdrop-filter: var(--blur); backdrop-filter: var(--blur); padding: 8px 0; }
+  .nav-links a { padding: 14px 20px; font-size: 1rem; }
   body { background-attachment: scroll !important; }
 }
 @media (prefers-reduced-motion: reduce) {
