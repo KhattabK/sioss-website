@@ -1,0 +1,158 @@
+/* ============================================================
+   SIOSS glass layer (2026-11): loaded last on every page, after style.css and any inline <style>.
+   It restyles without removing anything: surfaces become frosted glass over a dark aurora,
+   the main buttons become neon pills (cyan to lime), and the yellow "join" button keeps its colour.
+   ============================================================ */
+:root {
+  --neon-1: #22e1ff;
+  --neon-2: #b8ff3c;
+  --g-neon: linear-gradient(100deg, var(--neon-1) 0%, #5cf2b8 50%, var(--neon-2) 100%);
+  --night: #05080f;
+  /* Every card on the site is drawn with these, so turning them translucent turns them into glass. */
+  --dark-2: rgba(255, 255, 255, .045);
+  --mid: rgba(255, 255, 255, .07);
+  --border: rgba(255, 255, 255, .12);
+  --glass-hi: rgba(255, 255, 255, .22);
+  --blur: blur(18px) saturate(160%);
+  --radius: 18px;
+  --radius-lg: 26px;
+}
+
+/* The aurora: fixed colour light behind the whole page */
+html { background: var(--night); }
+body {
+  background:
+    radial-gradient(55vw 45vw at 85% -5%, rgba(34, 225, 255, .16), transparent 70%),
+    radial-gradient(45vw 40vw at -5% 30%, rgba(26, 111, 196, .22), transparent 70%),
+    radial-gradient(40vw 35vw at 100% 70%, rgba(184, 255, 60, .08), transparent 70%),
+    radial-gradient(50vw 40vw at 10% 100%, rgba(34, 225, 255, .10), transparent 70%),
+    var(--night) !important;
+  background-attachment: fixed !important;
+}
+::selection { background: var(--neon-1); color: #041018; }
+:focus-visible { outline-color: var(--neon-1); }
+
+/* Sections show the aurora through them instead of flat bands */
+.about, .team, .hrv-section, .contact, .course-promo, .why, .shop, .gallery, .testimonials, .certs,
+.photo-scroll-section, .footer { background: transparent !important; }
+.footer { border-top: 1px solid var(--border); background: rgba(255, 255, 255, .025) !important;
+  -webkit-backdrop-filter: var(--blur); backdrop-filter: var(--blur); }
+
+/* Accent words glow in the neon gradient */
+.accent, .hero h1 .accent, h1 span {
+  background: var(--g-neon); -webkit-background-clip: text; background-clip: text; color: transparent !important;
+  filter: drop-shadow(0 0 18px rgba(34, 225, 255, .35));
+}
+
+/* ── Navigation: a floating glass bar ── */
+.navbar {
+  top: 10px !important; left: clamp(8px, 1.6vw, 22px) !important; right: clamp(8px, 1.6vw, 22px) !important;
+  width: auto !important; border-radius: 22px;
+  background: rgba(8, 12, 22, .55) !important; border: 1px solid var(--border);
+  -webkit-backdrop-filter: var(--blur); backdrop-filter: var(--blur);
+  box-shadow: 0 18px 40px -24px rgba(0, 0, 0, .8), inset 0 1px 0 rgba(255, 255, 255, .08);
+}
+.navbar.scrolled { background: rgba(8, 12, 22, .78) !important; }
+.nav-links a { border-radius: 999px; transition: background .2s, color .2s; }
+.nav-links a:hover { background: rgba(255, 255, 255, .08); }
+.navbar .btn-sm, .navbar .btn-sm.btn-primary { border-radius: 999px; background: #facc15 !important; color: #0a0e15 !important;
+  box-shadow: 0 0 0 1px rgba(250, 204, 21, .4), 0 8px 22px -8px rgba(250, 204, 21, .7); }
+.navbar .btn-sm:hover { background: #fff !important; transform: none; }
+.lang-switch { border-radius: 999px; background: rgba(255, 255, 255, .06); border: 1px solid var(--border); }
+
+/* ── Buttons: neon pills ── */
+.btn { border-radius: 999px; }
+.btn-primary {
+  background: var(--g-neon) !important; background-size: 180% 100% !important; background-position: 0 0 !important;
+  color: #041018 !important; font-weight: 700; border: 0;
+  box-shadow: 0 0 0 1px rgba(184, 255, 60, .25), 0 12px 32px -10px rgba(34, 225, 255, .65), inset 0 1px 0 rgba(255, 255, 255, .5);
+  transition: background-position .5s var(--ease-out), transform .25s var(--ease-out), box-shadow .25s;
+}
+.btn-primary:hover {
+  background-position: 100% 0 !important; transform: translateY(-2px);
+  box-shadow: 0 0 0 1px rgba(184, 255, 60, .45), 0 18px 40px -10px rgba(184, 255, 60, .6), inset 0 1px 0 rgba(255, 255, 255, .5);
+}
+.btn-primary:active { transform: translateY(1px) scale(.98); }
+.btn-outline {
+  background: rgba(255, 255, 255, .06) !important; border: 1px solid var(--glass-hi) !important; color: #fff;
+  -webkit-backdrop-filter: var(--blur); backdrop-filter: var(--blur);
+}
+.btn-outline:hover { background: rgba(255, 255, 255, .14) !important; border-color: var(--neon-1) !important;
+  box-shadow: 0 0 22px -6px rgba(34, 225, 255, .6); }
+
+/* ── Hero: glass meta pills and a soft fade into the page ── */
+.hero::after { content: ""; position: absolute; inset: auto 0 0; height: 30%; pointer-events: none;
+  background: linear-gradient(0deg, var(--night), transparent); z-index: 1; }
+.hero-inner { position: relative; z-index: 2; }
+.hero-meta > span {
+  padding: 7px 14px; border-radius: 999px; background: rgba(255, 255, 255, .08); border: 1px solid var(--border);
+  -webkit-backdrop-filter: var(--blur); backdrop-filter: var(--blur);
+}
+.hero-meta svg { color: var(--neon-2); }
+
+/* ── Glass surfaces: every card on the home page ── */
+.why-card, .team-card, .shop-card, .promo-card, .promo-facts li, .yt-card, .contact-form, .cert-card,
+.hrv-video-wrap, .tv-wrap, .reel-wrap {
+  background: var(--mid) !important; border: 1px solid var(--border) !important; border-radius: var(--radius-lg) !important;
+  -webkit-backdrop-filter: var(--blur); backdrop-filter: var(--blur);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .07), 0 20px 50px -30px rgba(0, 0, 0, .9);
+  overflow: hidden;
+  transition: border-color .3s, box-shadow .3s, transform .3s var(--ease-out);
+}
+.team-card, .why-card, .contact-form, .promo-facts li { padding: 22px; }
+.promo-facts li { padding: 12px 14px; border-radius: 16px !important; }
+.why-card:hover, .team-card:hover, .shop-card:hover, .promo-card:hover, .yt-card:hover, .cert-card:hover {
+  border-color: rgba(34, 225, 255, .55) !important; transform: translateY(-4px);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .1), 0 0 0 1px rgba(34, 225, 255, .15), 0 24px 60px -24px rgba(34, 225, 255, .35);
+}
+.why-card::before { background: var(--g-neon) !important; }
+.promo-facts b { background: var(--g-neon) !important; color: #041018 !important; border-radius: 12px; }
+.promo-tag, .cert-tag { border-radius: 999px; border-color: rgba(34, 225, 255, .4) !important; color: var(--neon-1) !important;
+  background: rgba(34, 225, 255, .08); }
+.team-role { color: var(--neon-1) !important; }
+.cert-thumb, .shop-img { border-radius: 18px; overflow: hidden; }
+.cert-card { padding: 12px; }
+.about-img-main, .about-img-float, .photo-slide { border-radius: var(--radius-lg) !important; overflow: hidden;
+  border: 1px solid var(--border); box-shadow: 0 24px 60px -30px rgba(0, 0, 0, .9); }
+.team-avatar { border-radius: 20px !important; box-shadow: inset 0 0 0 1px var(--border); }
+
+/* Play buttons and scroll arrows become glass circles */
+.play-btn svg, .scroll-arrow { -webkit-backdrop-filter: var(--blur); backdrop-filter: var(--blur); }
+.play-btn:hover svg { background: var(--neon-1) !important; color: #041018; }
+.scroll-arrow { background: rgba(255, 255, 255, .08) !important; border: 1px solid var(--border) !important; border-radius: 50% !important; }
+.scroll-arrow:hover { border-color: var(--neon-1) !important; box-shadow: 0 0 18px -4px rgba(34, 225, 255, .7); }
+
+/* Form fields: dark glass with a neon focus ring */
+.form-group input, .form-group select, .form-group textarea, input[type=email], input[type=text], input[type=tel], textarea, select {
+  border-radius: 14px; background: rgba(255, 255, 255, .05) !important; border: 1px solid var(--border) !important;
+}
+.form-group input:focus, .form-group select:focus, .form-group textarea:focus, input:focus, textarea:focus, select:focus {
+  border-color: var(--neon-1) !important; box-shadow: 0 0 0 3px rgba(34, 225, 255, .18); outline: none;
+}
+.social-btn { border-radius: 50%; background: rgba(255, 255, 255, .06); }
+.social-btn:hover { background: var(--neon-1) !important; border-color: var(--neon-1) !important; color: #041018; }
+
+/* ── Course pages (inline-styled): the same glass on their cards, price box and questions ── */
+.fact, .card, ol.steps li, .teacher, .price, details {
+  -webkit-backdrop-filter: var(--blur); backdrop-filter: var(--blur);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .06);
+}
+.price { box-shadow: inset 0 1px 0 rgba(255, 255, 255, .08), 0 0 0 1px rgba(34, 225, 255, .18), 0 30px 70px -30px rgba(34, 225, 255, .35); }
+.price .amt { background: var(--g-neon); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.tag { border-color: rgba(34, 225, 255, .4) !important; background: rgba(34, 225, 255, .08); }
+.btn:not(.ghost):not(.btn-outline):not(.btn-sm) {
+  background: var(--g-neon); color: #041018; border-radius: 999px;
+  box-shadow: 0 12px 30px -12px rgba(34, 225, 255, .6);
+}
+.btn.ghost { border-radius: 999px; background: rgba(255, 255, 255, .06); border-color: var(--glass-hi); color: #fff; }
+section { border-top-color: rgba(255, 255, 255, .06) !important; }
+
+@media (max-width: 900px) {
+  .navbar { top: 6px !important; left: 6px !important; right: 6px !important; border-radius: 18px; }
+  .nav-links { border-radius: 18px; background: rgba(8, 12, 22, .92) !important;
+    -webkit-backdrop-filter: var(--blur); backdrop-filter: var(--blur); }
+  body { background-attachment: scroll !important; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .btn-primary, .why-card, .team-card, .shop-card, .promo-card, .yt-card, .cert-card { transition: none; }
+}
