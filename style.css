@@ -373,6 +373,16 @@ p:last-child { margin-bottom: 0; }
   gap: 96px;
   align-items: center;
 }
+.about-video {
+  max-width: 960px;
+  margin: 0 auto 72px;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+  background: #05080f;
+}
+.about-video video { display: block; width: 100%; aspect-ratio: 16 / 9; background: #05080f; }
 .about-visual { position: relative; padding-bottom: 48px; }
 .about-img-main {
   border-radius: var(--radius-lg);

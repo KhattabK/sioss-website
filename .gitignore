@@ -5,3 +5,8 @@
 marketing/academy-licence/
 marketing/curriculum/
 marketing/svff-course/
+
+# About-video build files (outputs are copied to media/ for the site)
+marketing/about-video/work/
+marketing/about-video/*.mp4
+marketing/about-video/run.log
