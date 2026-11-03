@@ -24,7 +24,7 @@ IMG = ROOT / "images"
 WORK = HERE / "work"
 KEYS = Path(r"C:\Users\D.M.F\Desktop\EIAST-Academy")
 FF = imageio_ffmpeg.get_ffmpeg_exe()
-EDGE = r"C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe"
+EDGE = r"C:\Program Files\Google\Chrome\Application\chrome.exe"  # headless Edge stopped writing screenshots (3 Nov)
 VOICE = "pCKbQ4EPGE06zpEPGNvS"  # Abdullah, Arabic news & corporate; not used by any EIAST course
 AVATAR = "Onat_Suit_Front_public"
 GREEN = "#00B140"
@@ -37,7 +37,7 @@ LINES = [
     "وهي مؤسسة تعليمية متخصصة في تدريب المدربين الرياضيين وتطويرهم، في مختلف التخصصات.",
     "يقود المنظمة الدكتور عبد العظيم أحمد الأَوْسي: خبير القيادة الاستراتيجية والأداء العالي، "
     "مدير المنظمة السُّوَيْدية الدولية للعلوم الرياضية سِيوس، وأستاذ مادة الرياضة والصحة في السُّوَيْد، "
-    "ومدرب إتش آر في، والباحث في علوم الرياضة.",
+    "ومدرب إتش آر في، والخبير في تقنية إتش آر في والفلاي ويل.",
     "مهمتنا نقل علوم الرياضة الحديثة وتقنياتها إلى المنطقة العربية وما وراءها، وفق المعايير الدولية.",
     "ونُصدر مجلة علمية مُحَكَّمة، هي مجلة سِيوس لعلوم الرياضة.",
     "ونقدّم دوراتنا حضورياً وعبر الإنترنت: دبلوم المدرب الشخصي، والإسعافات الأولية والإنعاش، "
@@ -185,8 +185,8 @@ def sample_certificate():
                   'padding:4px 40px;border-radius:14px;z-index:9">نموذج · SAMPLE</div></body>')
     html = WORK / "cert-sample.html"
     html.write_text(s, encoding="utf-8")
-    subprocess.run([EDGE, "--headless", "--disable-gpu", "--hide-scrollbars", "--force-device-scale-factor=2",
-                    f"--user-data-dir={os.environ['TEMP']}\\edge-sioss-{uuid.uuid4().hex[:6]}",
+    subprocess.run([EDGE, "--headless=new", "--disable-gpu", "--hide-scrollbars", "--force-device-scale-factor=2",
+                    f"--user-data-dir={os.environ['TEMP']}\\chrome-sioss-render",
                     "--window-size=1123,794", "--virtual-time-budget=8000", f"--screenshot={png}", html.as_uri()],
                    capture_output=True, timeout=120)
     assert png.exists(), png
@@ -215,8 +215,8 @@ def edge_png(name, body, WH):
                   f'<body style="width:{WH[0]}px;height:{WH[1]}px;position:relative">{body}</body></html>', encoding="utf-8")
     if not png.exists() or os.environ.get("REDO"):
         png.unlink(missing_ok=True)
-        subprocess.run([EDGE, "--headless", "--disable-gpu", "--hide-scrollbars", "--default-background-color=00000000",
-                        f"--user-data-dir={os.environ['TEMP']}\\edge-sioss-{uuid.uuid4().hex[:6]}", "--force-device-scale-factor=1",
+        subprocess.run([EDGE, "--headless=new", "--disable-gpu", "--hide-scrollbars", "--default-background-color=00000000",
+                        f"--user-data-dir={os.environ['TEMP']}\\chrome-sioss-render", "--force-device-scale-factor=1",
                         f"--window-size={WH[0]},{WH[1]}", "--virtual-time-budget=8000", f"--screenshot={png}", hp.as_uri()],
                        capture_output=True, timeout=120)
     assert png.exists(), png
@@ -272,7 +272,7 @@ def cards(kind, title, WH):
                 ("خبير القيادة الاستراتيجية والأداء العالي", "neon", at("خبير", 3) - line_times()[3][0]),
                 ("مدير المنظمة السويدية الدولية للعلوم الرياضية", "", at("مدير", 3) - line_times()[3][0]),
                 ("أستاذ مادة الرياضة والصحة في السويد", "dim", at("وأستاذ", 3) - line_times()[3][0]),
-                ("مدرب HRV وعالم رياضة", "dim", at("ومدرب", 3) - line_times()[3][0])]
+                ("مدرب HRV وخبير تقنية HRV والفلاي ويل", "dim", at("ومدرب", 3) - line_times()[3][0])]
         if V:
             add("dir-bg", '<div class="e glass" style="left:60px;right:60px;top:1110px;height:330px"></div>', 0.2)
             tops, sizes, r = [1130, 1210, 1265, 1315, 1365], [50, 34, 31, 30, 30], 96
