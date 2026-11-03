@@ -35,7 +35,9 @@ LINES = [
     "مرحباً بكم في المنظمة السُّوَيْدية الدولية للعلوم الرياضية، سِيوس.",
     "تأسست منظمتنا في السُّوَيْد عام ألفين وخمسة عشر، ومَقَرُّها مدينة لِينشوبينغ.",
     "وهي مؤسسة تعليمية متخصصة في تدريب المدربين الرياضيين وتطويرهم، في مختلف التخصصات.",
-    "يقود المنظمة الدكتور عبد العظيم أحمد الأَوْسي، مدرب إتش آر في، والباحث في علوم الرياضة.",
+    "يقود المنظمة الدكتور عبد العظيم أحمد الأَوْسي: خبير القيادة الاستراتيجية والأداء العالي، "
+    "مدير المنظمة السُّوَيْدية الدولية للعلوم الرياضية سِيوس، وأستاذ مادة الرياضة والصحة في السُّوَيْد، "
+    "ومدرب إتش آر في، والباحث في علوم الرياضة.",
     "مهمتنا نقل علوم الرياضة الحديثة وتقنياتها إلى المنطقة العربية وما وراءها، وفق المعايير الدولية.",
     "ونُصدر مجلة علمية مُحَكَّمة، هي مجلة سِيوس لعلوم الرياضة.",
     "ونقدّم دوراتنا حضورياً وعبر الإنترنت: دبلوم المدرب الشخصي، والإسعافات الأولية والإنعاش، "
@@ -265,18 +267,20 @@ def cards(kind, title, WH):
         add("sw3", f'<div class="e" style="left:0;right:0;top:{900 if V else 650}px;text-align:center;font-size:{56 if V else 58}px;font-weight:800">'
                    'تأسست في <span class="gold">السويد</span></div>'
                    f'<div class="e dim" style="left:0;right:0;top:{990 if V else 740}px;text-align:center;font-size:40px;font-weight:700;direction:ltr">Linköping · Sweden</div>', 1.0)
-    elif kind == "director":
+    elif kind == "director":  # each title appears as it is spoken
+        rows = [("د. عبد العظيم أحمد الأوسي", "", 0.4),
+                ("خبير القيادة الاستراتيجية والأداء العالي", "neon", at("خبير", 3) - line_times()[3][0]),
+                ("مدير المنظمة السويدية الدولية للعلوم الرياضية", "", at("مدير", 3) - line_times()[3][0]),
+                ("أستاذ مادة الرياضة والصحة في السويد", "dim", at("وأستاذ", 3) - line_times()[3][0]),
+                ("مدرب HRV وعالم رياضة", "dim", at("ومدرب", 3) - line_times()[3][0])]
         if V:
-            add("dir", '<div class="e glass" style="left:70px;right:70px;top:1130px;padding:30px 40px">'
-                       '<div style="font-size:54px;font-weight:900">د. عبد العظيم أحمد الأوسي</div>'
-                       '<div class="neon" style="font-size:38px;font-weight:800">مدير المنظمة</div>'
-                       '<div class="dim" style="font-size:34px;font-weight:700">مدرب HRV وعالم رياضة</div></div>', 0.4)
+            add("dir-bg", '<div class="e glass" style="left:60px;right:60px;top:1110px;height:330px"></div>', 0.2)
+            tops, sizes, r = [1130, 1210, 1265, 1315, 1365], [50, 34, 31, 30, 30], 96
         else:
-            add("dir", '<div class="e" style="right:110px;top:330px;width:900px">'
-                       '<div class="bar" style="width:200px;margin-bottom:26px"></div>'
-                       '<div style="font-size:68px;font-weight:900;line-height:1.3">د. عبد العظيم أحمد الأوسي</div>'
-                       '<div class="neon" style="font-size:46px;font-weight:800;margin-top:6px">مدير المنظمة</div>'
-                       '<div class="dim" style="font-size:38px;font-weight:700;margin-top:4px">مدرب HRV وعالم رياضة</div></div>', 0.4)
+            add("dir-bg", '<div class="e bar" style="right:110px;top:250px;width:200px"></div>', 0.2)
+            tops, sizes, r = [300, 410, 480, 540, 595], [66, 44, 38, 34, 34], 110
+        for n, ((text, cls, t), top, fs) in enumerate(zip(rows, tops, sizes)):
+            add(f"dir{n}", f'<div class="e {cls}" style="right:{r}px;top:{top}px;font-size:{fs}px;font-weight:{900 if n == 0 else 800};white-space:nowrap">{text}</div>', t)
     elif kind == "journal":
         if V:
             add("jr", '<div class="e glass" style="left:70px;right:70px;top:1150px;padding:28px 40px">'
