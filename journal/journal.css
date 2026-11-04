@@ -121,3 +121,4 @@ table.details td { padding: 6px 0; color: var(--white); }
 .cert-figure a { display: block; }
 .cert-figure img { display: block; width: 100%; height: auto; border-radius: 4px; background: #fff; }
 .cert-figure figcaption { color: var(--muted); font-size: .88rem; margin-top: 8px; }
+.fact-note { color: var(--muted); font-weight: 400; font-size: .82rem; }
