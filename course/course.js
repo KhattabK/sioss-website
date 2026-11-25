@@ -117,14 +117,14 @@
     app.innerHTML = `
       <section class="card narrow">
         <h1>دخول المتدربين</h1>
-        <p class="muted">اكتب بريدك الإلكتروني، ونرسل إليك رابط الدخول. لا تحتاج كلمة مرور.</p>
+        <p class="muted">اكتب بريدك الإلكتروني، ونرسل إليك رمز الدخول ورابطاً مباشراً. لا تحتاج كلمة مرور.</p>
         <form id="f">
           <label for="email">البريد الإلكتروني</label>
           <input id="email" type="email" dir="ltr" required autocomplete="email" placeholder="name@example.com">
-          <button class="btn" id="send">أرسل رابط الدخول</button>
+          <button class="btn" id="send">أرسل رمز الدخول</button>
         </form>
         <form id="c" hidden>
-          <p class="ok-msg">أرسلنا الرسالة. افتح الرابط الذي فيها من هذا الجهاز، أو اكتب الرمز هنا.</p>
+          <p class="ok-msg">أرسلنا الرسالة. اكتب الرمز الذي فيها هنا، أو افتح الرابط من هذا الجهاز.</p>
           <label for="code">رمز الدخول</label>
           <input id="code" inputmode="numeric" dir="ltr" autocomplete="one-time-code" maxlength="8" required>
           <button class="btn">دخول</button>
@@ -190,13 +190,13 @@
         <h1>${C.title}</h1>
         <div class="bar" role="progressbar" aria-valuemin="0" aria-valuemax="${ls.length}" aria-valuenow="${done}"><i style="width:${done / ls.length * 100}%"></i></div>
         <p class="muted">أكملت ${done} من ${ls.length} وحدة.</p>
-        ${cert ? `<a class="btn" href="certificate.html${location.search}">شهادتك جاهزة: افتحها</a>`
+        ${cert ? `<a class="btn" href="certificate.html${encodeURI(location.search)}">شهادتك جاهزة: افتحها</a>`
           : next ? `<a class="btn" href="#/unit/${next.n}">${done ? 'تابع' : 'ابدأ'}: الوحدة ${next.n}</a>`
           : `<a class="btn" href="#/exam">انتقل إلى الاختبار النهائي</a>`}
       </section>
-      ${C.gift ? `<section class="how gift">🎁 <b>هديتك مع ${C.title}:</b> ${C.gift.title}، مجاناً وبشهادتها. ادخل بالبريد نفسه. <a class="btn" href="${C.gift.href}${location.search}">افتح الهدية</a></section>` : ''}
+      ${C.gift ? `<section class="how gift">🎁 <b>هديتك مع ${C.title}:</b> ${C.gift.title}، مجاناً وبشهادتها. ادخل بالبريد نفسه. <a class="btn" href="${C.gift.href}${encodeURI(location.search)}">افتح الهدية</a></section>` : ''}
       <section class="how">
-        <b>طريقة الدراسة:</b> شاهد فيديو الوحدة، ثم اقرأ النص، ثم أجب عن اختبارها. تُحسب الوحدة مكتملة عند النجاح في اختبارها.
+        <b>طريقة الدراسة:</b> اقرأ نص الوحدة وشاهد الفيديو إن وُجد، ثم أجب عن اختبارها. تُحسب الوحدة مكتملة عند النجاح في اختبارها.
         <br><small class="muted">${TERMS}</small>
       </section>
       ${sections.map(s => `
@@ -336,7 +336,7 @@
         out.className = 'quiz-result ' + (r.passed ? 'pass' : 'fail');
         if (r.passed) {
           cert = await api.cert();
-          out.innerHTML = `نتيجتك: ${r.score} من ${r.total}. مبارك، نجحت. <a class="btn" href="certificate.html${location.search}">افتح شهادتك</a>`;
+          out.innerHTML = `نتيجتك: ${r.score} من ${r.total}. مبارك، نجحت. <a class="btn" href="certificate.html${encodeURI(location.search)}">افتح شهادتك</a>`;
           btn.hidden = true;
         } else {
           out.textContent = `نتيجتك: ${r.score} من ${r.total}. درجة النجاح ${r.pass}. راجع الوحدات ثم أعد المحاولة.`;

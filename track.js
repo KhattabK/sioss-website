@@ -43,7 +43,7 @@
         var ar = document.documentElement.lang !== 'en';
         document.getElementById('visitText').textContent = ar
           ? 'زوار اليوم ' + fmt(d.today) + ' · إجمالي الزوار ' + fmt(d.total)
-          : fmt(d.today) + ' visitors today · ' + fmt(d.total) + ' in total';
+          : fmt(d.today) + (d.today === 1 ? ' visitor today · ' : ' visitors today · ') + fmt(d.total) + ' in total';
         box.style.display = '';
       };
       draw();
