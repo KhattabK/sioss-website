@@ -300,11 +300,11 @@
     async function enter() {
       const { data: isAdmin } = await sb.rpc('is_admin');
       if (!isAdmin) {
+        // Not signed out: the same session may be a learner's course login on this browser.
         const { data } = await sb.auth.getUser();
-        await sb.auth.signOut();
         document.getElementById('codeForm').hidden = true;
         document.getElementById('loginForm').hidden = false;
-        loginError((data.user?.email || 'This email') + ' is not an admin.');
+        loginError((data.user?.email || 'This email') + ' is not an admin. Sign in with the admin email below.');
         return;
       }
       document.getElementById('loginWrap').style.display = 'none'; document.getElementById('adminWrap').style.display = 'block'; loadStudents();
