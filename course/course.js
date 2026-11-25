@@ -262,7 +262,7 @@
     if (!qs.length) return;
     const note = qs[0].previousElementSibling;
     const m = note.textContent.match(/درجة النجاح\s*(\d+)\s*من\s*(\d+)/);
-    const pass = m ? +m[1] : Math.ceil(qs.length * 0.7);
+    const pass = m ? +m[1] : Math.ceil(qs.length * 0.6);
     note.textContent = `اختر إجابة واحدة لكل سؤال ثم اضغط «${isExam ? 'أرسل الاختبار' : 'تحقّق من إجاباتي'}». درجة النجاح ${pass} من ${qs.length}.`;
 
     let locked = false;
