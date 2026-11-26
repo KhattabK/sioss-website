@@ -751,7 +751,8 @@ document.addEventListener('DOMContentLoaded', () => {
   let lang = new URLSearchParams(location.search).get('lang');
   if (!TRANSLATIONS[lang]) {
     // First visit: Arabic for Arabic-language browsers, English for everyone else
-    lang = /^ar\b/i.test(navigator.language || '') ? 'ar' : 'en';
+    // Visitors from our ads (TikTok, Instagram…) are Arabic speakers, so they start in Arabic.
+    lang = /^ar\b/i.test(navigator.language || '') || new URLSearchParams(location.search).get('utm_source') ? 'ar' : 'en';
     try { lang = localStorage.getItem('sioss_lang') || lang; } catch (_) {}
   }
   applyLang(lang);
