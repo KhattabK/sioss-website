@@ -43,6 +43,14 @@
   h1 span { color:var(--accent); }
   .lead { color:var(--text-muted); font-size:18px; max-width:700px; margin:0 0 22px; }
   .cta-row { display:flex; gap:12px; flex-wrap:wrap; }
+  .hero-buy { margin:6px 0 22px; }
+  .hero-price { display:flex; align-items:baseline; gap:10px; flex-wrap:wrap; margin:0 0 14px; }
+  .hero-price b { font-size:34px; font-weight:800; color:var(--white); line-height:1.2; }
+  .hero-price span { color:var(--text-muted); font-size:15px; }
+  .btn.wa:not(.ghost):not(.btn-outline):not(.btn-sm) { background:#1fa855; color:#fff; box-shadow:0 12px 30px -12px rgba(31,168,85,.6); }
+  .btn.wa:not(.ghost):not(.btn-outline):not(.btn-sm):hover { background:#188a45; }
+  .hero-buy .more { display:inline-block; margin-top:12px; font-size:15px; }
+  @media (max-width:760px) { .hero-buy .cta-row .btn { flex:1 1 100%; text-align:center; } .hero { padding-top:24px; } }
   .facts { display:grid; grid-template-columns:repeat(4,1fr); gap:12px; margin-top:34px; }
   .fact { background:var(--dark-2); border:1px solid var(--border); border-radius:var(--radius); padding:14px 16px; }
   .fact b { display:block; font-size:20px; color:var(--white); }
@@ -125,11 +133,15 @@
   <div class="hero">
     <span class="tag">دورة مسجّلة من السويد · تبدأ متى شئت</span>
     <h1>دورة <span>التكتيك</span> في كرة القدم</h1>
-    <p class="lead">كيف يفكّر مدرب درّب في الدوري السويدي الممتاز في الدفاع والهجوم والتحولات والكرات الثابتة؟ وكيف يحوّل ذلك إلى أسبوع تدريبي وخطة مباراة؟ اثنتا عشرة وحدة بالشرح العربي ورسوم الخطط، خمس منها بالفيديو مع المحاضر، آخرها مشروع تخرّج قصير، تنتهي باختبار وشهادة.</p>
-    <div class="cta-row">
-      <a class="btn" href="#buy">اشترك الآن</a>
-      <a class="btn ghost" href="#program">محتوى الدورة</a>
+    <div class="hero-buy">
+      <div class="hero-price"><b id="heroAmt" dir="ltr"></b><span>دفعة واحدة · وصول مدى الحياة · شهادة SIOSS</span></div>
+      <div class="cta-row">
+        <a class="btn" id="heroBuy" href="#buy">اشترك الآن</a>
+        <a class="btn wa" id="heroWa" target="_blank" rel="noopener">ادفع بزين كاش أو كي كارد عبر واتساب</a>
+      </div>
+      <a class="more" href="#program">شاهد محتوى الدورة ↓</a>
     </div>
+    <p class="lead">كيف يفكّر مدرب درّب في الدوري السويدي الممتاز في الدفاع والهجوم والتحولات والكرات الثابتة؟ وكيف يحوّل ذلك إلى أسبوع تدريبي وخطة مباراة؟ اثنتا عشرة وحدة بالشرح العربي ورسوم الخطط، خمس منها بالفيديو مع المحاضر، آخرها مشروع تخرّج قصير، تنتهي باختبار وشهادة.</p>
     <div class="facts">
       <div class="fact"><b>12 وحدة</b><small>في ثلاثة أقسام</small></div>
       <div class="fact"><b>5 فيديوهات</b><small>على السبورة ولوحة الملعب</small></div>
@@ -264,6 +276,7 @@
     document.getElementById("buyNote").textContent = "الدفع بالبطاقة يُفتح قريباً. راسلنا الآن لنحجز لك مقعدك.";
   }
 </script>
+<script src="/buy-bar.js"></script>
 <script src="/track.js" defer></script>
 <script src="/ads.js" defer></script>
 </body>

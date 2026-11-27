@@ -56,6 +56,7 @@
   }
   document.addEventListener('click', function (e) {
     var a = e.target.closest && e.target.closest('a');
-    if (a && (a.id === 'buyBtn' || /buy\.stripe\.com/.test(a.href))) send('buy_click');
+    // Pay buttons: the buy box, the first-screen and bottom-bar buttons, Stripe links and WhatsApp (Zain Cash / Qi Card).
+    if (a && (a.id === 'buyBtn' || a.id === 'heroBuy' || a.hasAttribute('data-buy') || /buy\.stripe\.com|wa\.me\//.test(a.href))) send('buy_click');
   }, true);
 })();
