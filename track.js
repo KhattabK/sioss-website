@@ -31,7 +31,9 @@
     } catch (e) {}
   }
   // Wait for i18n.js to set the page language, so the language shown is the one recorded.
-  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', function () { send('view'); });
+  // A deferred script runs while readyState is already 'interactive' but before DOMContentLoaded,
+  // i.e. before i18n.js has applied the language, so wait for the event unless the page has fully loaded.
+  if (document.readyState !== 'complete') document.addEventListener('DOMContentLoaded', function () { send('view'); });
   else send('view');
   // Public visitor counter on the home page (#visitCount): today's visits (Baghdad time) and all visits.
   var box = document.getElementById('visitCount');
